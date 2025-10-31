@@ -1,0 +1,30 @@
+.config-rows {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 0.5rem 0;
+	transition: background 0.2s;
+}
+.config-rows:hover {
+	background-color: #a5a5a514;
+}
+.config-rows .label {
+	width: 15rem;
+	padding-right: 1.5rem;
+	text-align: right;
+}
+.config-rows .value {
+	display: flex;
+	align-items: center;
+	min-height: 3.2rem;
+	margin: 0 0.5rem;
+}
+.config-rows .desc {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 1rem;
+}
+.setingLight {
+	font-style: normal;
+	background-color: yellow;
+}

@@ -1,0 +1,38 @@
+@use './dialog.scss' as *; // 弹窗
+@use './message.scss' as *; // 消息提示
+@use './loading.scss' as *; // 加载中
+@use './alert.scss' as *; // 提示
+@use './card.scss' as *; // 卡片
+@use './button.scss' as *; // 按钮
+@use './input.scss' as *; // 输入框
+@use './select.scss' as *; // 下拉框
+@use './table.scss' as *; // 表格
+@use './pagination.scss' as *; // 分页
+@use './form.scss' as *; // 表单
+@use './tabs.scss' as *; // 标签
+@use './link.scss' as *; // 链接
+@use './cascader.scss' as *; // 级联选择器
+@use './checkbox.scss' as *; // 复选框
+@use './container.scss' as *; // 单选框
+@use './popover.scss' as *; // 弹出框
+@use './collapse.scss' as *; // 折叠面板
+@use './radio.scss' as *; // 单选框
+@use './date.scss' as *; // 日期选择器
+
+@use 'element-plus/theme-chalk/src/loading.scss'; // 加载中
+@use 'element-plus/theme-chalk/src/message.scss'; // 消息提示
+
+
+.el-textarea,
+.el-input,
+.el-alert,
+.el-card,
+.el-button,
+.el-link,
+.el-radio,
+.el-checkbox,
+.el-dropdown,
+.el-popover,
+.el-dropdown-menu{
+	--el-font-size-base: 12px;
+}

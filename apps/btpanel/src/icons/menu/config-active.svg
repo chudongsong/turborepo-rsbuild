@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="config-active-layer" xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<linearGradient id="center-gradient" x1="512" y1="606.5" x2="512" y2="417.5"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<circle class="center-circle" fill="url(#center-gradient)" cx="512" cy="512" r="94.5" />
+	<path class="center-circle" fill="url(#center-gradient)"
+		d="M890.2,288c-25-44.4-70.4-71.3-161.3-125.1l-30.7-18.2c-90.9-53.8-136.3-80.7-186.2-80.7s-95.3,26.9-186.2,80.7l-30.7,18.2c-90.9,53.9-136.4,80.8-161.3,125.1-24.9,44.3-24.9,98.2-24.9,205.8v36.4c0,107.6,0,161.5,24.9,205.8,25,44.4,70.4,71.3,161.3,125.1l30.7,18.2c90.9,53.8,136.3,80.7,186.2,80.7s95.3-26.9,186.2-80.7l30.7-18.2c90.9-53.9,136.4-80.8,161.3-125.1s24.9-98.1,24.9-205.8v-36.4c0-107.6,0-161.5-24.9-205.8ZM512,666.5c-85.33,0-154.5-69.17-154.5-154.5s69.17-154.5,154.5-154.5,154.5,69.17,154.5,154.5-69.17,154.5-154.5,154.5Z" />
+</svg>

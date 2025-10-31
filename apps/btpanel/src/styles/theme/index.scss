@@ -1,0 +1,179 @@
+/** 亮色配置 **/
+:root{
+	--el-fill-color-light: #f7f7f7; /* 背景颜色 */
+	--el-file-color-light-rgb: 240, 240, 240;
+
+	--el-fill-color-ligth-active: #e6e6e6;
+	--el-file-color-light-active-rgb: 230, 230, 230;
+
+	/* 基础色 */
+	--el-color-white: #fff;
+	--el-color-white-rgb: 255, 255, 255;
+	--el-color-black: #000;
+	--el-color-black-rgb: 0, 0, 0;
+	--el-color-primary: #20a53a;
+	--el-color-primary-dark: #1e7e34;
+	--el-color-success: #67c23a;
+	--el-color-success-dark: #429938;
+	--el-color-warning: #f2711c;
+	--el-color-warning-dark: #c25a16;
+	--el-color-danger: #db2828;
+	--el-color-danger-dark: #af2020;
+	--el-color-info: #909399;
+	--el-base-primary: #303133;
+	--el-base-primary-rgb: 48, 49, 51;
+	--el-base-secondary: #606266;
+	--el-base-secondary-rgb: 96, 98, 102;
+	--el-base-tertiary: #909399;
+	--el-base-tertiary-rgb: 144, 147, 153;
+	--el-base-supplement: #2196F3;
+	--el-base-supplement-rgb: 37, 99, 235;
+	--el-base-supplement-dark: #1f52c2;
+	--el-base-supplement-light-3: #79bbff;
+	--el-base-supplement-light-5: #a0cfff;
+	--el-base-supplement-light-7: #c6e2ff;
+	--el-base-supplement-light-8: #d9ecff;
+	--el-base-supplement-light-9: #ecf5ff;
+
+	/* 文字颜色 */
+	--el-color-text-primary: #303133;
+	--el-color-text-primary-rgb: 48, 49, 51;
+	--el-color-text-secondary: #606266;
+	--el-color-text-tertiary: #909399;
+	--el-color-text-disabled: #c0c4cc;
+
+	/* 填充颜色 */
+	--el-fill-color: #f0f2f5; /* 填充颜色 */
+	--el-fill-color-lighter: #fafafa; /* 填充颜色-更浅 */
+	--el-fill-color-extra-light: #fafcff; /* 填充颜色-额外浅 */
+	--el-fill-color-dark: #ebedf0; /* 填充颜色-深 */
+	--el-fill-color-darker: #e6e8eb; /* 填充颜色-更深 */
+
+	/* 边框颜色 */
+	--el-color-border: #dcdfe6; /* 边框颜色 */
+	--el-color-border-dark-tertiary: #e4e7ed; /* 边框颜色-浅 */
+	--el-color-border-dark-tertiaryer: #ebeef5; /* 边框颜色-更浅 */
+	--el-color-border-extra-light: #f2f6fc; /* 边框颜色-额外浅 */
+	--el-color-border-dark: #d4d7de; /* 边框颜色-深 */
+	--el-color-border-darker: #c6c9cf; /* 边框颜色-更深 */
+
+	/* 主要颜色变体 */
+	--el-color-primary-dark-2: #1e7e34; /* 主要颜色-深 */
+	--el-color-warning-dark-2: #c6892e; /* 警告颜色-深 */
+	--el-color-danger-dark-2: #c81e1e; /* 危险颜色-深 */
+	--el-color-success-dark-2: #429938; /* 成功颜色-深 */
+
+	/* 字体大小 */
+	--el-font-size-extra-small: 10px; /* 额外小（10px） */
+	--el-font-size-small: 12px; /* 小（12px） */
+	--el-font-size-base: 14px; /* 基础（14px） */
+	--el-font-size-medium: 16px; /* 中（16px） */
+	--el-font-size-large: 18px; /* 大（18px） */
+	--el-font-size-extra-large: 20px; /* 额外大（20px） */
+	--el-font-size-subtitle-large: 24px; /* 副标题大（24px） */
+	--el-font-size-icon-large: 32px; /* 图标大（32px） */
+	--el-font-size-title-large: 40px; /* 标题大（40px） */
+	--el-font-size-large-36: 36px; /* 大36（36px） */
+	--el-font-size-large-40: 40px; /* 大（40px） */
+	--el-font-size-large-46: 46px; /* 大46（46px） */
+	--el-font-size-large-50: 50px; /* 大50（50px） */
+	--el-font-size-large-54: 54px; /* 大54（54px） */
+	--el-font-size-large-60: 60px; /* 大60（60px） */
+	--el-font-size-large-100: 100px; /* 大100（100px） */
+
+	/* 圆角 */
+	--el-border-radius-small: 2px; /* 小圆角（2px） */
+	--el-border-radius-base: 4px; /* 基础圆角（4px） */
+	--el-border-radius-medium: 6px; /* 中圆角（6px） */
+	--el-border-radius-large: 8px; /* 大圆角（8px） */
+	--el-border-radius-extra-large: 12px; /* 额外大圆角（12px） */
+	--el-border-radius-round: 20px; /* 圆角（20px） */
+	--el-border-radius-extra-round: 50px; /* 圆角（50px） */
+	--el-border-radius-circle: 100%; /* 圆形（100%） */
+
+
+	/* 支付颜色变量 - 企业版 */
+	--bt-ltd-bg-color: #2f3437f2; /* 企业版背景 */
+	--bt-ltd-sub-bg-color: #E4A93C; /* 企业版次背景 */
+	--bt-ltd-light-bg-color: #FFCE7D; /* 企业版浅次背景 */
+	--bt-ltd-color: #B87100; /* 企业版主色 */
+	--bt-ltd-color-linear-1: #3c2f19; /* 企业版主色-线性 */
+	--bt-ltd-color-linear-2: #634825; /* 企业版主色-线性 */
+	--bt-ltd-sub-color: #D38200; /* 企业版次色 */
+	--bt-ltd-light-color: #FFB95A; /* 企业版浅次色 */
+	--bt-ltd-border-color: #ECB665; /* 企业版边框 */
+
+
+	/* 支付颜色变量 - 专业版 */
+	--bt-pro-bg-color: #fff5e1; /* 专业版背景 */
+	--bt-pro-sub-bg-color: #E4A93C; /* 专业版次背景 */
+	--bt-pro-light-bg-color: #FFCE7D; /* 专业版浅次背景 */
+	--bt-pro-color: #ff7300; /* 专业版主色 */
+	--bt-pro-sub-color: #ff9600; /* 专业版次色 */
+	--bt-pro-light-color: #FFB95A; /* 专业版浅次色 */
+	--bt-pro-border-color: #ECB665; /* 专业版边框 */
+
+	/* 全局图标 */
+	--bt-layout-icon-color: #666666; // 操作图标颜色
+	--bt-layout-payment-icon-color: #ffc047; // 支付图标颜色
+	--bt-layout-tootls-icon-color: #666666; // 工具图标颜色
+
+
+	/* 全局配置 */
+	--bt-layout-active-color: #fbfbfb; // 激活状态
+	--bt-layout-active-color-rgb: 251, 251, 251; // 激活状态rgb
+	--bt-main-content-opacity: .9; // 主视图透明度
+	--bt-main-bg-images: '';
+	--bt-main-bg-images-opacity: .2;
+	--bt-main-shadow-color: var(--el-color-black); // 主视图阴影颜色
+	--bt-main-shadow-opacity: 0.2; // 主视图阴影透明度
+
+	/* 侧边栏样式 */ 
+	// --bt-menu-icon-color: var(--bt-layout-icon-color); // 侧边栏图标基础颜色（包括logo、menu-icon）
+	--bt-menu-icon-gradient-color-1: var(--el-color-primary); // 侧边栏图标渐变色
+	--bt-menu-icon-gradient-color-2: var(--el-color-primary-light-3); // 侧边栏图标渐变色
+	--bt-menu-message-color: var(--el-color-primary); // 侧边栏消息颜色
+	--bt-menu-message-color-active: var(--el-color-white); // 侧边栏消息颜色-激活
+
+	// --bt-menu-text-color: var(--el-color-text-primary); // 侧边栏文字颜色
+	// --bt-menu-sidebar-bg-opacity: .9; // 侧边栏背景透明度
+	// --bt-menu-sidebar-color: rgba(var(--el-color-white-rgb), var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色
+	// --bt-menu-sidebar-color-active: rgba(var(--bt-layout-active-color-rgb), var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色
+	--bt-menu-sidebar-label-color: var(--el-color-primary);
+	// --bt-menu-shadow-color: rgba(0, 0, 0, 0.1); // 侧边栏阴影
+
+	// --bt-menu-operation-color: var(--el-color-text-tertiary); // 侧边栏操作图标颜色
+	// --bt-menu-operation-color-active: var(--el-color-text-primary); // 侧边栏操作图标颜色-激活
+	// --bt-menu-operation-bg-color: var(--bt-layout-active-color); // 侧边栏操作图标背景颜色
+
+
+
+--bt-menu-sidebar-bg-opacity: 1; // 侧边栏背景透明度
+--bt-menu-icon-color: #bbbbbb; // 侧边栏图标颜色
+--bt-menu-sidebar-color: rgba(60, 68, 77, var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色
+--bt-menu-sidebar-color-active: rgba(56, 64, 73, var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色-激活
+--bt-menu-shadow-color: rgba(var(--bt-menu-shadow-color), 0.1); // 侧边栏阴影颜色
+--bt-menu-text-color: #ffffff; // 侧边栏文字颜色
+--bt-menu-operation-color: #cccccc; // 侧边栏操作图标颜色
+--bt-menu-operation-color-active: #ffffff; // 侧边栏操作图标颜色-激活
+--bt-menu-operation-bg-color: rgb(56, 64, 73); // 侧边栏操作图标背景颜色
+
+
+	// 表格调整
+	.el-table {
+		--el-fill-color-blank: #fff !important;
+		--el-table-header-bg-color: #f6f6f6 !important;
+	}
+
+	// 图表调整
+	--bt-echart-line-color: #cfcfcf;
+
+	// logo 调整
+	--bt-logo-left-color: var(--el-color-primary-dark-2);
+	--bt-logo-right-color: var(--el-color-primary);
+
+	// 首页进度前景色处理
+	.state-component .el-progress-circle {
+		--el-fill-color-light:#EEE;
+	}
+}

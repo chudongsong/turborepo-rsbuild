@@ -1,0 +1,87 @@
+.el-loading-mask.is-fullscreen {
+	@apply flex justify-center items-center fixed top-0 left-0 right-0 bottom-0;
+	.el-loading-spinner {
+		@apply flex items-center;
+		width: auto;
+		min-width: 18rem;
+		max-width: 70rem;
+		padding: 1.6rem 2.5rem;
+		background-color: rgba(var(--el-color-white-rgb),1);
+		border: 1px solid var(--el-color-border-dark);
+		border-radius: var(--el-border-radius-base);
+		word-break: break-all;
+		.circular {
+			width: 32px !important;
+			height: 32px !important;
+			margin-right: 1.2rem;
+			color: var(--el-color-text-secondary);
+			animation: none;
+			position: relative;
+			&::after {
+				position: absolute;
+				content: '';
+				display: block;
+				width: 32px;
+				height: 32px;
+				top: 0;
+				left: 0;
+				border: 1.5px solid var(--el-color-primary);
+				opacity: 0.8;
+				border-top-color: transparent;
+				border-radius: 100%;
+				animation: circle infinite 0.75s linear;
+			}
+			&::before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				opacity: 0.8;
+				transform: translate(-50%, -50%);
+				content: '';
+				display: block;
+				width: 1.4rem;
+				height: 2rem;
+				background-image: url('/static/icons/logo-green.svg');
+				background-size: contain;
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
+		}
+		.el-loading-text {
+			margin: 0;
+			line-height: 2.4rem;
+			text-align: left;
+			font-size: var(--el-font-size-base);
+			color: var(--el-color-text-secondary);
+		}
+	}
+}
+
+.el-loading-mask .el-loading-spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bt-loading .el-loading-spinner .custom-loading__icon {
+	@apply w-[5rem] h-[5rem] relative flex items-center justify-center;
+}
+
+.bt-loading .el-loading-spinner .custom-loading__icon::after {
+	@apply content-[''] absolute block w-[40px] h-[40px] top-[50%] left-[50%] mt-[-20px] ml-[-20px] border-[1.8px] border-solid border-primary rounded-circle opacity-[0.8];
+	border-top-color: transparent !important;
+	animation: circle infinite 0.8s linear;
+}
+
+.bt-loading .el-loading-spinner .custom-loading__icon svg {
+	@apply w-[2rem] h-[2rem];
+}
+
+@keyframes circle {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

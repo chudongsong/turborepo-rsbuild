@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="database-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1"
+	viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.database-element {
+			fill: none;
+			}
+
+			.database-top {
+			fill: url(#gradient-top);
+			}
+
+			.database-middle {
+			fill: url(#gradient-middle);
+			}
+
+			.database-bottom {
+			fill: url(#gradient-bottom);
+			}
+
+			.database-base {
+			fill: url(#gradient-base);
+			}
+		</style>
+		<linearGradient id="gradient-top" x1="510.8" y1="313.4" x2="510.8" y2="548"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-middle" x1="510.8" y1="500.2" x2="510.8" y2="810.6"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-bottom" x1="510.8" y1="65.8" x2="510.8" y2="361.1"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-base" x1="510.8" y1="1630.8" x2="510.8" y2="1939.8"
+			gradientTransform="translate(0 2008) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<g>
+		<path class="database-top"
+			d="M511.1,710.6c358.2,0,439.3-120.8,444.7-129.5v-105.1c-11.1,9.1-138.7,108-444.9,108s-434-96.8-445.1-105.7v103.3c7.7,11.8,92.4,129,445.3,129h0Z" />
+		<path class="database-middle"
+			d="M510.9,523.8c363.9,0,441.8-124.7,444.9-129.8v-180.6H65.8v181.7c8.8,13.4,95.1,128.7,445.1,128.7h0Z" />
+		<path class="database-bottom"
+			d="M511.1,770.8c-308.2,0-435.6-98.1-445.3-105.9v157.9c0,74.8,199.2,135.4,445,135.4s445-60.6,445-135.4v-159.9c-12.3,10-140.2,107.9-444.7,107.9h0Z" />
+	</g>
+	<path class="database-base"
+		d="M510.8,377.2c245.8,0,445-69.2,445-154.5s-199.2-154.5-445-154.5S65.8,137.3,65.8,222.7s199.3,154.5,445,154.5Z" />
+</svg>

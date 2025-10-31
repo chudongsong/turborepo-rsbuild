@@ -1,0 +1,124 @@
+.el-tabs {
+	&--border-card > &__header{
+		border-bottom: none !important;
+	}
+	&--border-card > &-pane {
+		height: 100%;
+	}
+	
+	.el-tabs__item{
+		--el-font-size-base: 12px;
+	}
+	.el-tabs__nav-prev,
+	.el-tabs__nav-next {
+		display: none;
+	}
+
+	&.tab-switch .el-tabs__nav-prev,
+	&.tab-switch .el-tabs__nav-next {
+		display: inline-block !important;
+	}
+	&.tab-switch .is-left.el-tabs__nav-wrap.is-scrollable {
+		padding: 30px 0 !important;
+	}
+
+	&.tab-switch .is-top.el-tabs__nav-wrap.is-scrollable {
+		padding: 0px 20px !important;
+	}
+
+	.el-tabs__nav-wrap {
+		padding: 0 !important;
+	}
+	&.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+		transition: none !important;
+	}
+	&.el-tabs--border-card > .el-tabs__content {
+		padding: 10px 0;
+	}
+	// 带背景的卡片样式
+	&.tabs-bg-card {
+		.el-tabs__item {
+			padding: 0 16px !important;
+			color: var(--el-color-text-primary);
+			background-color: var(--el-fill-color-light);
+			border: 1px var(--el-border-color) solid !important;
+		}
+		.el-tabs__item.is-active {
+			border-bottom-color: var(--el-color-border-extra-light) !important;
+		}
+		.el-tabs__header {
+			background-color: rgba(var(--el-color-white-rgb), 1);
+		}
+		.el-tabs__nav {
+			border: 1px solid var(--el-border-color);
+			border-right-width: 0 !important;
+			border-bottom-width: 0 !important;
+		}
+		&.el-tabs--border-card {
+			border: none;
+		}
+	}
+
+	// 左侧带背景的卡片样式
+	&.tabs-left-bg-card {
+		border: none !important;
+		border-bottom-left-radius: var(--el-border-radius-base);
+		border-bottom-right-radius: var(--el-border-radius-base);
+		& > .el-tabs__header {
+			border-right: none !important;
+			background: var(--el-fill-color);
+			margin-right: 0 !important;
+		}
+		.is-left.el-tabs__nav {
+			width: 130px !important;
+		}
+		.is-left > .el-tabs__item {
+			color: var(--el-color-text-primary);
+			padding: 0 0 0 36px !important;
+			text-align: left !important;
+			justify-content: flex-start !important;
+			border: none !important;
+		}
+		& > .el-tabs__content {
+			padding: 16px;
+			height: 100%;
+		}
+		& > .el-tab-pane {
+			height: 100%;
+		}
+	}
+
+	&.tabs-demo {
+		.el-tabs__nav {
+			border: none !important;
+		}
+		.el-tabs__item {
+			border: none !important;
+			border-bottom: 2px solid var(--el-fill-color-darker) !important;
+			background: rgba(var(--el-color-white-rgb), 1) !important;
+		}
+		.el-tabs__item.is-active {
+			border-bottom: 2px solid var(--el-fill-color-darker) !important;
+			color: var(--el-color-primary) !important;
+			font-weight: 700;
+		}
+	}
+
+	// 默认卡片样式
+	&.tabs-card {
+		.el-tabs__item.is-active::after {
+			width: 100%;
+			height: 3px;
+			background-color: rgba(var(--el-color-white-rgb), 1) ;
+			content: '';
+			position: absolute;
+			bottom: 0;
+		}
+		.el-tabs__nav{
+			border-radius: var(--el-border-radius-base) var(--el-border-radius-base) 0 0 !important;
+		}
+	}
+	&__item {
+		font-weight: 400 !important;
+	}
+}

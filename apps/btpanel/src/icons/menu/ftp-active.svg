@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="ftp-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.ftp-active-connector {
+			fill: url(#gradient-connector);
+			}
+
+			.ftp-active-line {
+			fill: url(#gradient-line);
+			}
+
+			.ftp-active-circle {
+			fill: url(#gradient-circle);
+			}
+
+			.ftp-active-body {
+			fill: url(#gradient-body);
+			}
+		</style>
+		<linearGradient id="gradient-connector" x1="512" y1="208.8" x2="512" y2="328.8"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-line" x1="64" y1="149.2" x2="960" y2="149.2"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-circle" x1="422" y1="148.7" x2="602" y2="148.7"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-body" x1="512" y1="718.8" x2="512" y2="50.6"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<rect class="ftp-active-connector" x="492" y="695.2" width="40" height="120" />
+	<rect class="ftp-active-line" x="64" y="844.8" width="896" height="60" />
+	<circle class="ftp-active-circle" cx="512" cy="875.3" r="90" />
+	<path class="ftp-active-body"
+		d="M820.4,217.5c-2.4-2.6-4.9-5.1-7.5-7.5-28.6-25.7-72.6-25.7-160.5-25.7h-12.5c-38.6,0-57.8,0-75.8-5.1-9.8-2.8-19.3-6.7-28.3-11.7-16.3-9.1-29.9-22.7-57.2-50l-18.4-18.4c-9.1-9.2-13.7-13.7-18.5-17.7-20.7-17.2-46.1-27.7-72.9-30.2-6.2-.6,3.9-.6-25.6-.6s-44.2,0-56.5,2.3c-54,10.1-96.3,52.4-106.5,106.5-2.3,12.3-2.3,27-2.3,56.5h0v235.7c0,126,0,189,39.1,228.1,39.1,39.1,102.1,39.1,228.1,39.1h133.7c126,0,189.1,0,228.2-39.1,39.1-39.1,39.1-102.1,39.1-228.1v-73.6c0-87.9,0-131.9-25.7-160.5ZM689.1,353.9h-152.1c-16.6,0-30-13.4-30-30s13.4-30,30-30h152.1c16.6,0,30,13.4,30,30s-13.4,30-30,30Z" />
+</svg>

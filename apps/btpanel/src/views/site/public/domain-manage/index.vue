@@ -1,0 +1,169 @@
+<template>
+	<div class="">
+		<div class="flex items-end mb-[12px]">
+			<el-popover ref="popover" placement="top-start" width="36rem" popper-class="green-tips-popover !p-0 !border-none" v-model:visible="popoverFocus" :trigger-keys="[]" trigger="focus">
+				<template #default>
+					<div class="!p-[12px] bg-primary text-white leading-[2.4rem]">
+						如需绑定外网，请换行填写，每行一个域名，默认为80端口
+						<br />
+						IP地址格式：192.168.1.199
+						<br />
+						泛解析添加方法 *.domain.com
+						<br />
+						如另加端口格式为 www.domain.com:88
+					</div>
+				</template>
+				<template #reference>
+					<bt-input
+						v-model="domainData"
+						type="textarea"
+						resize="none"
+						:rows="4"
+						width="42rem"
+						@focus="popoverFocus = true"
+						:placeholder="'如需绑定外网，请换行填写，每行一个域名，默认为80端口\nIP地址格式：192.168.1.199\n泛解析添加方法 *.domain.com\n如另加端口格式为 www.domain.com:88'"
+						class="domain-textarea"></bt-input>
+				</template>
+			</el-popover>
+			<el-button type="primary" class="absolute" style="right: 4rem; top: 5rem" @click="addDomain">添加</el-button>
+		</div>
+		<bt-table-group>
+			<template #header-right>
+				<!-- 测试版功能 -->
+				<div v-if="['php', 'proxy', 'phpasync'].includes(siteType)">
+					HTTPS端口：{{ port }}
+					<span class="bt-link cursor-pointer" v-show="typeof port === 'number'" @click="openUpdatePortView">更换</span>
+				</div>
+			</template>
+			<template #content>
+				<BtTable :max-height="440" />
+			</template>
+			<template #footer-left>
+				<BtBatch />
+			</template>
+		</bt-table-group>
+		<ul class="mt-[.8rem] leading-8 text-small list-disc ml-2rem" v-if="!['php', 'java'].includes(siteType)">
+			<li>如果您的是HTTP项目，且需要映射到外网，请至少绑定一个域名</li>
+			<li>建议所有域名都使用默认的80端口</li>
+			<li v-if="siteType === 'phpasync'" class="text-danger">只有部署前端或反向代理域名后此域名才可用</li>
+		</ul>
+	</div>
+</template>
+
+<script setup lang="tsx">
+import BtInputNumber from '@/components/form/bt-input-number'
+import { useBatch, useDialog, useForm, useRefreshList, useTable } from '@/hooks/tools'
+import { FormItemCustom } from '@/hooks/tools/form/form-item'
+import { defaultVerify, portVerify } from '@/utils'
+import { useSiteStore } from '@site/useStore'
+import { addDomain, delDomain, delMultDomain, domainData, getDomainList, initDomain, popoverFocus, setPort } from './useController'
+import { useSiteDomainStore } from './useStore'
+import { useSiteSSLStore } from '../ssl-arrange/useStore'
+import { useCheckbox } from '@/hooks/tools/table/column'
+
+const { isBindExtranet, siteType } = useSiteStore()
+const { isRefreshDomain, port } = useSiteDomainStore()
+
+const { sslInfo } = useSiteSSLStore()
+
+/**
+ * @description 批量操作
+ */
+const useTableBatch = useBatch([
+	{
+		label: '删除',
+		value: 'delete',
+		event: async (batchCofirm, nextAll, selectedList, options) => {
+			delMultDomain(selectedList.value)
+		},
+	},
+])
+
+const { BtTable, BtBatch, config, refresh } = useTable({
+	request: initDomain,
+	columns: [
+		useCheckbox(),
+		{
+			label: '域名',
+			prop: 'name',
+			width: 400,
+			render: (row: any) => {
+				return (
+					<div class="">
+						<a class="inline-block bt-link  truncate" href={`http${sslInfo.value.https ? 's' : ''}://${row.name}${sslInfo.value.https ? '' : `:${row.port}`}`} title={row.name} target="_blank">
+							{row.name}
+						</a>
+						{siteType.value === 'php' && row?.cn_name && row.name !== row?.cn_name ? <span>（{row.cn_name}）</span> : ''}
+					</div>
+				)
+			},
+		},
+		{
+			label: '端口',
+			prop: 'port',
+		},
+		{
+			label: '操作',
+			align: 'right',
+			render: (row: any) => {
+				// 当只有一个域名时,且外网映射为开启状态时显示不可操作
+				if (config.data.length === 1 && isBindExtranet.value) return <span>不可操作</span>
+				return (
+					<span
+						class="bt-link"
+						onClick={() => {
+							delDomain(row)
+						}}>
+						删除
+					</span>
+				)
+			},
+		},
+	],
+	extension: [useTableBatch, useRefreshList(isRefreshDomain)],
+})
+
+/**
+ * @description 更换端口
+ */
+const openUpdatePortView = () => {
+	const { BtForm, submit } = useForm({
+		data: {
+			port: config.other.port,
+		},
+		options: (formData: Ref<AnyObject>) =>
+			computed(() => [
+				FormItemCustom(
+					'HTTPS端口',
+					() => {
+						return <BtInputNumber v-model={formData.value.port}></BtInputNumber>
+					},
+					'port',
+					{
+						attrs: {
+							min: 1,
+							max: 65535,
+						},
+						rules: [defaultVerify({ message: '请输入端口号', trigger: 'blur' }), portVerify()],
+					}
+				),
+			]),
+		submit: setPort,
+	})
+	useDialog({
+		title: `更换端口`,
+		area: 42,
+		showFooter: true,
+		component: () => <BtForm class="p-2rem" />,
+		onConfirm: submit,
+	})
+}
+
+defineExpose({ init: refresh })
+</script>
+
+<style lang="css">
+.domain-textarea .el-textarea__inner {
+	padding: 1rem;
+}
+</style>

@@ -1,0 +1,42 @@
+/* 产品介绍 */
+.productIntroduce {
+	@apply bg-no-repeat bg-[var(--bt-ltd-bg-color)] pl-[28px] pl-[24px];
+    border-top-left-radius: var(--el-border-radius-base);
+    border-bottom-left-radius: var(--el-border-radius-base);
+}
+
+/* 产品介绍标题 */
+.productIntroduceTitle {
+	@apply text-round font-bold pt-[20px];
+}
+
+/* 产品介绍特权列表 */
+.productIntroducePrivilegeList {
+	@apply pt-[16px];
+}
+
+/* 产品介绍特权列表项 */
+.productIntroducePrivilegeItem {
+	@apply py-[16px] text-base leading-[20px];
+}
+
+/* 产品介绍特权列表项图标 */
+.productIntroducePrivilegeItemIcon {
+	@apply mr-[8px];
+}
+
+/* 产品介绍特权列表项标题 */
+.productIntroducePrivilegeItemTitle {
+	@apply text-black;
+}
+
+/* 产品特权对比按钮 */
+.productPrivilegeCompareButton {
+	@apply text-base leading-[20px] text-black;
+}
+
+
+
+
+
+

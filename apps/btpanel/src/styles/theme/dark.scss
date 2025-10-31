@@ -1,0 +1,217 @@
+/* 深色主题 */
+html.dark {
+	--el-fill-color-light: #0f0f0f; /* 背景颜色 */
+	--el-file-color-light-rgb: 15, 15, 15;
+
+	--el-fill-color-ligth-active: #2e2e2e;
+	--el-file-color-light-active-rgb: 46, 46, 46 ;
+
+	/* 基础色 */
+	--el-color-white: #e1e1e1;
+	--el-color-white-rgb: 30, 30, 30;
+	--el-color-black: #ffffff;
+	--el-color-black-rgb: 255, 255, 255;
+	--el-color-primary: #1e7e34;
+	--el-color-primary-dark: #1e7e34;
+	--el-color-success: #67c23a;
+	--el-color-success-dark: #429938;
+	--el-color-warning: #f2711c;
+	--el-color-warning-dark: #c25a16;
+	--el-color-danger: #db2828;
+	--el-color-danger-dark: #af2020;
+	--el-base-primary: #e4e7ed;
+	--el-base-primary-rgb: 228, 231, 237;
+	--el-base-secondary: #c0c4cc;
+	--el-base-secondary-rgb: 192, 196, 204;
+	--el-base-tertiary: #909399;
+	--el-base-tertiary-rgb: 144, 147, 153;
+	--el-base-supplement: #409eff;
+	--el-base-supplement-rgb: 64, 158, 255;
+	--el-base-supplement-dark: #337ecc;
+	--el-base-supplement-light-3: #79bbff;
+	--el-base-supplement-light-5: #a0cfff;
+	--el-base-supplement-light-7: #c6e2ff;
+	--el-base-supplement-light-8: #d9ecff;
+	--el-base-supplement-light-9: #ecf5ff;
+
+	/* 文字颜色 */
+	/* 主要文字颜色 */
+	--el-color-text-primary: #e1e1e1;
+	/* 主要文字颜色rgb值 */
+	--el-color-text-primary-rgb: 228, 231, 237;
+	/* 二级文字颜色 */
+	--el-color-text-secondary: #CCC;
+	/* 三级文字颜色 */
+	--el-color-text-tertiary: #BBB;
+	/* 禁用文字颜色 */
+	--el-color-text-disabled: #999;
+
+	/* 填充颜色 */
+	--el-fill-color: #262727; /* 填充颜色 */
+	--el-fill-color-lighter: #1d1e1f; /* 填充颜色-更浅 */
+	--el-fill-color-extra-light: #191a1b; /* 填充颜色-额外浅 */
+	--el-fill-color-dark: #2b2c2d; /* 填充颜色-深 */
+	--el-fill-color-darker: #2f3031; /* 填充颜色-更深 */
+
+	/* 边框颜色 */
+	--el-color-border: #4c4d4f; /* 边框颜色 */
+	--el-color-border-dark-tertiary: #414243; /* 边框颜色-浅 */
+	--el-color-border-dark-tertiaryer: #363637; /* 边框颜色-更浅 */
+	--el-color-border-extra-light: #2b2c2d; /* 边框颜色-额外浅 */
+	--el-color-border-dark: #565758; /* 边框颜色-深 */
+	--el-color-border-darker: #606162; /* 边框颜色-更深 */
+
+	/* 主要颜色变体 */
+	--el-color-primary-dark-2: #1e7e34; /* 主要颜色-深 */
+	--el-color-warning-dark-2: #c6892e; /* 警告颜色-深 */
+	--el-color-danger-dark-2: #c81e1e; /* 危险颜色-深 */
+	--el-color-success-dark-2: #429938; /* 成功颜色-深 */
+
+	/* 字体大小保持不变 */
+	--el-font-size-extra-small: 10px;
+	--el-font-size-small: 12px;
+	--el-font-size-base: 14px;
+	--el-font-size-medium: 16px;
+	--el-font-size-large: 18px;
+	--el-font-size-extra-large: 20px;
+	--el-font-size-subtitle-large: 24px;
+	--el-font-size-icon-large: 32px;
+	--el-font-size-title-large: 40px;
+	--el-font-size-large-36: 36px;
+	--el-font-size-large-40: 40px;
+	--el-font-size-large-46: 46px;
+	--el-font-size-large-50: 50px;
+	--el-font-size-large-54: 54px;
+	--el-font-size-large-60: 60px;
+	--el-font-size-large-100: 100px;
+
+	/* 圆角保持不变 */
+	--el-border-radius-small: 2px;
+	--el-border-radius-base: 4px;
+	--el-border-radius-medium: 6px;
+	--el-border-radius-large: 8px;
+	--el-border-radius-extra-large: 12px;
+	--el-border-radius-round: 20px;
+	--el-border-radius-extra-round: 50px;
+	--el-border-radius-circle: 100%;
+
+	/* 支付颜色变量 - 企业版 (深色主题调整) */
+	--bt-ltd-bg-color: #141415f2;
+	--bt-ltd-sub-bg-color: #E4A93C;
+	--bt-ltd-light-bg-color: #FFCE7D;
+	--bt-ltd-color: #B87100;
+	--bt-ltd-color-linear-1: #3c2f19;
+	--bt-ltd-color-linear-2: #634825;
+	--bt-ltd-sub-color: #D38200;
+	--bt-ltd-light-color: #FFB95A;
+	--bt-ltd-border-color: #ECB665;
+
+	/* 支付颜色变量 - 专业版 (深色主题调整) */
+	--bt-pro-bg-color: #2a2520;
+	--bt-pro-sub-bg-color: #E4A93C;
+	--bt-pro-light-bg-color: #FFCE7D;
+	--bt-pro-color: #ff7300;
+	--bt-pro-sub-color: #ff9600;
+	--bt-pro-light-color: #FFB95A;
+	--bt-pro-border-color: #ECB665;
+
+		/* 全局图标 */
+	--bt-layout-icon-color: #999; // 操作图标颜色
+	--bt-layout-payment-icon-color: #ffc047; // 支付图标颜色
+	--bt-layout-tootls-icon-color: #999; // 工具图标颜色
+
+	/* 全局配置 */
+	--bt-layout-active-color: #0f0f0f; // 激活状态
+	--bt-layout-active-color-rgb: 15, 15, 15; // 激活状态rgb
+	--bt-main-content-opacity: .9; // 主视图透明度
+	--bt-main-bg-images: '';
+	--bt-main-bg-images-opacity: .2;
+	--bt-main-shadow-color: var(--el-color-black); // 主视图阴影颜色
+	--bt-main-shadow-opacity: 0.2; // 主视图阴影透明度
+
+
+	/* 侧边栏样式 */ 
+	--bt-menu-icon-color: var(--bt-layout-icon-color); // 侧边栏图标基础颜色（包括logo、menu-icon）
+	--bt-menu-icon-gradient-color-1: var(--el-color-primary); // 侧边栏图标渐变色
+	--bt-menu-icon-gradient-color-2: var(--el-color-primary-light-3); // 侧边栏图标渐变色
+	--bt-menu-message-color: var(--el-color-primary); // 侧边栏消息颜色
+	--bt-menu-message-color-active: var(--el-color-white); // 侧边栏消息颜色-激活
+
+	--bt-menu-text-color: var(--el-color-text-primary); // 侧边栏文字颜色
+	--bt-menu-sidebar-color: rgba(var(--el-color-white-rgb), var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色
+	--bt-menu-sidebar-color-active: rgba(var(--bt-layout-active-color-rgb), var(--bt-menu-sidebar-bg-opacity)); // 侧边栏背景颜色
+	--bt-menu-sidebar-label-color: var(--el-color-primary);
+	--bt-menu-shadow-color: rgba(0, 0, 0, 0.1); // 侧边栏阴影
+
+	--bt-menu-operation-color: var(--el-color-text-tertiary); // 侧边栏操作图标颜色
+	--bt-menu-operation-color-active: var(--el-color-text-primary); // 侧边栏操作图标颜色-激活
+	--bt-menu-operation-bg-color: var(--bt-layout-active-color); // 侧边栏操作图标背景颜色
+
+
+	// 图表调整
+	--bt-echart-line-color: #888;
+
+	// 全局遮罩
+	--el-overlay-color-lighter: rgba(0, 0, 0, 0.6);
+
+
+	// 表格调整
+	.el-table {
+		--el-fill-color-blank: #1a1a1a !important;
+		--el-table-header-bg-color: #1a1a1a !important;
+	}
+
+	// 描述列表调整
+	.el-descriptions{
+		--el-descriptions-item-bordered-label-background: rgba(15,15,15,var(--bt-main-content-opacity)) !important;
+	}
+
+	// 按钮调整
+	.el-button{
+		--el-button-text-color: var(--el-color-text-primary);
+	}
+
+	// 下拉调整
+	.el-select{
+		--el-input-text-color: var(--el-color-text-primary);
+	}
+
+	// 分页调整
+	.el-pagination{
+		--el-text-color-regular: var(--el-color-text-primary);
+	}
+	// 标签调整
+	.el-tabs{
+		--el-text-color-primary: var(--el-color-text-primary);
+	}
+
+	// 首页进度前景色处理
+	.state-component .el-progress-circle{
+		--el-fill-color-light: #444;
+	}
+
+	// 提示消息
+	.el-popper.is-dark {
+    color: var(--el-color-text-primary);
+    background: rgba(var(	--el-color-white-rgb), 0.8);
+    border: 1px solid var(--el-color-border);
+		& > .el-popper__arrow::before{
+			border-color: var(--el-color-border);
+			background: rgba(var(	--el-color-white-rgb),1);
+		}
+	}	
+
+	// 权益对比-表格处理
+	.privilege_contrast_cont .ltd_table thead,
+	.privilege_contrast_cont .ops_table thead,
+	.privilege_contrast_cont .ops_table tr:nth-of-type(2n + 0),
+	.privilege_contrast_cont .ltd_table tr:nth-of-type(2n + 0) {
+		background: #303133 !important;
+	}
+	
+	// 全局背景颜色
+	background-color: var(--el-fill-color-light);
+}
+
+
+

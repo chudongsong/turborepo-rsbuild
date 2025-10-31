@@ -1,0 +1,12 @@
+// 修改按钮组件的样式
+.el-button{
+	&.el-button--small{
+		border-radius: var(--el-border-radius-base) !important;
+	}
+	&,&.is-round {
+		padding: 8px 12px !important;
+	}
+	&:focus-visible {
+		outline: 0 !important;
+	}
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1024 1024">
+  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2, .st3, .st4 {
+        fill: none;
+      }
+
+      .st1, .st2, .st3, .st4 {
+        stroke: var(--bt-layout-icon-color, #666666);
+      }
+
+      .st1, .st4 {
+        stroke-width: 60px;
+      }
+
+      .st5 {
+        clip-path: url(#clippath-1);
+      }
+
+      .st2, .st3 {
+        stroke-width: .9px;
+      }
+
+      .st2, .st4 {
+        stroke-linecap: round;
+      }
+
+      .st6 {
+        fill: var(--bt-layout-icon-color, #666666);
+      }
+
+      .st7 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st0" x="1203.22" y="998.5" width="14.4" height="14.4"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="st0" x="65" y="64" width="896" height="896"/>
+    </clipPath>
+  </defs>
+  <g class="st7">
+    <g>
+      <circle class="st3" cx="1210.12" cy="1005.4" r="5.7"/>
+      <path class="st2" d="M1210.02,1006.7v-4"/>
+      <path class="st6" d="M1210.52,1008.2c0,.28-.22.5-.5.5s-.5-.22-.5-.5.22-.5.5-.5.5.22.5.5Z"/>
+      <path class="st2" d="M1214.32,1009.6l2.1,2.1"/>
+    </g>
+  </g>
+  <g class="st5">
+    <g>
+      <circle class="st1" cx="491.6" cy="491.6" r="387.75"/>
+      <path class="st4" d="M484.8,580.03v-272.11"/>
+      <path class="st6" d="M518.81,682.07c0,18.78-15.23,34.01-34.01,34.01s-34.01-15.23-34.01-34.01,15.23-34.01,34.01-34.01,34.01,15.23,34.01,34.01Z"/>
+      <path class="st4" d="M777.3,777.3l142.86,142.86"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+{
+  "name": "@panel/utils",
+  "version": "0.1.0",
+  "description": "纯函数版 btpanel 工具库，提供校验、时间、颜色等工具函数（使用 Rsbuild 打包）。",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "./dist/static/js/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/static/js/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rsbuild build && tsc -p tsconfig.build.json",
+    "dev": "rsbuild dev",
+    "test": "rstest --coverage",
+    "test:watch": "rstest --watch",
+    "lint": "eslint \"src/**/*.{ts}\"",
+    "format": "prettier --write \"**/*.{ts,md,json}\""
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "@rstest/core": "^0.6.1",
+    "@rstest/coverage-istanbul": "^0.0.4",
+    "mockdate": "^3.0.5",
+    "@types/mockdate": "^3.0.0"
+  }
+}

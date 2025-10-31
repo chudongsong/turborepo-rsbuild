@@ -1,0 +1,14 @@
+// 警告框
+.el-alert {
+	&.el-alert--info {
+		background-color: var(--el-fill-color-lighter);
+		border: 1px solid var(--el-color-border-dark-tertiaryer);
+		color: var(--el-color-text-secondary);
+	}
+	&.el-alert--info.is-light {
+		background-color: var(--el-fill-color-light);
+		border: 1px solid var(--el-color-border-dark-tertiaryer);
+		color: var(--el-color-text-tertiary);
+	}
+}
+// --el-alert-icon-large-size: 24px;

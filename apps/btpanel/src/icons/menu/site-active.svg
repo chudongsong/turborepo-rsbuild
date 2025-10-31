@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="site-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.site-active-top {
+			fill: url(#site-gradient-top);
+			}
+
+			.site-active-right {
+			fill: url(#site-gradient-right);
+			}
+
+			.site-active-left {
+			fill: url(#site-gradient-left);
+			}
+
+			.site-active-highlight {
+			fill: #fff;
+			}
+		</style>
+		<linearGradient id="site-gradient-top" x1="511.9" y1="378.7" x2="511.9" y2="64.1"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="site-gradient-right" x1="688.8" y1="960.1" x2="688.8" y2="438.7"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="site-gradient-left" x1="210.8" y1="958.7" x2="210.8" y2="438.7"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<g>
+		<path class="site-active-top"
+			d="M894.3,129.7c-65.6-65.6-171.2-65.6-382.4-65.6s-316.8,0-382.4,65.6c-50,50-61.9,123.3-64.7,249h894.2c-2.8-125.7-14.7-199-64.7-249ZM263.6,305.2c-22.9,0-41.4-18.5-41.4-41.4s18.5-41.4,41.4-41.4,41.4,18.5,41.4,41.4-18.5,41.4-41.4,41.4ZM387.7,305.2c-22.9,0-41.4-18.5-41.4-41.4s18.5-41.4,41.4-41.4,41.4,18.5,41.4,41.4-18.5,41.4-41.4,41.4ZM511.9,305.2c-22.9,0-41.4-18.5-41.4-41.4s18.5-41.4,41.4-41.4,41.4,18.5,41.4,41.4-18.5,41.4-41.4,41.4Z" />
+		<path class="site-active-right"
+			d="M417.7,438.7v521.1c28.8.3,60.1.3,94.2.3,211.2,0,316.8,0,382.4-65.6,65.6-65.6,65.6-171.2,65.6-382.4s0-50.5-.1-73.4H417.7Z" />
+		<path class="site-active-left"
+			d="M64,438.7c-.1,22.9-.1,47.4-.1,73.4,0,211.2,0,316.8,65.6,382.4,47.2,47.2,115.1,60.4,228.2,64.2V438.7H64Z" />
+		<path class="site-active-highlight" d="M357.7,959.2l60,1.2v-.5c-21.3-.2-41.3-.6-60-1.2v.5Z" />
+	</g>
+</svg>

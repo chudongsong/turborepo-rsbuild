@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="firewall-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1"
+	viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.firewall-active-element {
+			fill: url(#firewall-gradient);
+			}
+		</style>
+		<linearGradient id="firewall-gradient" x1="512.1" y1="960.1" x2="512.1" y2="63.9"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="firewall-active-element"
+		d="M898.5,202.1c-17-24.1-84.3-47.2-219-93.3l-25.7-8.8c-70.2-24.1-105.3-36.1-141.7-36.1s-71.5,12.1-141.7,36.1l-25.7,8.8c-134.7,46.2-202.1,69.2-219,93.3-16.9,24.1-16.9,95.7-16.9,239h.2v70.6c0,252.6,190,375.2,309.1,427.2,32.3,14.1,48.5,21.2,94.1,21.2s61.8-7.1,94.1-21.2c119.2-52,309.1-174.6,309.1-427.2v-70.6c0-143.3,0-214.9-16.9-239ZM667,448.5l-175.1,175.1c-6.4,6.4-14.8,9.8-23.8,9.8s-17.4-3.4-23.8-9.8l-87.4-87.4c-13.2-13.3-13.2-34.5,0-47.7,13.3-13.2,34.5-13.2,47.7,0l63.9,63.5,151.2-151.2c13.3-13.2,34.4-13.2,47.3,0,13.2,13.3,13.2,34.5,0,47.7Z" />
+</svg>

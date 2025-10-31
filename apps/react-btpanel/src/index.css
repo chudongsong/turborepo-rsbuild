@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* nprogress override */
+#nprogress .bar {
+  background: #3b82f6;
+  height: 2px;
+}

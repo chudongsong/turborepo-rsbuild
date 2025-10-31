@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="exit-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.exit-active-outline {
+			fill: none;
+			stroke: url(#gradient-outline);
+			stroke-width: 60px;
+			}
+			.exit-active-body {
+			fill: url(#gradient-body);
+			}
+		</style>
+		<linearGradient id="gradient-outline" x1="247.5" y1="170.1" x2="247.5" y2="853.9"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="gradient-body" x1="357.6" y1="511.9" x2="916.8" y2="511.9"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="exit-active-outline"
+		d="M387.3,200.1h-41.6c-98,0-147,0-177.5,30.4-30.4,30.4-30.4,79.4-30.4,177.5v207.9c0,98,0,147,30.4,177.5s79.4,30.5,177.5,30.5h41.6" />
+	<path class="exit-active-body"
+		d="M916.4,375.5c3-116.8-7.7-176-41.1-210.1-39.8-41.8-92.9-50.3-192.2-67.5l-105.6-18.4c-103.6-17.2-142.6-20.3-179.8,10.5-32.9,28-39.7,70-39.9,175.4h0v492.6c-1.5,117.9,8.3,149.2,44.9,181.4,28.3,24.9,98.6,21.4,183.9,3.7l96.4-17.1c111.5-18.6,166-33,197.5-74.1,29.3-38.2,38.6-93.4,35.9-204.1v-272.2ZM542,553.6c0,16.6-13.4,30-30,30s-30-13.4-30-30v-83.2c0-16.6,13.4-30,30-30s30,13.4,30,30v83.2Z" />
+</svg>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="database-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.database-element {
+			fill: none;
+			stroke: var(--bt-menu-icon-color, #787a79);
+			stroke-width: 60px;
+			}
+		</style>
+	</defs>
+	<path class="database-element"
+		d="M925.85,243.42s0,520.08,0,560.29c0,68.77-185.81,124.51-415.03,124.51s-415.03-55.74-415.03-124.51c0-38.55,0-560.29,0-560.29" />
+	<path class="database-element"
+		d="M925.84,616.95c0,68.77-185.81,124.51-415.03,124.51s-415.03-55.74-415.03-124.51" />
+	<path class="database-element"
+		d="M925.84,430.18c0,68.76-185.81,124.51-415.03,124.51s-415.03-55.74-415.03-124.51" />
+	<path class="database-element"
+		d="M510.81,347.17c229.22,0,415.03-55.74,415.03-124.51s-185.81-124.51-415.03-124.51S95.78,153.9,95.78,222.66s185.82,124.51,415.03,124.51Z" />
+</svg>

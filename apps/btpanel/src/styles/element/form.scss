@@ -1,0 +1,60 @@
+// 表单
+.el-form {
+	& &-item {
+		display: flex;
+		&::before,
+		&::after {
+			display: none;
+		}
+		&__label {
+			margin-right: 2rem;
+			padding-right: 0;
+		}
+		&__content {
+			flex: 1;
+			margin-left: 0 !important;
+		}
+		&--small {
+			&.el-form-item {
+				margin-bottom: 0;
+				& + .el-form-item {
+					margin-top: 1.6rem;
+				}
+			}
+			& .el-form-item__label {
+				min-width: 8rem;
+				line-height: 3.2rem;
+				font-size: var(--el-font-size-small);
+				color: var(--el-color-text-secondary);
+			}
+			& .el-form-item__content {
+				.el-input {
+					font-size: var(--el-font-size-small);
+					.el-input__inner {
+						height: 3.2rem;
+					}
+				}
+				.el-form-item__error {
+					font-size: var(--el-font-size-extra-small);
+				}
+				.el-textarea {
+					.el-textarea__inner {
+						border-radius: var(--el-border-radius-small);
+					}
+				}
+			}
+		}
+	}
+	.el-form-item__label {
+		min-width: 8rem;
+		line-height: 3.2rem;
+		font-size: var(--el-font-size-small);
+		color: var(--el-color-text-secondary);
+	}
+}
+
+.el-form .el-form-item__content {
+	.el-checkbox__label {
+		font-size: var(--el-font-size-small);
+	}
+}

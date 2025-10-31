@@ -1,0 +1,122 @@
+.hotCon {
+	width: 40rem;
+	position: fixed;
+	background-color: var(--el-color-white);
+	border: 1px solid var(--el-color-border-dark-tertiary);
+	border-radius: var(--el-border-radius-base);
+	font-size: var(--el-font-size-small);
+	padding: 1.5rem;
+	z-index: 999;
+}
+
+// .box {
+// 	background-color: var(--el-color-white);
+// }
+
+.history-title {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 1rem;
+	align-items: center;
+	font-size: var(--el-font-size-base);
+	border-bottom: 1px solid var(--el-color-border-dark-tertiaryer);
+}
+
+.list-box {
+	// padding: 1rem 0;
+	margin-bottom: 1rem;
+	// border-bottom: 1px solid var(--el-color-border-dark-tertiaryer);
+}
+
+.list-box-body {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.4rem;
+	max-height: 12.6rem;
+	overflow: auto;
+}
+
+.body-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	line-height: 2.4rem;
+	cursor: pointer;
+	padding: 0.2rem 0.6rem;
+}
+
+.body-item:hover {
+	background-color: var(--el-fill-color-light);
+}
+
+.body-item .svgtofont-el-close {
+	display: none;
+}
+
+.body-item:hover .svgtofont-el-close {
+	display: inline-block;
+	opacity: 1;
+}
+.body-item span {
+	flex: 1;
+	margin-right: 4px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-size: var(--el-font-size-base);
+	color: var(--el-base-tertiary);
+}
+
+.recommend-list {
+	margin-top: 1rem;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.recommend-item {
+	cursor: pointer;
+	border-radius: var(--el-border-radius-base);
+	height: 3.2rem;
+	line-height: 3.2rem;
+	display: inline-block;
+	transition: all 0.5s;
+	padding: 0 1rem;
+	width: fit-content;
+}
+
+.recommend-item:hover {
+	background-color: var(--el-fill-color);
+	color: var(--el-color-primary);
+}
+
+.softItem {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	height: 3.3rem;
+	cursor: pointer;
+	border-radius: var(--el-border-radius-base);
+	transition: all 0.5s;
+	white-space: nowrap;
+}
+
+.softItem:hover {
+	background-color: var(--el-fill-color-light);
+}
+
+.softItem img {
+	max-width: 2.2rem;
+	margin-right: 0.5rem;
+	align-self: center;
+	margin-top: -0.25rem;
+}
+
+.softItem span {
+	display: inline-block;
+	color: var(--el-color-text-secondary);
+}

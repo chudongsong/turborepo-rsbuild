@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="crontab-active-layer" xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.crontab-header {
+			fill: url(#header-gradient);
+			}
+			.crontab-body {
+			fill: url(#body-gradient);
+			}
+			.crontab-line-left {
+			stroke: url(#line-left-gradient);
+			fill: none;
+			stroke-linecap: round;
+			stroke-width: 60px;
+			}
+			.crontab-line-right {
+			stroke: url(#line-right-gradient);
+			fill: none;
+			stroke-linecap: round;
+			stroke-width: 60px;
+			}
+		</style>
+		<linearGradient id="line-left-gradient" x1="303.5" y1="198" x2="303.5" y2="75.4"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="line-right-gradient" x1="720.5" y1="198" x2="720.5" y2="75.4"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="header-gradient" x1="512" y1="346.5" x2="512" y2="140.1"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="body-gradient" x1="512" y1="946.5" x2="512" y2="406.5"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="crontab-line-left" d="M303.5,168v-62.6" />
+	<path class="crontab-line-right" d="M720.5,168v-62.6" />
+	<g>
+		<path class="crontab-header"
+			d="M957.55,346.5c-4.35-73.57-16.45-120.29-50.05-153.9-52.5-52.5-136.9-52.5-305.9-52.5h-179.2c-168.9,0-253.4,0-305.9,52.5-33.61,33.61-45.7,80.3-50.06,153.9h891.11Z" />
+		<path class="crontab-body"
+			d="M64.43,406.5c-.43,27.54-.43,58.06-.43,92v89.6c0,168.9,0,253.4,52.5,305.9s136.9,52.5,305.9,52.5h179.2c168.9,0,253.4,0,305.9-52.5s52.5-136.9,52.5-305.9v-89.6c0-33.93,0-64.45-.43-92H64.43ZM303.5,751.8c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7ZM303.5,585c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7ZM512,751.8c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7ZM512,585c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7ZM720.5,751.8c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7ZM720.5,585c-23,0-41.7-18.7-41.7-41.7s18.7-41.7,41.7-41.7,41.7,18.7,41.7,41.7-18.7,41.7-41.7,41.7Z" />
+	</g>
+</svg>

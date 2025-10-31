@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="mail-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.mail-active-element {
+			fill: url(#mail-gradient);
+			}
+		</style>
+		<linearGradient id="mail-gradient" x1="512" y1="846.4" x2="512" y2="177.6"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="mail-active-element"
+		d="M838.8,177.6H185.2c-66.9,0-121.2,54.3-121.2,121.2v426.4c0,66.9,54.3,121.2,121.2,121.2h653.6c66.9,0,121.2-54.3,121.2-121.2v-426.4c0-66.9-54.3-121.2-121.2-121.2ZM839.4,689.6c10.9,10.9,10.9,28.7,0,39.6-10.9,10.9-28.7,10.9-39.6,0l-178-178-53.9,53.3c-15.2,15.3-39.5,22.9-59.5,22.9s-38.1-7.2-52.5-18.9l-3-2.4c-2.6-2.3-5-4.8-7.3-7.4l-46.3-46.5-177,177c-10.9,10.9-28.7,10.9-39.6,0-10.9-10.9-10.9-28.7,0-39.6l177.1-177.2-177.1-178.1c-10.9-10.9-10.9-28.7,0-39.6,10.9-10.9,28.7-10.9,39.6,0l233.7,234.6c14.7,12.7,31.7,21.2,54.2,21.2s42.7-9.1,57.8-23.5v.3l233.6-232.6c10.9-10.9,28.7-10.9,39.6,0c10.9,11.1,10.9,28.8,0,39.7l-179.5,177.5,177.7,177.7Z" />
+</svg>

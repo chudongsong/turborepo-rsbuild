@@ -1,0 +1,40 @@
+
+a.el-link {
+	vertical-align: initial;
+}
+
+.el-link{
+	font-weight: 400;
+	line-height: 1.4;
+	vertical-align: initial;
+
+	// 主要链接
+	&.el-link--primary{
+		color: var(--el-color-primary);
+		&:hover{
+			color: var(--el-color-primary-dark-2);
+		}
+	}
+
+ 	// 风险链接
+	&.el-link--danger{
+		color: var(--el-color-danger);
+		&:hover{
+			color: var(--el-color-danger-dark-2);
+		}
+	}
+	// 警告链接
+	&.el-link--warning{
+		color: var(--el-color-warning);
+		&:hover{
+			color: var(--el-color-warning-dark-2);
+		}
+	}
+	// 默认链接
+	&.el-link--default{
+		color: var(--el-color-text-secondary) ;
+		&:hover{
+			color: var(--el-color-primary);
+		}
+	}
+}

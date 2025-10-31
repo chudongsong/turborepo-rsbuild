@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="files-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1"
+	viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.files-active-element {
+			fill: url(#files-gradient);
+			}
+		</style>
+		<linearGradient id="files-gradient" x1="512" y1="959.9" x2="512" y2="63.9"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="files-active-element"
+		d="M925.6,287.7c-3.2-3.6-6.6-6.9-10.1-10.1-38.3-34.5-97.3-34.5-215.2-34.5h-16.7c-51.7,0-77.5,0-101.6-6.9-13.2-3.7-26-9-38-15.7-21.9-12.2-40.2-30.5-76.7-67l-24.7-24.6c-12.2-12.2-18.4-18.4-24.8-23.7-27.8-23-61.8-37.1-97.7-40.5-8.3-.8,5.3-.8-34.3-.8s-59.3,0-75.8,3.1c-72.5,13.7-129.2,70.4-142.9,142.9-3.1,16.5-3.1,36.3-3.1,75.8h0c0-.1,0,315.8,0,315.8,0,168.9,0,253.4,52.5,305.9s136.9,52.5,305.9,52.5h179.2c168.9,0,253.4,0,305.9-52.5s52.5-136.9,52.5-305.9v-98.6c0-117.9,0-176.9-34.5-215.2ZM764,458h-210c-16.6,0-30-13.4-30-30s13.4-30,30-30h210c16.6,0,30,13.4,30,30s-13.4,30-30,30Z" />
+</svg>

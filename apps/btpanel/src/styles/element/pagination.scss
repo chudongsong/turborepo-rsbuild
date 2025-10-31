@@ -1,0 +1,35 @@
+// 分页
+.el-pagination {
+	--el-pagination-font-size: 12px !important;
+	&.is-background .el-pager li:not(.disabled) {
+		font-weight: bold;
+		// &:hover {
+		// 	background-color: var(--el-color-border-dark-tertiaryer) !important;
+		// }
+		&.active {
+			background-color: var(--el-color-primary-light-7) !important;
+			color: var(--el-color-primary);
+		}
+	}
+	& &__jump {
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+}
+.el-pagination.is-background li.is-active,
+.el-pagination.is-background li.is-active:hover {
+	background-color: var(--el-color-primary-light-7) !important;
+	color: var(--el-color-primary) !important;
+}
+.el-pagination__editor.el-input {
+	width: 46px !important;
+}
+.el-input--small input.el-input__inner {
+	height: 2.6rem;
+	line-height: 2.6rem;
+}
+
+.el-pagination .el-select {
+	width: auto !important;
+	min-width: 100px;
+}

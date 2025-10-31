@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REPORT_TITLE_PLACEHOLDER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 1.5em;
+        }
+        
+        .file-details {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .file-summary {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #495057;
+            border: none;
+            outline: none;
+            transition: background-color 0.2s ease;
+        }
+        
+        .file-summary:hover {
+            background: #e9ecef;
+        }
+        
+        .file-details[open] .file-summary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: none;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-block code {
+            background: none;
+            padding: 0;
+            color: #333;
+        }
+        
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .stats-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stats-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .value-cell {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            padding: 8px 12px !important;
+        }
+        
+        .file-cell {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .count-cell {
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .meta-info {
+            background: #e3f2fd;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .meta-info strong {
+            color: #1976d2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .stats-table {
+                font-size: 14px;
+            }
+            
+            .code-block {
+                font-size: 12px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>REPORT_TITLE_PLACEHOLDER</h1>
+            <p>REPORT_DESCRIPTION_PLACEHOLDER</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">TOTAL_MATCHES_PLACEHOLDER</div>
+                <div class="stat-label">TOTAL_MATCHES_LABEL_PLACEHOLDER</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">UNIQUE_FILES_PLACEHOLDER</div>
+                <div class="stat-label">涉及文件数</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="meta-info">
+                <strong>项目根目录:</strong> PROJECT_ROOT_PLACEHOLDER<br>
+                <strong>扫描时间:</strong> SCAN_TIME_PLACEHOLDER
+            </div>
+            
+            <div class="section">
+                <h2>📁 文件详情</h2>
+                <div class="file-list">
+COLLAPSIBLE_SECTIONS_PLACEHOLDER
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 匹配值统计</h2>
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>匹配值</th>
+                            <th>出现次数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+VALUE_STATS_PLACEHOLDER
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>报告生成时间: SCAN_TIME_PLACEHOLDER | 硬编码样式扫描工具</p>
+        </div>
+    </div>
+    
+    <script>
+        // 添加一些交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 统计展开的详情数量
+            const details = document.querySelectorAll('.file-details');
+            let openCount = 0;
+            
+            details.forEach(detail => {
+                detail.addEventListener('toggle', function() {
+                    if (this.open) {
+                        openCount++;
+                    } else {
+                        openCount--;
+                    }
+                });
+            });
+            
+            // 添加全部展开/收起功能
+            const header = document.querySelector('.header');
+            const toggleBtn = document.createElement('button');
+            toggleBtn.textContent = '展开所有文件';
+            toggleBtn.style.cssText = `
+                margin-top: 15px;
+                padding: 8px 16px;
+                background: rgba(255,255,255,0.2);
+                border: 1px solid rgba(255,255,255,0.3);
+                color: white;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            `;
+            
+            toggleBtn.addEventListener('click', function() {
+                const allClosed = Array.from(details).every(d => !d.open);
+                details.forEach(detail => {
+                    detail.open = allClosed;
+                });
+                this.textContent = allClosed ? '收起所有文件' : '展开所有文件';
+            });
+            
+            toggleBtn.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(255,255,255,0.3)';
+            });
+            
+            toggleBtn.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(255,255,255,0.2)';
+            });
+            
+            header.appendChild(toggleBtn);
+        });
+    </script>
+</body>
+</html>

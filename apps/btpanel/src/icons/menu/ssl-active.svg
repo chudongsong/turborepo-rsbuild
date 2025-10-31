@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="ssl-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.ssl-active-circle {
+			fill: url(#ssl-gradient-circle);
+			}
+
+			.ssl-active-main {
+			fill: url(#ssl-gradient-main);
+			}
+		</style>
+		<linearGradient id="ssl-gradient-circle" x1="319.1" y1="540.7" x2="319.1" y2="384.7"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #289d3b)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #1a893b)" />
+		</linearGradient>
+		<linearGradient id="ssl-gradient-main" x1="512" y1="823.5" x2="512" y2="200.5"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #289d3b)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #1a893b)" />
+		</linearGradient>
+	</defs>
+	<circle class="ssl-active-circle" cx="319.1" cy="462.7" r="78" />
+	<path class="ssl-active-main"
+		d="M847.2,200.5H176.8c-62.3,0-112.8,50.5-112.8,112.8v397.3c0,62.3,50.5,112.8,112.8,112.8h670.4c62.3,0,112.8-50.5,112.8-112.8v-397.3c0-62.3-50.5-112.8-112.8-112.8ZM410.6,671.3c0,11-7.8,20-17.4,20h-12c-3.6,0-7-1.2-9.9-3.6l-42.2-33.6c-6-4.8-13.9-4.8-19.9,0l-42.3,33.6c-2.9,2.3-6.4,3.6-9.9,3.6h-12c-9.6,0-17.4-9-17.4-20v-63.1c0-11,7.8-20,17.4-20h0c9.6,0,17.4,3,17.4,14v14.8c0,16.3,16,25.8,27.6,16.3l19.1-15.6c6.1-5,14.2-5,20.3,0l18.7,15.5c11.5,9.5,27.6,0,27.6-16.2v-14.7c0-11,7.8-14,17.4-14h0c9.6,0,17.4,9,17.4,20v63.1ZM319.1,592.7c-71.8,0-130-58.2-130-130s58.2-130,130-130,130,58.2,130,130-58.2,130-130,130ZM759.5,642.3c0,16.6-13.4,30-30,30h-171.5c-16.6,0-30-13.4-30-30h0c0-16.6,13.4-30,30-30h171.5c16.6,0,30,13.4,30,30h0ZM834.9,518c0,16.6-13.4,30-30,30h-247c-16.6,0-30-13.4-30-30h0c0-16.6,13.4-30,30-30h247c16.6,0,30,13.4,30,30h0ZM834.9,393.7c0,16.6-13.4,30-30,30h-247c-16.6,0-30-13.4-30-30h0c0-16.6,13.4-30,30-30h247c16.6,0,30,13.4,30,30h0Z" />
+</svg>

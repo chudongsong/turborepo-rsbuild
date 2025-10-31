@@ -1,0 +1,285 @@
+.files-list .icon-bg {
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background: url('/static/images/file_icon/css_sprites.png');
+	background-repeat: no-repeat;
+	background-size: 25px;
+	width: 25px;
+	height: 25px;
+	background-position: -0px -375px;
+}
+
+.files-list .swf-icon {
+	background-position: -0px -0px;
+}
+.files-list .webm-icon {
+	background-position: -0px -25px;
+}
+.files-list .webp-icon {
+	background-position: -0px -50px;
+}
+.files-list .wma-icon {
+	background-position: -0px -75px;
+}
+.files-list .wmv-icon {
+	background-position: -0px -100px;
+}
+.files-list .xls-icon {
+	background-position: -0px -125px;
+}
+.files-list .xml-icon {
+	background-position: -0px -150px;
+}
+.files-list .access-icon {
+	background-position: -0px -175px;
+}
+.files-list .apk-icon {
+	background-position: -0px -200px;
+}
+.files-list .avi-icon {
+	background-position: -0px -250px;
+}
+.files-list .bmp-icon {
+	background-position: -0px -250px;
+}
+.files-list .cdr-icon {
+	background-position: -0px -275px;
+}
+.files-list .compress-icon {
+	background-position: -0px -300px;
+}
+.files-list .css-icon {
+	background-position: -0px -325px;
+}
+.files-list .doc-icon {
+	background-position: -0px -350px;
+}
+.files-list .file-icon {
+	background-position: -0px -375px;
+}
+.files-list .folder-icon {
+	background-position: -0px -400px;
+}
+.files-list .gif-icon {
+	background-position: -0px -425px;
+}
+.files-list .html-icon {
+	background-position: -0px -450px;
+}
+.files-list .ico-icon {
+	background-position: -0px -475px;
+}
+.files-list .java-icon {
+	background-position: -0px -500px;
+}
+.files-list .js-icon {
+	background-position: -0px -525px;
+}
+.files-list .bt_split_json-icon {
+	background-position: -0px -550px;
+}
+.files-list .jpeg-icon {
+	background-position: -0px -575px;
+}
+.files-list .jpg-icon {
+	background-position: -0px -600px;
+}
+.files-list .json-icon {
+	background-position: -0px -625px;
+}
+.files-list .log-icon {
+	background-position: -0px -650px;
+}
+.files-list .lua-icon {
+	background-position: -0px -675px;
+}
+.files-list .mkv-icon {
+	background-position: -0px -700px;
+}
+.files-list .mov-icon {
+	background-position: -0px -725px;
+}
+.files-list .mp4-icon {
+	background-position: -0px -750px;
+}
+.files-list .mpg-icon {
+	background-position: -0px -775px;
+}
+.files-list .mpeg-icon {
+	background-position: -0px -800px;
+}
+.files-list .pdf-icon {
+	background-position: -0px -825px;
+}
+.files-list .php-icon {
+	background-position: -0px -850px;
+}
+.files-list .png-icon {
+	background-position: -0px -875px;
+}
+.files-list .ppt-icon {
+	background-position: -0px -900px;
+}
+.files-list .py-icon {
+	background-position: -0px -925px;
+}
+.files-list .rm-icon {
+	background-position: -0px -950px;
+}
+.files-list .rmvb-icon {
+	background-position: -0px -975px;
+}
+.files-list .sh-icon {
+	background-position: -0px -1000px;
+}
+.files-list .bt_split-icon {
+	background-position: -0px -1025px;
+}
+.files-list .sql-icon {
+	background-position: -0px -1050px;
+}
+
+/* 图标视图 */
+.files-icon .icon-bg {
+	cursor: pointer;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background: url('/static/images/file_icon/css_sprites.png');
+	background-repeat: no-repeat;
+	background-size: 44px;
+	width: 44px;
+	height: 44px;
+	background-position: -0px -660px;
+}
+
+.files-icon .swf-icon {
+	background-position: -0px -0px;
+}
+.files-icon .webm-icon {
+	background-position: -0px -44px;
+}
+.files-icon .webp-icon {
+	background-position: -0px -88px;
+}
+.files-icon .wma-icon {
+	background-position: -0px -132px;
+}
+.files-icon .wmv-icon {
+	background-position: -0px -176px;
+}
+.files-icon .xls-icon {
+	background-position: -0px -220px;
+}
+.files-icon .xml-icon {
+	background-position: -0px -264px;
+}
+.files-icon .access-icon {
+	background-position: -0px -308px;
+}
+.files-icon .apk-icon {
+	background-position: -0px -352px;
+}
+.files-icon .avi-icon {
+	background-position: -0px -396px;
+}
+.files-icon .bmp-icon {
+	background-position: -0px -440px;
+}
+.files-icon .cdr-icon {
+	background-position: -0px -484px;
+}
+.files-icon .compress-icon {
+	background-position: -0px -528px;
+}
+.files-icon .css-icon {
+	background-position: -0px -572px;
+}
+.files-icon .doc-icon {
+	background-position: -0px -616px;
+}
+.files-icon .file-icon {
+	background-position: -0px -660px;
+}
+.files-icon .folder-icon {
+	background-position: -0px -704px;
+}
+.files-icon .gif-icon {
+	background-position: -0px -748px;
+}
+.files-icon .html-icon {
+	background-position: -0px -792px;
+}
+.files-icon .ico-icon {
+	background-position: -0px -836px;
+}
+.files-icon .java-icon {
+	background-position: -0px -880px;
+}
+.files-icon .js-icon {
+	background-position: -0px -924px;
+}
+.files-icon .bt_split_json-icon {
+	background-position: -0px -968px;
+}
+.files-icon .jpeg-icon {
+	background-position: -0px -1012px;
+}
+.files-icon .jpg-icon {
+	background-position: -0px -1056px;
+}
+.files-icon .json-icon {
+	background-position: -0px -1100px;
+}
+.files-icon .log-icon {
+	background-position: -0px -1144px;
+}
+.files-icon .lua-icon {
+	background-position: -0px -1188px;
+}
+.files-icon .mkv-icon {
+	background-position: -0px -1232px;
+}
+.files-icon .mov-icon {
+	background-position: -0px -1276px;
+}
+.files-icon .mp4-icon {
+	background-position: -0px -1320px;
+}
+.files-icon .mpg-icon {
+	background-position: -0px -1364px;
+}
+.files-icon .mpeg-icon {
+	background-position: -0px -1408px;
+}
+.files-icon .pdf-icon {
+	background-position: -0px -1452px;
+}
+.files-icon .php-icon {
+	background-position: -0px -1496px;
+}
+.files-icon .png-icon {
+	background-position: -0px -1540px;
+}
+.files-icon .ppt-icon {
+	background-position: -0px -1584px;
+}
+.files-icon .py-icon {
+	background-position: -0px -1628px;
+}
+.files-icon .rm-icon {
+	background-position: -0px -1672px;
+}
+.files-icon .rmvb-icon {
+	background-position: -0px -1716px;
+}
+.files-icon .sh-icon {
+	background-position: -0px -1760px;
+}
+.files-icon .bt_split-icon {
+	background-position: -0px -1804px;
+}
+.files-icon .sql-icon {
+	background-position: -0px -1848px;
+}

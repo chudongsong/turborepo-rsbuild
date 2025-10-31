@@ -1,0 +1,91 @@
+
+// 导入 Element Plus 基础变量，只导入一次避免冲突
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+	// 通用颜色配置
+	$colors: (
+		'primary': (
+			'base': #20a53a,
+		),
+		'success': (
+			'base': #67c23a,
+		),
+		'warning': (
+			'base': #f2711c,
+		),
+		'danger': (
+			'base': #db2828,
+		),
+		'error': (
+			'base': #db2828,
+		),
+		'info': (
+			'base': #909399,
+		),
+	),
+
+	// 字体大小配置
+	$font-size: (
+		'extra-small': 10px,
+		'small': 12px,
+		'base': 14px,
+		'medium': 16px,
+		'large': 18px,
+		'extra-large': 20px,
+	),
+
+	// 组件配置
+	$alert: (
+		'title-font-size': 12px,
+	),
+	$select: (
+		'font-size': 12px,
+		'input-font-size': 12px,
+	),
+	$button: (
+		'font-size': 12px,
+	),
+	$pagination: (
+		'button-bg-color': var(--el-fill-color-light),
+		'button-height': 30px,
+		'button-color': var(--el-color-text-secondary),
+	),
+	$message: (
+		'text-color': var(--el-color-text-secondary),
+		'border-color': var(--el-color-border-dark-tertiaryer),
+		'bg-color': var(--el-color-white),
+	),
+	$dropdown: (
+		'menuItem-hover-fill': var(--el-fill-color-dark),
+		'menuItem-hover-color': var(--el-color-primary),
+	),
+	$dialog: (
+		'padding-primary': 0,
+	),
+	// $table: (
+	// 	'header-bg-color': var(),
+	// ),
+	$table-font-size: (
+		'default': 12px,
+	),
+	$table-cell-padding: (
+		'default': 0 6px,
+	),
+	$card: (
+		'padding': 0,
+	),
+	$input-height: (
+		'default': 30px,
+	),
+	$button-padding-horizontal: (
+		'default': 12px,
+	),
+	$button-padding-vertical: (
+		'default': 6px,
+	),
+	$common-component-size: (
+		'default': 30px,
+	)
+);
+
+// custom dark variables
+@use './dark.scss';

@@ -1,0 +1,22 @@
+/* 替代 Vite 的 unplugin-fonts 生成文件。
+   如需自定义网络字体，请在此文件中声明 @font-face。
+   当前版本提供占位与系统字体回退，确保无该文件时不报错。 */
+
+/* 示例：
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('/static/font/AlibabaPuHuiTi-2-65-Medium.woff2') format('woff2'),
+       url('/static/font/AlibabaPuHuiTi-2-65-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+:root {
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+}
+
+body {
+  font-family: var(--font-family-base);
+}

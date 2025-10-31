@@ -1,0 +1,15 @@
+/* 卡片 */
+.el-card {
+	overflow: initial !important;
+	position: relative;
+	& &__header {
+		display: flex;
+		align-items: center;
+		min-height: 4.8rem;
+		padding: 0 2rem;
+		// border-bottom: 1px solid var(--el-color-border-dark-tertiary);
+		font-size: var(--el-font-size-medium);
+		color: var(--el-color-text-secondary);
+	}
+	--el-card-padding: 0;
+}

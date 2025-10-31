@@ -1,0 +1,37 @@
+// 选择器
+.el-select-dropdown {
+	max-width: 280px;
+	& &__item {
+		height: 3.2rem;
+		line-height: 3.2rem;
+		font-size: var(--el-font-size-small);
+	}
+}
+.el-select--small .el-select__wrapper {
+	height: 2.6rem;
+	line-height: 2.6rem;
+}
+.el-select .el-input--small input.el-input__inner {
+	padding-right: 2.6rem;
+}
+
+.el-select {
+	.el-select__wrapper {
+		font-size: inherit !important;
+		min-height: 30px;
+		height: 30px !important;
+		line-height: 30px;
+	}
+
+	&.bt-multiple-select .el-select__wrapper {
+		height: auto !important;
+	}
+}
+
+.el-select__placeholder {
+	font-size: var(--el-font-size-small);
+}
+
+.el-select-dropdown .el-select-dropdown__footer {
+	padding: 0 !important;
+}

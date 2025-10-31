@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="soft-active-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.soft-active-topleft {
+			fill: url(#soft-gradient-topleft);
+			}
+
+			.soft-active-topright {
+			fill: url(#soft-gradient-topright);
+			}
+
+			.soft-active-bottomleft {
+			fill: url(#soft-gradient-bottomleft);
+			}
+
+			.soft-active-bottomright {
+			fill: url(#soft-gradient-bottomright);
+			}
+
+		</style>
+		<linearGradient id="soft-gradient-topleft" x1="272.3" y1="547.2" x2="272.3" y2="955.8"
+			gradientTransform="translate(0 1024) scale(1 -1)" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="soft-gradient-bottomright" x1="751.5" y1="547.5" x2="751.5" y2="956"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="soft-gradient-bottomleft" x1="272.3" y1="547.5" x2="272.3" y2="956"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+		<linearGradient id="soft-gradient-topright" x1="751.5" y1="68.2" x2="751.5" y2="476.8"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="var(--bt-menu-icon-gradient-color-1, #20a53a)" />
+			<stop offset="1" stop-color="var(--bt-menu-icon-gradient-color-2, #068f20)" />
+		</linearGradient>
+	</defs>
+	<path class="soft-active-topleft"
+		d="M68,272.5c0-112.8,91.5-204.3,204.3-204.3s204.3,91.5,204.3,204.3v136.2c0,15.8,0,23.7-1.7,30.2-4.7,17.6-18.5,31.4-36.1,36.1-6.5,1.7-14.4,1.7-30.2,1.7h-136.2c-112.8,0-204.3-91.5-204.3-204.3h0Z" />
+	<path class="soft-active-bottomright"
+		d="M547.2,615.6c0-15.8,0-23.7,1.7-30.2,4.7-17.6,18.5-31.4,36.1-36.1,6.5-1.7,14.4-1.7,30.2-1.7h136.2c112.8,0,204.3,91.5,204.3,204.3s-91.5,204.3-204.3,204.3-204.3-91.5-204.3-204.3v-136.2h0Z" />
+	<path class="soft-active-bottomleft"
+		d="M68,751.7c0-112.8,91.4-204.3,204.3-204.3h122.6c28.6,0,42.9,0,53.8,5.6,9.6,4.9,17.4,12.7,22.3,22.3,5.6,10.9,5.6,25.2,5.6,53.8v122.6c0,112.8-91.4,204.3-204.3,204.3s-204.3-91.4-204.3-204.3h0Z" />
+	<path class="soft-active-topright"
+		d="M547.2,272.5c0-112.8,91.5-204.3,204.3-204.3s204.3,91.5,204.3,204.3-91.5,204.3-204.3,204.3h-145.9c-6.8,0-10.2,0-13-.3-23.7-2.7-42.4-21.4-45-45-.3-2.8-.3-6.2-.3-13v-145.9h0Z" />
+</svg>

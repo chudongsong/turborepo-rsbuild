@@ -1,0 +1,16 @@
+/dist/*
+.local
+.output.js
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
+
+/public/**/*.html
+
+# *.html
+
+/panel
+/temp1

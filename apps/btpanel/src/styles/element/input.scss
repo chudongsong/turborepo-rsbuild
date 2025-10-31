@@ -1,0 +1,40 @@
+.el-input {
+	&--small {
+		input.el-input__inner {
+			height: 3rem;
+			line-height: 3rem;
+			padding: 0 1rem;
+			font-size: var(--el-font-size-small);
+		}
+		&.el-input.is-disabled .el-input__inner {
+			color: var(--el-color-text-secondary);
+		}
+		textarea.el-textarea__inner {
+			padding: 1rem;
+			font-size: var(--el-font-size-small);
+		}
+		.el-input__wrapper {
+			padding: 0 !important;
+		}
+	}
+	& > &.__inner {
+		box-shadow: none !important;
+	}
+	&.is-disabled {
+		.el-input__inner {
+			border-color: #dddddd !important;
+		}
+	}
+	&-number {
+		.is-controls-right[class*='small'] [class*='increase'],
+		.is-controls-right[class*='small'] [class*='decrease'] {
+			--el-input-number-controls-height: 15px;
+		}
+	}
+}
+
+.el-textarea__inner {
+	font-family: 'Microsoft YaHei', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="ftp-layer" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+	<defs>
+		<style>
+			.ftp-line-round {
+			stroke-linecap: round;
+			fill: none;
+			stroke: var(--bt-menu-icon-color, #777a79);
+			stroke-width: 60px;
+			}
+
+			.ftp-outline {
+			fill: none;
+			stroke: var(--bt-menu-icon-color, #777a79);
+			stroke-width: 60px;
+			}
+
+			.ftp-rect {
+			fill: var(--bt-menu-icon-color, #777a79);
+			stroke: var(--bt-menu-icon-color, #777a79);
+			stroke-width: 40px;
+			}
+
+			.ftp-connector {
+			fill: none;
+			stroke: var(--bt-menu-icon-color, #777a79);
+			stroke-width: 40px;
+			}
+		</style>
+	</defs>
+	<path class="ftp-line-round" d="M689.12,323.86h-152.06" />
+	<path class="ftp-outline"
+		d="M202.55,231.09c0-26.84,0-40.26,2.11-51.44,9.28-49.21,47.77-87.7,96.98-96.98,11.18-2.11,24.6-2.11,51.44-2.11,11.76,0,17.64,0,23.29.53,24.36,2.28,47.47,11.85,66.31,27.47,4.37,3.62,8.53,7.78,16.84,16.09l16.74,16.73c24.81,24.81,37.21,37.21,52.07,45.48,8.16,4.54,16.82,8.12,25.79,10.69,16.35,4.66,33.89,4.66,68.97,4.66h11.37c80.05,0,120.08,0,146.1,23.4,2.39,2.15,4.67,4.43,6.83,6.83,23.4,26.02,23.4,66.05,23.4,146.1v66.97c0,114.69,0,172.03-35.63,207.66-35.63,35.63-92.98,35.63-207.67,35.63h-121.65c-114.69,0-172.03,0-207.66-35.63-35.63-35.63-35.63-92.97-35.63-207.66v-214.41Z" />
+	<line class="ftp-outline" x1="64" y1="874.78" x2="960" y2="874.78" />
+	<rect class="ftp-rect" x="446.84" y="805.17" width="128.21" height="139.22" rx="50.62" ry="50.62" />
+	<line class="ftp-connector" x1="510.94" y1="815.23" x2="510.94" y2="670.58" />
+</svg>
