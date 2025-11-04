@@ -1,7 +1,7 @@
 {
-  "name": "@panel/utils",
-  "version": "0.1.0",
-  "description": "纯函数版 btpanel 工具库，提供校验、时间、颜色等工具函数（使用 Rsbuild 打包）。",
+  "name": "@org/utils",
+  "version": "2.0.0",
+  "description": "通用工具库 - 提供常用工具方法，包括校验、时间、颜色、文件、字符串等工具函数",
   "license": "MIT",
   "author": "",
   "type": "module",
@@ -16,8 +16,10 @@
   "scripts": {
     "build": "rsbuild build && tsc -p tsconfig.build.json",
     "dev": "rsbuild dev",
-    "test": "rstest --coverage",
-    "test:watch": "rstest --watch",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:rust": "rstest --coverage",
+    "test:rust:watch": "rstest --watch",
     "lint": "biome check ./src",
     "lint:fix": "biome check --write ./src",
     "format": "biome format ./src",
@@ -34,6 +36,8 @@
     "typescript": "^5.4.5",
     "@rstest/core": "^0.6.1",
     "@rstest/coverage-istanbul": "^0.0.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "vitest": "^3.2.4",
     "mockdate": "^3.0.5",
     "@types/mockdate": "^3.0.0"
   }
