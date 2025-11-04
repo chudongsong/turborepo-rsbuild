@@ -20,7 +20,7 @@ export const isString = (val: unknown): val is string =>
  * 检查值是否为数字
  */
 export const isNumber = (val: unknown): val is number =>
-	typeof val === 'number' && !isNaN(val)
+	typeof val === 'number' && !isNaN(val) && isFinite(val)
 
 /**
  * 检查值是否为布尔值
@@ -54,10 +54,11 @@ export const isUndefined = (val: unknown): val is undefined =>
 /**
  * 检查是否为开发环境
  */
-export const isDev = (): boolean =>
-	typeof process !== 'undefined' &&
-	process.env &&
-	process.env.NODE_ENV !== 'production'
+export const isDev = (): boolean => {
+	if (typeof process === 'undefined' || !process.env) return false
+	const nodeEnv = process.env.NODE_ENV
+	return nodeEnv !== 'production' && nodeEnv !== 'test'
+}
 
 /**
  * URL 编码

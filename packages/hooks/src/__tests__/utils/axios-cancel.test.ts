@@ -70,17 +70,20 @@ describe('AxiosCanceler', () => {
 				method: 'POST',
 			}
 
+			// 创建一个模拟的取消函数
+			const mockCancel = vi.fn()
+
+			// 使用模拟的取消函数创建 cancelToken
+			config.cancelToken = new axios.CancelToken(mockCancel)
+
 			// 添加请求
 			axiosCanceler.addPending(config)
-
-			// 创建取消函数的 spy
-			const cancelSpy = vi.spyOn(config.cancelToken!, 'throwIfRequested')
 
 			// 移除请求
 			axiosCanceler.removePending(config)
 
 			// 验证取消函数被调用
-			expect(cancelSpy).toHaveBeenCalled()
+			expect(mockCancel).toHaveBeenCalled()
 		})
 	})
 

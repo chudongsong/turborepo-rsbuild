@@ -192,13 +192,13 @@ export const waitFor = (callback: () => void | Promise<void>, timeout = 1000) =>
 }
 
 // 模拟成功的 axios 请求
-export const setupAxiosMock = (
+export const setupAxiosMock = async (
 	{
 		data = mockResponse,
 		status = 200,
 	} = {},
 ) => {
-	const axios = vi.mocked(await import('axios')).default
+	const axios = vi.mocked((await import('axios')).default)
 
 	const mockAxiosInstance = {
 		interceptors: {
@@ -241,8 +241,8 @@ export const setupAxiosMock = (
 }
 
 // 模拟失败的 axios 请求
-export const setupAxiosErrorMock = (error: Error) => {
-	const axios = vi.mocked(await import('axios')).default
+export const setupAxiosErrorMock = async (error: Error) => {
+	const axios = vi.mocked((await import('axios')).default)
 
 	const mockAxiosInstance = {
 		interceptors: {

@@ -57,6 +57,15 @@ describe('HttpRequest', () => {
 			post: vi.fn(),
 		}
 
+		// Mock window object
+		global.window = {
+			...global.window,
+			location: {
+				...global.window?.location,
+				reload: vi.fn(),
+			},
+		}
+
 		// @ts-ignore
 		axios.create.mockReturnValue(mockAxiosInstance)
 		httpRequest = new HttpRequest()
@@ -287,18 +296,13 @@ describe('HttpRequest', () => {
 			}
 			mockAxiosInstance.request.mockResolvedValue(mockResponse)
 
-			// 模拟 window.location.reload
-			const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => {})
-
 			const config: RequestConfig = {
 				url: 'user/login',
 				method: 'POST',
 			}
 
 			await httpRequest.request(config)
-			expect(reloadSpy).toHaveBeenCalled()
-
-			reloadSpy.mockRestore()
+			expect(window.location.reload).toHaveBeenCalled()
 		})
 	})
 
@@ -394,11 +398,18 @@ describe('HttpRequest', () => {
 		})
 
 		it('对相同输入应该返回相同格式', () => {
+			// Use fake timers to ensure different timestamps
+			vi.useFakeTimers()
+
 			const token1 = httpRequest.handleToken('key')
+			vi.advanceTimersByTime(1) // Advance time by 1ms
 			const token2 = httpRequest.handleToken('key')
+
 			expect(token1.request_time).not.toBe(token2.request_time) // 时间不同
 			expect(typeof token1.request_token).toBe('string')
 			expect(typeof token2.request_token).toBe('string')
+
+			vi.useRealTimers()
 		})
 	})
 })

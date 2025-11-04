@@ -21,7 +21,7 @@
     "@rsbuild/plugin-svgr": "^1.0.0",
     "@tanstack/history": "^1.133.28",
     "@tanstack/react-router": "^1.38.0",
-    "@turbo/ui": "workspace:*",
+    "@org/ui": "workspace:*",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.1.1",
     "@xterm/xterm": "^5.5.0",

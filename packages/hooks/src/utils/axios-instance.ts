@@ -7,7 +7,7 @@ import axios, {
 	type AxiosResponse,
 	type AxiosError,
 } from 'axios'
-import { isDev, isFunction, isNumber, isObject, isString, isUndefined, getToken, encodeParams, md5 } from './helpers'
+import { isDev, isFunction, isNumber, isObject, isString, isUndefined, isBoolean, getToken, encodeParams, md5, getCookie } from './helpers'
 import { axiosCanceler } from './axios-cancel'
 import type {
 	RequestConfig,
