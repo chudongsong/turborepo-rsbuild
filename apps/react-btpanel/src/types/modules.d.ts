@@ -1,9 +1,9 @@
 declare module '*.svg' {
-  const src: string;
-  export default src;
+	const src: string
+	export default src
 }
 
-declare module '*.css';
+declare module '*.css'
 
-declare module 'nprogress';
-declare module 'qrcode';
+declare module 'nprogress'
+declare module 'qrcode'

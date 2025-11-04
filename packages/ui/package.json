@@ -1,0 +1,67 @@
+{
+  "name": "@turbo/ui",
+  "version": "0.1.0",
+  "description": "Shared UI components library with shadcn/ui integration",
+  "main": "dist/static/js/index.js",
+  "module": "dist/static/js/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "components"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/static/js/index.js",
+      "require": "./dist/static/js/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/static/css/index.css",
+    "./components/*": "./components/*"
+  },
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev",
+    "type-check": "tsc --noEmit",
+    "lint": "biome check ./src",
+    "lint:fix": "biome check --write ./src",
+    "format": "biome format ./src",
+    "format:fix": "biome format --write ./src",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.474.0",
+    "tailwind-merge": "^2.3.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.0",
+    "@rsbuild/plugin-react": "^1.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "shadcn",
+    "tailwind",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}

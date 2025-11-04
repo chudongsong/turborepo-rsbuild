@@ -18,8 +18,12 @@
     "dev": "rsbuild dev",
     "test": "rstest --coverage",
     "test:watch": "rstest --watch",
-    "lint": "eslint \"src/**/*.{ts}\"",
-    "format": "prettier --write \"**/*.{ts,md,json}\""
+    "lint": "biome check ./src",
+    "lint:fix": "biome check --write ./src",
+    "format": "biome format ./src",
+    "format:fix": "biome format --write ./src",
+    "check": "biome check ./src",
+    "check:fix": "biome check --write ./src"
   },
   "sideEffects": false,
   "files": [
@@ -27,12 +31,6 @@
   ],
   "devDependencies": {
     "@rsbuild/core": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.1.0",
-    "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "@rstest/core": "^0.6.1",
     "@rstest/coverage-istanbul": "^0.0.4",

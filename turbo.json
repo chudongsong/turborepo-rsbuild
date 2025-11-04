@@ -9,10 +9,17 @@
       "env": ["PUBLIC_HOST", "PUBLIC_REMOTE_2", "PUBLIC_REMOTE_1"],
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "type-check": {
+      "dependsOn": ["^type-check"]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
     },
     "dev": {
       "env": ["PUBLIC_HOST", "PUBLIC_REMOTE_2", "PUBLIC_REMOTE_1"],
