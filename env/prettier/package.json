@@ -1,0 +1,16 @@
+{
+	"name": "@linglongos/prettier",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "",
+	"exports": {
+		".": "./index.js"
+	},
+	"devDependencies": {
+		"@linglongos/typescript": "workspace:*",
+		"prettier": "^3.6.2"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

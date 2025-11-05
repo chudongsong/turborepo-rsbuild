@@ -1,5 +1,5 @@
 {
-  "name": "@org/ui",
+  "name": "@linglongos/ui",
   "version": "0.1.0",
   "description": "Shared UI components library with shadcn/ui integration",
   "main": "dist/static/js/index.js",

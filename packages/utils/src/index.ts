@@ -1,5 +1,5 @@
 /**
- * @org/utils - 通用工具库
+ * @linglongos/utils - 通用工具库
  *
  * 提供TypeScript/JavaScript开发的常用工具函数，包括：
  * - 数据处理和验证
@@ -41,6 +41,7 @@ export * from './common'
 export * from './random'
 
 // 颜色工具
+export { type ColorFormat } from './color'
 export * from './color'
 
 // 文件图标工具
@@ -58,7 +59,7 @@ export const version = '2.0.0'
  * 工具库信息
  */
 export const info = {
-  name: '@org/utils',
+  name: '@linglongos/utils',
   version,
   description: '通用工具库 - 提供常用的工具方法',
   author: 'Org Team',

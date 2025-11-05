@@ -1,5 +1,5 @@
 {
-  "name": "@org/utils",
+  "name": "@linglongos/utils",
   "version": "2.0.0",
   "description": "通用工具库 - 提供常用工具方法，包括校验、时间、颜色、文件、字符串等工具函数",
   "license": "MIT",

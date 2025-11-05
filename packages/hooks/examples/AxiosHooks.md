@@ -1,6 +1,6 @@
 # Axios Hooks 使用指南
 
-本文档展示如何使用 `@org/hooks` 包中提供的各种 Axios Hooks。
+本文档展示如何使用 `@linglongos/hooks` 包中提供的各种 Axios Hooks。
 
 ## 目录
 
@@ -19,7 +19,7 @@
 ### 安装依赖
 
 ```bash
-pnpm add @org/hooks axios
+pnpm add @linglongos/hooks axios
 ```
 
 ### 导入 Hooks
@@ -31,7 +31,7 @@ import {
   useAsyncFetch,
   useErrorHandler,
   usePreload,
-} from '@org/hooks'
+} from '@linglongos/hooks'
 ```
 
 ---

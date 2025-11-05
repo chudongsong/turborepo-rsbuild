@@ -15,7 +15,7 @@ export default class SessionsController extends Controller {
    * 生成 TOTP 二维码 URL 与 base32 密钥
    * @summary 获取TOTP绑定信息
    * @description 生成用于双因子认证的TOTP二维码URL和base32密钥
-   * @router get /api/v2/generate_bind_info
+   * @router get /api/v1/sessions/get_bind_info
    */
   async new(ctx: Context) {
     try {
@@ -33,7 +33,7 @@ export default class SessionsController extends Controller {
    * 确认绑定或验证令牌
    * @summary 创建认证会话
    * @description 通过TOTP令牌验证创建用户认证会话
-   * @router post /api/v2/create_session
+   * @router post /api/v1/sessions/create_session
    */
   async create(ctx: Context) {
     // 定义验证规则

@@ -64,6 +64,22 @@ export default (app: Application) => {
 	// 文档控制器 (Docs Controller)
 	router.get('/api/v1/docs/openapi_json', controller.docs.openapi)
 
+	// 插件注册中心 (Plugins Controller) - 遵循动词+宾语规范，仅使用GET和POST
+	router.get('/api/v1/get_plugins', controller.plugins.index) // 获取插件列表
+	router.get('/api/v1/get_plugin_detail', controller.plugins.show) // 获取插件详情（通过query参数传递id）
+	router.get('/api/v1/get_plugin_by_name', controller.plugins.showByName) // 根据名称获取插件（通过query参数传递name）
+	router.post('/api/v1/create_plugin', controller.plugins.create) // 创建插件
+	router.post('/api/v1/update_plugin', controller.plugins.update) // 更新插件（通过body传递id和更新数据）
+	router.post('/api/v1/delete_plugin', controller.plugins.destroy) // 删除插件（通过body传递id）
+	router.get('/api/v1/get_plugin_versions', controller.plugins.listVersions) // 获取插件版本列表（通过query传递pluginId）
+	router.post('/api/v1/create_plugin_version', controller.plugins.createVersion) // 创建插件版本
+	router.post('/api/v1/mark_plugin_latest', controller.plugins.markLatest) // 标记版本为最新
+	router.get('/api/v1/get_plugin_categories', controller.plugins.listCategories) // 获取插件分类列表
+	router.post('/api/v1/increment_download_count', controller.plugins.download) // 递增下载计数
+
 	// 其他路由
 	router.get('/ui', controller.ui.index)
+
+	// 文档路由映射 - 将 /docs 重定向到 /swagger-ui.html
+	router.get('/docs', controller.docs.redirect)
 }

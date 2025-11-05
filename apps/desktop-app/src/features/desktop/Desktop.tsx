@@ -7,7 +7,7 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@store/index'
 import { fetchConfig } from '@store/slices/desktop.slice'
-import { useContainerSize } from '@org/hooks'
+import { useContainerSize } from '@linglongos/hooks'
 import { useBackgroundStyle } from '@hooks/useBackgroundStyle'
 import { useStyleVars } from '@hooks/useStyleVars'
 import { useGridSystem } from '@hooks/useGridSystem'

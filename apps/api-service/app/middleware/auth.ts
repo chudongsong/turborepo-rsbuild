@@ -15,6 +15,8 @@ export default function authMiddleware() {
     '/api/v1/init/status',           // 初始化状态检查
     '/api/v1/auth/google-auth-bind', // 2FA 绑定（生成二维码）
     '/api/v1/auth/google-auth-verify', // 2FA 验证（首次绑定或登录）
+    '/docs',                         // Swagger UI 文档页面（带尾斜杠）
+    '/docs/',                        // Swagger UI 文档页面（带尾斜杠）
     '/swagger-doc',                  // Swagger JSON 文档
     '/swagger-ui.html',              // Swagger UI 页面
     '/swagger-ui-bundle.js',         // Swagger UI 资源文件

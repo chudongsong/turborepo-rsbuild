@@ -8,13 +8,14 @@ import type { Context } from 'egg';
  * - `googleAuthBind`：生成绑定用二维码 URL 与 base32 密钥（不保存）；
  * - `googleAuthConfirm`：确认绑定，验证令牌并保存密钥；
  * - `googleAuthVerify`：校验一次性口令，成功后创建会话并写入签名 Cookie。
+ * @controller Auth
  */
 export default class AuthController extends Controller {
   /**
    * 生成绑定信息（二维码 URL 与 base32 密钥）。
-   *
-   * @param {Context} ctx - Egg 请求上下文
-   * @returns {Promise<void>} - 设置 `ctx.body` 为 `{ code, message, data: { qrCodeUrl, secret } }`
+   * @summary 获取2FA绑定信息
+   * @description 生成用于双因子认证的TOTP二维码URL和base32密钥
+   * @router get /api/v1/auth/google-auth-bind
    */
   async googleAuthBind(ctx: Context) {
     try {
@@ -29,9 +30,9 @@ export default class AuthController extends Controller {
 
   /**
    * 确认绑定 2FA。
-   *
-   * @param {Context} ctx - Egg 请求上下文，`ctx.request.body.secret` 为密钥，`ctx.request.body.token` 为一次性口令
-   * @returns {Promise<void>} - 根据校验结果设置响应与签名 Cookie（成功 200，失败 401）
+   * @summary 确认2FA绑定
+   * @description 验证TOTP令牌并确认2FA绑定，创建用户会话
+   * @router post /api/v1/auth/google-auth-confirm
    */
   async googleAuthConfirm(ctx: Context) {
     try {
@@ -57,9 +58,9 @@ export default class AuthController extends Controller {
 
   /**
    * 验证 2FA 令牌并创建会话。
-   *
-   * @param {Context} ctx - Egg 请求上下文，`ctx.request.body.token` 为一次性口令
-   * @returns {Promise<void>} - 根据校验结果设置响应与签名 Cookie（成功 200，失败 401）
+   * @summary 验证2FA令牌
+   * @description 验证TOTP令牌并创建用户会话
+   * @router post /api/v1/auth/google-auth-verify
    */
   async googleAuthVerify(ctx: Context) {
     try {

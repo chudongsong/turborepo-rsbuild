@@ -12,13 +12,14 @@ type PanelType = 'bt' | '1panel';
  * - 2FA 绑定状态
  * - 面板绑定状态
  * - 会话状态
+ * @controller Init
  */
 export default class InitController extends Controller {
   /**
    * 检查系统初始化状态
-   *
+   * @summary 检查API服务状态
    * @description 检查 2FA 绑定和面板绑定状态，用于前端判断需要进行哪些初始化步骤
-   * @returns {Promise<void>} 返回初始化状态信息
+   * @router all /api/v1/init/status
    */
   public async checkStatus() {
     const { ctx, service } = this;

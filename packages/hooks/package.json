@@ -1,5 +1,5 @@
 {
-  "name": "@org/hooks",
+  "name": "@linglongos/hooks",
   "version": "1.0.0",
   "description": "通用 React Hooks 库",
   "type": "module",

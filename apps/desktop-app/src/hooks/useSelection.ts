@@ -6,17 +6,17 @@
  * - 提供桌面图标特定的事件处理器
  */
 import { useRef } from 'react'
-import { useSelection } from '@org/hooks'
+import { useSelection } from '@linglongos/hooks'
 
 /**
  * 桌面图标选择管理 Hook。
  *
- * 基于 @org/hooks 的通用 useSelection 封装，专门用于桌面图标的选择场景。
+ * 基于 @linglongos/hooks 的通用 useSelection 封装，专门用于桌面图标的选择场景。
  * 支持单选与多选（cmd/ctrl），并在点击、按下与拖拽开始时更新选中集合。
  *
  * @returns 桌面选择状态与事件处理函数
  */
-export function useSelection() {
+export function useDesktopSelection() {
 	const uiSelection = useSelection<string>()
 
 	/**

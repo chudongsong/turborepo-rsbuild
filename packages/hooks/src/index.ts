@@ -1,5 +1,5 @@
 /**
- * @org/hooks - 通用 React Hooks 库
+ * @linglongos/hooks - 通用 React Hooks 库
  *
  * 提供可复用的 React Hooks，涵盖常见场景：
  * - 容器尺寸监听 (useContainerSize)

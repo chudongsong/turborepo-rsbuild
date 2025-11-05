@@ -462,4 +462,311 @@ export default class StorageService extends Service {
 	close(): void {
 		this.dbManager.close()
 	}
+
+	// ==================== 插件管理相关方法 ====================
+
+	/**
+	 * 创建新插件
+	 *
+	 * @param {object} pluginData 插件数据
+	 * @returns {number} 新插件的 ID
+	 */
+	createPlugin(pluginData: {
+		name: string
+		description?: string
+		author?: string
+		repository_url?: string
+		homepage_url?: string
+		keywords?: string
+		license?: string
+		category?: string
+		is_official?: boolean
+		published_at?: number
+	}): number {
+		return this.dbManager.createPlugin(pluginData)
+	}
+
+	/**
+	 * 获取插件列表
+	 *
+	 * @param {object} options 查询选项
+	 * @returns {array} 插件列表
+	 */
+	getPlugins(options?: {
+		limit?: number
+		offset?: number
+		category?: string
+		author?: string
+		search?: string
+	}): any[] {
+		return this.dbManager.getPlugins(options)
+	}
+
+	/**
+	 * 根据 ID 获取插件详情
+	 *
+	 * @param {number} id 插件 ID
+	 * @returns {object|null} 插件详情
+	 */
+	getPluginById(id: number): any {
+		return this.dbManager.getPluginById(id)
+	}
+
+	/**
+	 * 根据名称获取插件
+	 *
+	 * @param {string} name 插件名称
+	 * @returns {object|null} 插件信息
+	 */
+	getPluginByName(name: string): any {
+		return this.dbManager.getPluginByName(name)
+	}
+
+	/**
+	 * 更新插件信息
+	 *
+	 * @param {number} id 插件 ID
+	 * @param {object} updates 更新数据
+	 * @returns {Database.RunResult} 执行结果
+	 */
+	updatePlugin(id: number, updates: {
+		description?: string
+		author?: string
+		repository_url?: string
+		homepage_url?: string
+		keywords?: string
+		license?: string
+		category?: string
+		download_count?: number
+		rating?: number
+	}): any {
+		return this.dbManager.updatePlugin(id, updates)
+	}
+
+	/**
+	 * 删除插件
+	 *
+	 * @param {number} id 插件 ID
+	 * @returns {Database.RunResult} 执行结果
+	 */
+	deletePlugin(id: number): any {
+		return this.dbManager.deletePlugin(id)
+	}
+
+	/**
+	 * 创建新版本
+	 *
+	 * @param {object} versionData 版本数据
+	 * @returns {number} 新版本的 ID
+	 */
+	createPluginVersion(versionData: {
+		plugin_id: number
+		version: string
+		manifest: string
+		package_url: string
+		package_size?: number
+		checksum?: string
+		min_linglongos_version?: string
+		engines?: string
+		dependencies?: string
+		peer_dependencies?: string
+		readme?: string
+		changelog?: string
+		download_url?: string
+		published_at?: number
+		is_latest?: boolean
+	}): number {
+		return this.dbManager.createPluginVersion(versionData)
+	}
+
+	/**
+	 * 获取版本详情
+	 *
+	 * @param {number} id 版本 ID
+	 * @returns {object|null} 版本信息
+	 */
+	getPluginVersionById(id: number): any {
+		return this.dbManager.getPluginVersionById(id)
+	}
+
+	/**
+	 * 获取插件的所有版本
+	 *
+	 * @param {number} pluginId 插件 ID
+	 * @returns {array} 版本列表
+	 */
+	getPluginVersions(pluginId: number): any[] {
+		return this.dbManager.getPluginVersions(pluginId)
+	}
+
+	/**
+	 * 标记版本为最新
+	 *
+	 * @param {number} versionId 版本 ID
+	 * @param {number} pluginId 插件 ID
+	 * @returns {Database.RunResult} 执行结果
+	 */
+	markAsLatest(versionId: number, pluginId: number): any {
+		return this.dbManager.markAsLatest(versionId, pluginId)
+	}
+
+	/**
+	 * 递增下载计数
+	 *
+	 * @param {number} pluginId 插件 ID
+	 * @param {number} versionId 版本 ID（可选）
+	 * @returns {void}
+	 */
+	incrementDownloadCount(pluginId: number, versionId?: number): void {
+		this.dbManager.incrementDownloadCount(pluginId, versionId)
+	}
+
+	/**
+	 * 获取插件分类列表
+	 *
+	 * @returns {array} 分类列表
+	 */
+	getPluginCategories(): any[] {
+		return this.dbManager.getPluginCategories()
+	}
+
+	// ==================== 文件管理相关方法 ====================
+
+	/**
+	 * 创建文件记录
+	 *
+	 * @param {object} fileData 文件数据
+	 * @returns {number} 文件ID
+	 */
+	createFile(fileData: {
+		filename: string
+		original_name: string
+		mime_type: string
+		size: number
+		storage_path: string
+		hash?: string
+		directory?: string
+		owner_id?: string
+		permissions?: string
+		is_public?: boolean
+		metadata?: any
+	}): number {
+		return this.dbManager.createFile(fileData)
+	}
+
+	/**
+	 * 获取文件列表
+	 *
+	 * @param {object} options 查询选项
+	 * @returns {array} 文件列表
+	 */
+	getFiles(options?: {
+		limit?: number
+		offset?: number
+		directory?: string
+		owner_id?: string
+		mime_type?: string
+		search?: string
+	}): any[] {
+		return this.dbManager.getFiles(options)
+	}
+
+	/**
+	 * 根据ID获取文件详情
+	 *
+	 * @param {number} id 文件ID
+	 * @returns {object|null} 文件信息
+	 */
+	getFileById(id: number): any {
+		return this.dbManager.getFileById(id)
+	}
+
+	/**
+	 * 根据hash获取文件
+	 *
+	 * @param {string} hash 文件哈希
+	 * @returns {object|null} 文件信息
+	 */
+	getFileByHash(hash: string): any {
+		return this.dbManager.getFileByHash(hash)
+	}
+
+	/**
+	 * 更新文件信息
+	 *
+	 * @param {number} id 文件ID
+	 * @param {object} updates 更新数据
+	 * @returns {any} 执行结果
+	 */
+	updateFile(id: number, updates: {
+		filename?: string
+		directory?: string
+		permissions?: string
+		is_public?: boolean
+		metadata?: any
+	}): any {
+		return this.dbManager.updateFile(id, updates)
+	}
+
+	/**
+	 * 删除文件（软删除）
+	 *
+	 * @param {number} id 文件ID
+	 * @returns {any} 执行结果
+	 */
+	deleteFile(id: number): any {
+		return this.dbManager.deleteFile(id)
+	}
+
+	/**
+	 * 永久删除文件
+	 *
+	 * @param {number} id 文件ID
+	 * @returns {any} 执行结果
+	 */
+	permanentlyDeleteFile(id: number): any {
+		return this.dbManager.permanentlyDeleteFile(id)
+	}
+
+	/**
+	 * 获取目录列表
+	 *
+	 * @param {string} parentDir 父目录
+	 * @returns {array} 目录列表
+	 */
+	getDirectories(parentDir?: string): any[] {
+		return this.dbManager.getDirectories(parentDir)
+	}
+
+	/**
+	 * 获取文件统计信息
+	 *
+	 * @returns {object} 统计信息
+	 */
+	getFileStats(): {
+		total_files: number
+		total_size: number
+		file_types: any[]
+	} {
+		return this.dbManager.getFileStats()
+	}
+
+	/**
+	 * 执行事务
+	 *
+	 * @param {() => T} fn 事务函数
+	 * @returns {T} 事务函数的返回值
+	 */
+	transaction<T>(fn: () => T): T {
+		return this.dbManager.transaction(fn)
+	}
+
+	/**
+	 * 获取数据库管理器实例
+	 *
+	 * @returns {DatabaseManager} 数据库管理器实例
+	 */
+	getDatabase(): DatabaseManager {
+		return this.dbManager
+	}
 }

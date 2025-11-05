@@ -1,10 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from '@rsbuild/core'
+import { pluginReact } from '@rsbuild/plugin-react'
+import { pluginSvgr } from '@rsbuild/plugin-svgr'
 import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
+  plugins: [pluginReact(), pluginSvgr()],
+  source: {
+    entry: {
+      index: './src/main.tsx',
+    },
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@/components': path.resolve(__dirname, './src/components'),
@@ -20,8 +24,13 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
-  build: {
-    outDir: 'dist',
-    sourcemap: true,
+  tools: {
+    rspack: {
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+        },
+      },
+    },
   },
 })

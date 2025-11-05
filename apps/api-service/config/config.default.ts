@@ -48,7 +48,7 @@ export default (appInfo: EggAppInfo) => {
     match: [/^\/public\//, /^\/static\//], // 只处理 /public/ 和 /static/ 路径的静态资源请求
   };
   (config as any).auth = {
-    ignore: [/^\/api\/v1\/auth\//, /^\/public\//, /^\/ui$/, /^\/api\/v1\/docs\//, /^\/.*\.(css|js|html|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|pdf|zip|tar|gz|json|xml|txt|md)$/],
+    ignore: [/^\/api\/v1\/auth\//, /^\/public\//, /^\/ui$/, /^\/docs\//, /^\/api\/v1\/docs\//, /^\/.*\.(css|js|html|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|pdf|zip|tar|gz|json|xml|txt|md)$/],
   };
   (config as any).bt = {
     match: [/^\/api\/v1\/proxy\/request/],

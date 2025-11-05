@@ -9,6 +9,16 @@ import type { Context } from 'egg'
  */
 export default class DocsController extends Controller {
 	/**
+	 * 文档重定向 - 将 /docs 重定向到 /swagger-ui.html
+	 *
+	 * @param {Context} ctx - Egg 请求上下文
+	 * @returns {Promise<void>} - 重定向到 Swagger UI
+	 */
+	async redirect(ctx: Context) {
+		ctx.redirect('/swagger-ui.html')
+	}
+
+	/**
 	 * 导出 OpenAPI JSON。
 	 *
 	 * @param {Context} ctx - Egg 请求上下文

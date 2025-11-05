@@ -1,5 +1,5 @@
 {
-  "name": "@org/shared-types",
+  "name": "@linglongos/shared-types",
   "version": "1.0.0",
   "description": "玲珑OS 共享类型定义",
   "main": "dist/index.js",
