@@ -101,7 +101,7 @@ export default (appInfo: EggAppInfo) => {
       },
     },
     enableSecurity: true,
-    routerMap: true,
+    routerMap: false, // 禁用路由映射，避免路径不匹配错误
     enable: true,
   };
 

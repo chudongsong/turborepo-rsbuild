@@ -4,27 +4,6 @@ import fs from 'node:fs'
 import crypto from 'crypto'
 
 /**
- * 文件信息接口
- */
-interface FileInfo {
-	id: number
-	filename: string
-	original_name: string
-	mime_type: string
-	size: number
-	storage_path: string
-	hash?: string
-	directory?: string
-	owner_id?: string
-	permissions?: string
-	is_public?: boolean
-	metadata?: any
-	created_at: number
-	updated_at: number
-	deleted_at?: number
-}
-
-/**
  * 文件上传选项接口
  */
 interface UploadOptions {

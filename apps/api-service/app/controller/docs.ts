@@ -9,13 +9,14 @@ import type { Context } from 'egg'
  */
 export default class DocsController extends Controller {
 	/**
-	 * 文档重定向 - 将 /docs 重定向到 /swagger-ui.html
+	 * 文档页面 - 返回 API 文档静态页面
 	 *
 	 * @param {Context} ctx - Egg 请求上下文
-	 * @returns {Promise<void>} - 重定向到 Swagger UI
+	 * @returns {Promise<void>} - 返回静态 HTML 文档页面
 	 */
 	async redirect(ctx: Context) {
-		ctx.redirect('/swagger-ui.html')
+		ctx.type = 'html'
+		ctx.body = '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/public/docs.html"></head><body>Redirecting to docs...</body></html>'
 	}
 
 	/**
