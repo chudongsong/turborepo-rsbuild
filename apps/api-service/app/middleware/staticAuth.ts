@@ -24,7 +24,7 @@ export default function staticAuthMiddleware() {
 		'/public/dashboard.html', // 仪表板页面
 		'/public/index.html', // 演示页面（可选择是否保护）
 		'/public/admin.html', // 管理页面（如果存在）
-		'/',
+		// '/', // 根路径由 HomeController 处理，不在这里处理
 	]
 
 	// 登录重定向页面

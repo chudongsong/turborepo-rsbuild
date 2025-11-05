@@ -1,1 +1,1 @@
-{"name": "foo","unitPath": "/Users/bt.cn/project/turborepo-rsbuild-main/apps/api-service/app/module/foo","clazzList": [{"name": "HelloService","filePath": "service/HelloService.ts"}],"multiInstanceClazzList": [],"protos": []}
+{"name": "foo","unitPath": "/Users/chudong/Project/turborepo-rsbuild/apps/api-service/app/module/foo","clazzList": [{"name": "HelloService","filePath": "service/HelloService.ts"}],"multiInstanceClazzList": [],"protos": []}

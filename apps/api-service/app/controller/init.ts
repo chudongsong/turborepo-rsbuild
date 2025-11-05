@@ -18,7 +18,7 @@ export default class InitController extends Controller {
   /**
    * 检查系统初始化状态
    * @summary 检查API服务状态
-   * @description 检查 2FA 绑定和面板绑定状态，用于前端判断需要进行哪些初始化步骤
+   * @description 检查验证方式、2FA绑定和面板绑定状态，用于前端判断需要进行哪些初始化步骤
    * @router all /api/v1/init/status
    */
   public async checkStatus() {
@@ -28,9 +28,11 @@ export default class InitController extends Controller {
       // 使用存储服务检查状态
       const storage = service.storage;
 
-      // 检查 2FA 绑定状态
-      const twoFASecret = storage.getTwoFASecret();
-      const hasTwoFA = !!twoFASecret;
+      // 检查验证方式
+      const authMethod = storage.getAuthMethod();
+
+      // 检查用户名
+      const username = storage.getUsername();
 
       // 检查面板绑定状态
       const panelType = 'bt' as PanelType; // 默认检查 bt 面板
@@ -46,14 +48,18 @@ export default class InitController extends Controller {
       }
 
       ctx.success({
-        hasTwoFA,
+        authMethod, // 新增：验证方式
+        username,   // 新增：用户名
         hasPanel,
         hasValidSession,
-        needsInitialization: !hasTwoFA || !hasPanel,
+        needsInitialization: !authMethod || !hasPanel,
+        // 保持向后兼容
+        hasTwoFA: authMethod === 'totp',
         // 添加调试信息
         debug: {
           sessionCookie: sessionId ? 'present' : 'missing',
-          twoFASecret: twoFASecret ? 'present' : 'missing',
+          authMethod: authMethod || 'not_set',
+          username: username || 'admin',
           panelConfig: panelConfig ? 'present' : 'missing',
           timestamp: new Date().toISOString(),
         },

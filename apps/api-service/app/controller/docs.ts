@@ -9,14 +9,77 @@ import type { Context } from 'egg'
  */
 export default class DocsController extends Controller {
 	/**
-	 * 文档页面 - 返回 API 文档静态页面
+	 * 文档页面 - 返回基于 Swagger UI 的 API 文档页面
 	 *
 	 * @param {Context} ctx - Egg 请求上下文
-	 * @returns {Promise<void>} - 返回静态 HTML 文档页面
+	 * @returns {Promise<void>} - 返回使用 Swagger UI 渲染的 HTML 文档页面
 	 */
 	async redirect(ctx: Context) {
 		ctx.type = 'html'
-		ctx.body = '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/public/docs.html"></head><body>Redirecting to docs...</body></html>'
+		const baseUrl = `${ctx.protocol}://${ctx.host}`
+		ctx.body = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LinglongOS API 文档</title>
+	<link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			background: #f5f5f5;
+		}
+		header {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 20px;
+			text-align: center;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+		h1 {
+			font-size: 2em;
+			margin-bottom: 5px;
+		}
+		.swagger-ui .topbar { display: none; }
+		.swagger-ui .info { margin: 20px 0; }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>LinglongOS API 文档</h1>
+		<p>统一面板代理与认证服务 API</p>
+	</header>
+	<div id="swagger-ui"></div>
+	<script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js"></script>
+	<script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-standalone-preset.js"></script>
+	<script>
+		window.onload = () => {
+			window.ui = SwaggerUIBundle({
+				url: '${baseUrl}/api/v1/docs/openapi.json',
+				dom_id: '#swagger-ui',
+				presets: [
+					SwaggerUIBundle.presets.apis,
+					SwaggerUIStandalonePreset
+				],
+				layout: "StandaloneLayout",
+				docExpansion: "none",
+				deepLinking: true,
+				showExtensions: true,
+				showCommonExtensions: true,
+				defaultModelsExpandDepth: 2,
+				defaultModelExpandDepth: 2,
+				displayRequestDuration: true,
+				tryItOutEnabled: true,
+				supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+				onComplete: () => {
+					console.log('Swagger UI loaded successfully');
+				}
+			});
+		};
+	</script>
+</body>
+</html>`
 	}
 
 	/**

@@ -84,5 +84,125 @@ export default class AuthController extends Controller {
     }
   }
 
+  /**
+   * 验证密码并创建会话。
+   * @summary 验证密码
+   * @description 验证用户密码并创建用户会话
+   * @router post /api/v1/auth/password-verify
+   */
+  async passwordVerify(ctx: Context) {
+    try {
+      const password = ctx.request.body?.password as string;
+      const result = await ctx.service.auth.verifyPasswordAndCreateSession(password);
+      if (!result || !result.sessionId) {
+        ctx.unauthorized('Invalid password or session expired.');
+        return;
+      }
+      const maxAge = 4 * 60 * 60 * 1000;
+      ctx.cookies.set('ll_session', result.sessionId!, {
+        maxAge,
+        httpOnly: true,
+        signed: true,
+      });
+      ctx.success(null, 'Authentication successful, session created.');
+    } catch (error) {
+      ctx.logger.error('验证密码失败:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      ctx.internalError('验证密码失败', errorMessage);
+    }
+  }
+
+  /**
+   * 根据验证方式自动验证并创建会话。
+   * @summary 自动验证
+   * @description 根据设置的验证方式自动选择密码或TOTP验证
+   * @router post /api/v1/auth/auto-verify
+   */
+  async autoVerify(ctx: Context) {
+    try {
+      const input = ctx.request.body?.input as string;
+      const result = await ctx.service.auth.verifyAndCreateSession(input);
+      if (!result || !result.sessionId) {
+        ctx.unauthorized('Invalid input or session expired.');
+        return;
+      }
+      const maxAge = 4 * 60 * 60 * 1000;
+      ctx.cookies.set('ll_session', result.sessionId!, {
+        maxAge,
+        httpOnly: true,
+        signed: true,
+      });
+      ctx.success(null, 'Authentication successful, session created.');
+    } catch (error) {
+      ctx.logger.error('自动验证失败:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      ctx.internalError('自动验证失败', errorMessage);
+    }
+  }
+
+  /**
+   * 设置验证方式。
+   * @summary 设置验证方式
+   * @description 在初始化时设置验证方式（密码或2FA）和用户名
+   * @router post /api/v1/auth/set-auth-method
+   */
+  async setAuthMethod(ctx: Context) {
+    try {
+      const { method, username, password, secret, token } = ctx.request.body as {
+        method?: 'password' | 'totp';
+        username?: string;
+        password?: string;
+        secret?: string;
+        token?: string;
+      };
+
+      if (!method) {
+        ctx.badRequest('Missing auth method');
+        return;
+      }
+
+      let result;
+
+      if (method === 'password') {
+        if (!password) {
+          ctx.badRequest('Password is required');
+          return;
+        }
+        result = await ctx.service.auth.setAuthMethod(method, username, password);
+      } else if (method === 'totp') {
+        if (!secret || !token) {
+          ctx.badRequest('Secret and token are required for TOTP');
+          return;
+        }
+        // 验证token
+        if (!ctx.service.auth.verifyTOTPToken(secret, token)) {
+          ctx.unauthorized('Invalid token');
+          return;
+        }
+        result = await ctx.service.auth.setAuthMethod(method, username, undefined, secret);
+      } else {
+        ctx.badRequest('Invalid auth method');
+        return;
+      }
+
+      if (!result || !result.sessionId) {
+        ctx.unauthorized('Failed to set auth method');
+        return;
+      }
+
+      const maxAge = 4 * 60 * 60 * 1000;
+      ctx.cookies.set('ll_session', result.sessionId!, {
+        maxAge,
+        httpOnly: true,
+        signed: true,
+      });
+      ctx.success(null, 'Auth method set successfully.');
+    } catch (error) {
+      ctx.logger.error('设置验证方式失败:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      ctx.internalError('设置验证方式失败', errorMessage);
+    }
+  }
+
 
 }

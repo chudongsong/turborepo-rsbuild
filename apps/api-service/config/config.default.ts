@@ -48,7 +48,10 @@ export default (appInfo: EggAppInfo) => {
     match: [/^\/public\//, /^\/static\//], // 只处理 /public/ 和 /static/ 路径的静态资源请求
   };
   (config as any).auth = {
-    ignore: [/^\/api\/v1\/auth\//, /^\/public\//, /^\/ui$/, /^\/docs\//, /^\/api\/v1\/docs\//, /^\/.*\.(css|js|html|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|pdf|zip|tar|gz|json|xml|txt|md)$/],
+    // 注意：ignore 配置已移除，因为 authMiddleware 现在有更智能的逻辑：
+    // 1. 内置白名单处理公共路径（文档、API等）
+    // 2. 根据系统初始化状态动态决定是否需要认证
+    // 3. 已初始化系统要求所有路径认证（包括根路径和UI路径）
   };
   (config as any).bt = {
     match: [/^\/api\/v1\/proxy\/request/],

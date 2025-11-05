@@ -66,6 +66,12 @@ export default class StorageService extends Service {
 	/** 2FA密钥存储键名 */
 	private static readonly TWOFA_SECRET_KEY = 'twofa_secret'
 
+	/** 验证方式存储键名 */
+	private static readonly AUTH_METHOD_KEY = 'auth_method'
+
+	/** 用户名存储键名 */
+	private static readonly USERNAME_KEY = 'username'
+
 	/** SQLite数据库文件路径 */
 	private static readonly DB_FILE_PATH = 'data/storage.db'
 
@@ -247,6 +253,115 @@ export default class StorageService extends Service {
 			StorageService.TWOFA_SECRET_KEY
 		)
 		return record?.value || null
+	}
+
+	/**
+	 * 设置验证方式
+	 *
+	 * @param {'password' | 'totp'} method 验证方式
+	 * @param {string} [password] 密码（当method为'password'时必需）
+	 * @param {string} [secret] 2FA密钥（当method为'totp'时必需）
+	 */
+	setAuthMethod(
+		method: 'password' | 'totp',
+		password?: string,
+		secret?: string
+	): void {
+		if (method === 'password') {
+			if (!password) {
+				throw new Error('Password is required when auth method is password')
+			}
+			// 生成密码哈希
+			const passwordHash = crypto.createHash('sha256').update(password).digest('hex')
+			this.dbManager.upsert(
+				'auth',
+				{
+					key: StorageService.AUTH_METHOD_KEY,
+					value: method,
+				},
+				['key']
+			)
+			this.dbManager.upsert(
+				'auth',
+				{
+					key: 'password_hash',
+					value: passwordHash,
+				},
+				['key']
+			)
+		} else if (method === 'totp') {
+			if (!secret) {
+				throw new Error('2FA secret is required when auth method is totp')
+			}
+			this.dbManager.upsert(
+				'auth',
+				{
+					key: StorageService.AUTH_METHOD_KEY,
+					value: method,
+				},
+				['key']
+			)
+		}
+	}
+
+	/**
+	 * 获取验证方式
+	 *
+	 * @returns {'password' | 'totp' | null} 验证方式，不存在时返回null
+	 */
+	getAuthMethod(): 'password' | 'totp' | null {
+		const record = this.dbManager.get<AuthRecord>(
+			'SELECT value FROM auth WHERE key = ?',
+			StorageService.AUTH_METHOD_KEY
+		)
+		return (record?.value as 'password' | 'totp') || null
+	}
+
+	/**
+	 * 验证密码
+	 *
+	 * @param {string} password 明文密码
+	 * @returns {boolean} 验证是否成功
+	 */
+	verifyPassword(password: string): boolean {
+		const hashRecord = this.dbManager.get<AuthRecord>(
+			'SELECT value FROM auth WHERE key = ?',
+			'password_hash'
+		)
+		if (!hashRecord) {
+			return false
+		}
+		const inputHash = crypto.createHash('sha256').update(password).digest('hex')
+		return inputHash === hashRecord.value
+	}
+
+	/**
+	 * 设置用户名
+	 *
+	 * @param {string} username 用户名
+	 */
+	setUsername(username: string): void {
+		this.dbManager.upsert(
+			'auth',
+			{
+				key: StorageService.USERNAME_KEY,
+				value: username,
+			},
+			['key']
+		)
+	}
+
+	/**
+	 * 获取用户名
+	 *
+	 * @returns {string} 用户名，默认返回 'admin'
+	 */
+	getUsername(): string {
+		const record = this.dbManager.get<AuthRecord>(
+			'SELECT value FROM auth WHERE key = ?',
+			StorageService.USERNAME_KEY
+		)
+		return record?.value || 'admin'
 	}
 
 	/**

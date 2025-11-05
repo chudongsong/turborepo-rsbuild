@@ -219,12 +219,14 @@ pnpm --filter @linglongos/api run stop
 
 ### 环境配置
 
-创建 `.env.local` 文件：
+创建 `.env.local` 文件（已创建）：
 
 ```bash
 EGG_SERVER_PORT=4000
 NODE_ENV=local
 ```
+
+> **注意**: 端口 4000 是默认配置，可根据需要修改。如果修改端口，请同时更新文档中的 URL。
 
 ### 测试
 
@@ -304,13 +306,98 @@ const user = db.get('SELECT * FROM users WHERE id = ?', 1);
 
 ## 📚 API 文档
 
-### Swagger UI
+### 文档访问方式
 
+**Swagger UI 文档页面** (推荐)
 - **文档地址**: http://localhost:4000/docs
-- **OpenAPI JSON**: http://localhost:4000/api/v1/docs/openapi.json
-- 可直接导入 Postman、Apifox 等工具
+- **说明**: 基于 Swagger UI 的交互式文档页面，数据来源于 `/api/v1/docs/openapi.json`
+- **特性**: 支持在线测试 API、自动加载 OpenAPI 规范、美观的界面
 
-### 典型调用流程
+**OpenAPI 规范**
+- **OpenAPI JSON**: http://localhost:4000/api/v1/docs/openapi.json
+- 可直接导入 Postman、Apifox、Insomnia 等 API 工具
+
+**Swagger UI** (egg-swagger-doc 自动生成)
+- **Swagger UI 地址**: http://localhost:4000/swagger-ui.html
+
+**说明**:
+- `/docs` 路由现在直接返回基于 Swagger UI 的交互式文档页面
+- 数据来源于 `/api/v1/docs/openapi.json`
+- 无需访问静态页面或额外的 Swagger 路径
+- egg-swagger-doc 会自动解析所有控制器的 `@controller`、`@summary`、`@router` 等注释
+
+**文档路由说明**:
+- `/docs` → 基于 Swagger UI 的交互式文档页面（推荐）
+- `/api/v1/docs/openapi.json` → OpenAPI JSON 规范（数据源）
+- `/swagger-ui.html` → egg-swagger-doc 自动生成的界面
+
+### 文档注释规范
+
+所有 API 接口使用标准的 Swagger 注释格式：
+
+```typescript
+/**
+ * @controller 控制器名称
+ */
+export default class ExampleController extends Controller {
+  /**
+   * @summary 接口简要描述
+   * @description 接口详细描述，包括功能说明
+   * @router GET /api/v1/example/path
+   */
+  async exampleMethod(ctx: Context) {
+    ctx.success(data);
+  }
+}
+```
+
+**注释说明**:
+- `@controller` - 定义控制器名称（必填）
+- `@summary` - 接口简要描述（必填）
+- `@description` - 接口详细说明（可选）
+- `@router` - 路由定义，格式：`[方法] 路径`（必填）
+- 支持的方法：`GET`、`POST`、`PUT`、`DELETE`、`PATCH`
+
+详细的文档编写指南请参考 [API_FIXES.md](./API_FIXES.md)
+
+### 授权与访问控制
+
+项目采用基于 Cookie 的会话认证机制，支持 2FA 双因素认证。
+
+#### 🔓 无需认证的路径
+
+以下路径无需认证即可访问：
+
+- **认证接口**: `/api/v1/auth/*`
+  - `GET /api/v1/auth/google-auth-bind` - 获取 2FA 绑定信息
+  - `POST /api/v1/auth/google-auth-verify` - 验证 2FA 令牌
+
+- **文档相关**: `/docs/*`, `/api/v1/docs/*`, `/public/*`
+  - 文档页面和静态资源
+
+- **初始化接口**: `/api/v1/init/status` - 初始化状态检查
+
+- **静态资源**: 所有带以下扩展名的文件
+  - `.css`, `.js`, `.html`, `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.ico`
+  - `.webp`, `.woff`, `.woff2`, `.ttf`, `.eot`
+  - `.pdf`, `.zip`, `.tar`, `.gz`, `.json`, `.xml`, `.txt`, `.md`
+
+#### 🔒 需要认证的路径
+
+除上述路径外，所有 API 接口均需要有效的会话认证：
+
+- **面板管理**: `/api/v1/panels/*`
+- **代理接口**: `/api/v1/proxy/*`
+- **会话管理**: `/api/v1/sessions/*`
+- **其他业务接口**
+
+#### 会话 Cookie
+
+- **Cookie 名称**: `ll_session`
+- **属性**: `httpOnly`, `signed`, `maxAge: 4h`
+- **获取方式**: 通过 2FA 认证成功后自动设置
+
+#### 典型调用流程
 
 ```bash
 # 1. 获取 2FA 绑定信息
@@ -514,12 +601,18 @@ location /api/ {
 ✅ **所有测试已通过** (19/19)
 
 最近修复的问题：
-- 修正了测试中的 2FA 认证流程，使用正确的 `google-auth-confirm` 端点
-- 解决了静态文件中间件与 home 控制器的路由冲突问题
-- 优化了静态资源匹配规则，提高了路由解析效率
-- 修复了 TypeScript 编译错误，包括类型定义、方法签名等问题
+- ✅ 启用 swaggerdoc 插件，修复文档生成问题
+- ✅ 优化授权中间件白名单配置，确保文档相关路径可访问
+- ✅ 完善 API 文档注释规范，提供完整的开发指南
+- ✅ 创建 `.env.local` 环境配置文件
+- ✅ 更新项目文档，增加开发指南和常见问题解答
+- ✅ 完善文档路由配置，明确 Swagger UI 访问路径
+- ✅ 修改 /docs 路由使用 Swagger UI 输出，基于 OpenAPI 数据
+- ✅ 修复404错误处理，不存在路由返回404而不是401
 
-详细的修复报告请参考 [OPTIMIZATION_REPORT.md](./OPTIMIZATION_REPORT.md)
+详细的修复报告和开发指南请参考：
+- [API_FIXES.md](./API_FIXES.md) - 修复说明和开发指南
+- [OPTIMIZATION_REPORT.md](./OPTIMIZATION_REPORT.md) - 之前的问题修复报告
 
 CI 已配置于 `.github/workflows/api-tests.yml`，在推送或 PR 时自动运行。
 

@@ -99,12 +99,11 @@ export default class AuthService extends Service {
   /**
    * 验证 TOTP 令牌
    *
-   * @private
    * @param {string} secret base32 密钥
    * @param {string} token 用户输入的一次性口令
    * @returns {boolean} 验证结果
    */
-  private verifyTOTPToken(secret: string, token: string): boolean {
+  verifyTOTPToken(secret: string, token: string): boolean {
     return speakeasy.totp.verify({
       secret,
       encoding: 'base32',
@@ -120,5 +119,71 @@ export default class AuthService extends Service {
    */
   private createSession(): string {
     return this.ctx.service.storage.createSession(AuthService.SESSION_EXPIRY_MS);
+  }
+
+  /**
+   * 验证密码并创建会话
+   *
+   * @param {string} password 用户输入的密码
+   * @returns {Promise<{ sessionId?: string } | null>} 成功返回 `{ sessionId }`，失败返回 `null`
+   */
+  async verifyPasswordAndCreateSession(password: string): Promise<{ sessionId?: string } | null> {
+    if (!password) {
+      return null;
+    }
+
+    // 验证密码
+    if (!this.ctx.service.storage.verifyPassword(password)) {
+      return null;
+    }
+
+    // 创建会话
+    const sessionId = this.createSession();
+    return { sessionId };
+  }
+
+  /**
+   * 设置验证方式
+   *
+   * @param {'password' | 'totp'} method 验证方式
+   * @param {string} [username] 用户名
+   * @param {string} [password] 密码（当method为'password'时必需）
+   * @param {string} [secret] 2FA密钥（当method为'totp'时必需）
+   * @returns {Promise<{ sessionId?: string } | null>} 成功返回 `{ sessionId }`，失败返回 `null`
+   */
+  async setAuthMethod(
+    method: 'password' | 'totp',
+    username?: string,
+    password?: string,
+    secret?: string
+  ): Promise<{ sessionId?: string } | null> {
+    // 保存用户名（默认admin）
+    const finalUsername = username?.trim() || 'admin';
+    this.ctx.service.storage.setUsername(finalUsername);
+
+    // 保存验证方式
+    this.ctx.service.storage.setAuthMethod(method, password, secret);
+
+    // 创建会话
+    const sessionId = this.createSession();
+    return { sessionId };
+  }
+
+  /**
+   * 验证用户输入并创建会话（根据验证方式自动选择）
+   *
+   * @param {string} input 用户输入（密码或TOTP令牌）
+   * @returns {Promise<{ sessionId?: string } | null>} 成功返回 `{ sessionId }`，失败返回 `null`
+   */
+  async verifyAndCreateSession(input: string): Promise<{ sessionId?: string } | null> {
+    const authMethod = this.ctx.service.storage.getAuthMethod();
+
+    if (authMethod === 'password') {
+      return this.verifyPasswordAndCreateSession(input);
+    } else if (authMethod === 'totp') {
+      return this.verifyTokenAndCreateSession(input);
+    }
+
+    return null;
   }
 }
