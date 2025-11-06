@@ -47,7 +47,7 @@ const plugin: EggPlugin = {
 		package: 'egg-validate', // 开启参数校验插件，提供参数校验功能
 	},
 	swaggerdoc: {
-		enable: true, // 启用 Swagger 文档插件
+		enable: false, // 临时禁用 Swagger 文档插件，避免启动错误
 		package: 'egg-swagger-doc', // 开启 Swagger 文档插件，提供 API 文档生成功能
 	},
 }

@@ -1,0 +1,35 @@
+{
+  "name": "@linglongos/sdk",
+  "version": "1.0.0",
+  "description": "LinglongOS 前端插件开发 SDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "linglongos",
+    "plugin",
+    "sdk",
+    "frontend"
+  ],
+  "author": "LinglongOS Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

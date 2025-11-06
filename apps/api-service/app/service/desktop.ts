@@ -92,18 +92,12 @@ export interface DesktopConfig {
  * 使用 JSON 文件存储桌面配置数据
  */
 export default class DesktopService extends Service {
-  /** 桌面配置文件路径 */
-  private static readonly CONFIG_FILE_PATH = 'data/desktop.json'
-
-  /** JSON格式化缩进 */
-  private static readonly JSON_INDENT = 2
-
   private readonly configPath: string
 
   constructor(ctx: any) {
     super(ctx)
     const baseDir = this.app.baseDir
-    this.configPath = path.join(baseDir, DesktopConfigService.CONFIG_FILE_PATH)
+    this.configPath = path.join(baseDir, 'data/desktop.json')
     this.ensureConfigFile()
   }
 
@@ -319,7 +313,7 @@ export default class DesktopService extends Service {
   private writeConfig(config: DesktopConfig): void {
     fs.writeFileSync(
       this.configPath,
-      JSON.stringify(config, null, DesktopConfigService.JSON_INDENT)
+      JSON.stringify(config, null, 2)
     )
     this.ctx.logger.info(`桌面配置已更新: ${this.configPath}`)
   }

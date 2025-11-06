@@ -457,7 +457,7 @@ npm run migrate:to-sqlite
 ```
 
 ### 端口配置
-- 开发环境：默认 7001
+- 开发环境：默认 4000
 - 生产环境：可通过环境变量 PORT 配置
 - 健康检查：/health
 
@@ -491,7 +491,7 @@ npm run migrate:to-sqlite
 - 基础镜像：node:18-alpine
 - 数据卷：/app/data
 - 配置卷：/app/config
-- 端口映射：7001:7001
+- 端口映射：4000:4000
 
 ### 集群部署
 - 使用负载均衡器（如 Nginx）

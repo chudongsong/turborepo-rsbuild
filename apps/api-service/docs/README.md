@@ -26,11 +26,34 @@ LinglongOS API 是一个基于 Egg.js 和 Tegg 框架构建的统一面板代理
 - [代码规范指南](coding-standards.md) - TypeScript、代码风格、命名规范
 - [测试指南](testing-guide.md) - 单元测试、集成测试、测试策略
 
-### 📖 API 文档
+### 📂 分类文档
+
+#### 开发文档
+- [01-访问控制流程](开发文档/01-访问控制流程.md) - 系统访问控制逻辑详解
+- [02-API路由规范](开发文档/02-API路由规范.md) - API 路由命名规范和设计原则
+- [03-认证与初始化状态](开发文档/03-认证与初始化状态.md) - 认证机制和初始化流程
+- [04-桌面配置指南](开发文档/04-桌面配置指南.md) - 桌面配置开发指南
+- [05-文件列表实现](开发文档/05-文件列表实现.md) - 文件列表功能实现方案
+- [06-插件系统实现总结](开发文档/06-插件系统实现总结.md) - 插件系统架构和实现
+
+#### API 文档
+- [01-桌面配置API](API文档/01-桌面配置API.md) - 桌面配置接口文档
+- [02-代理配置API文档](API文档/02-代理配置API文档.md) - 代理配置接口说明
 - [API 接口文档](api/) - 完整的 API 接口说明和示例
 - [认证接口](api/auth.md) - 用户认证、2FA 相关接口
 - [面板管理](api/panel.md) - 面板配置和管理接口
 - [代理转发](api/proxy.md) - 代理请求转发接口
+
+#### 插件系统文档
+- [插件系统总览](plugin-system/README.md) - 插件系统完整文档
+- [快速开始](plugin-system/QUICK_START.md) - 插件开发快速入门
+- [API 参考](plugin-system/API_REFERENCE.md) - 插件 API 详细说明
+- [最佳实践](plugin-system/BEST_PRACTICES.md) - 插件开发最佳实践
+
+#### 插件构建文档
+- [linglongos插件构建的两种模式](plugin/linglongos插件构建的两种模式.md)
+- [Module Federation 插件构建](plugin/Module Federation 插件构建.md)
+- [FE Plugin构建方法](plugin/FE Plugin构建方法.md)
 
 ### 🚀 部署运维
 - [部署指南](deployment-guide.md) - 生产环境部署步骤
@@ -49,31 +72,47 @@ LinglongOS API 是一个基于 Egg.js 和 Tegg 框架构建的统一面板代理
 
 ```
 docs/
-├── README.md                    # 本文档 - 项目文档中心
-├── project-overview.md         # 项目概述和技术栈
-├── project-structure.md        # 项目结构和代码组织
-├── api-development-spec.md     # API开发规范
-├── development-workflow.md     # 开发工作流程
-├── development-environment.md  # 开发环境配置
-├── coding-standards.md         # 代码规范指南
-├── testing-guide.md            # 测试指南
-├── deployment-guide.md         # 部署指南
-├── docker-deployment.md        # Docker部署方案
-├── environment-setup.md        # 环境配置管理
-├── monitoring.md               # 监控告警配置
-├── troubleshooting.md          # 故障排查指南
-├── performance-optimization.md # 性能优化指南
-├── security-guide.md           # 安全最佳实践
-├── backup-restore.md           # 备份恢复方案
-├── log-analysis.md             # 日志分析方法
-├── api/                        # API接口文档
-│   ├── auth.md                # 认证接口文档
-│   ├── panel.md               # 面板管理接口
-│   ├── config.md              # 配置管理接口
-│   └── proxy.md               # 代理转发接口
-├── deployment/                 # 部署相关文档
-├── development/               # 开发过程文档
-└── examples/                  # 使用示例和代码片段
+├── README.md                      # 本文档 - 项目文档中心
+├── project-overview.md            # 项目概述和技术栈
+├── project-structure.md           # 项目结构和代码组织
+├── api-development-spec.md        # API开发规范
+├── development-workflow.md        # 开发工作流程
+├── development-environment.md     # 开发环境配置
+├── coding-standards.md            # 代码规范指南
+├── testing-guide.md               # 测试指南
+├── 开发文档/                        # 开发相关文档
+│   ├── 01-访问控制流程.md         # 访问控制逻辑
+│   ├── 02-API路由规范.md          # API路由规范
+│   ├── 03-认证与初始化状态.md      # 认证和初始化
+│   ├── 04-桌面配置指南.md          # 桌面配置指南
+│   ├── 05-文件列表实现.md          # 文件列表实现
+│   └── 06-插件系统实现总结.md      # 插件系统总结
+├── API文档/                        # API接口文档
+│   ├── 01-桌面配置API.md          # 桌面配置接口
+│   └── 02-代理配置API文档.md       # 代理配置接口
+├── api/                          # API接口文档
+│   ├── files-api.md             # 文件API
+│   └── settings-api.md          # 设置API
+├── plugin-system/                # 插件系统完整文档
+│   ├── README.md                # 插件系统总览
+│   ├── QUICK_START.md           # 快速开始
+│   ├── API_REFERENCE.md         # API参考
+│   ├── BEST_PRACTICES.md        # 最佳实践
+│   ├── TROUBLESHOOTING.md       # 故障排查
+│   └── PROJECT_COMPLETION_SUMMARY.md # 完成总结
+├── plugin/                       # 插件构建文档
+│   ├── linglongos插件构建的两种模式.md
+│   ├── Module Federation 插件构建.md
+│   └── FE Plugin构建方法.md
+├── deployment-guide.md           # 部署指南
+├── docker-deployment.md          # Docker部署方案
+├── environment-setup.md          # 环境配置管理
+├── monitoring.md                 # 监控告警配置
+├── troubleshooting.md            # 故障排查指南
+├── performance-optimization.md   # 性能优化指南
+├── security-guide.md             # 安全最佳实践
+├── backup-restore.md             # 备份恢复方案
+└── log-analysis.md               # 日志分析方法
 ```
 
 ## 🛠️ 技术栈
@@ -104,23 +143,23 @@ docs/
 ### 安装和启动
 ```bash
 # 安装依赖
-pnpm -C apps/api install
+pnpm -C apps/api-service install
 
 # 启动开发服务器
-pnpm -C apps/api dev
+pnpm -C apps/api-service dev
 
 # 运行测试
-pnpm -C apps/api test
+pnpm -C apps/api-service test
 
 # 构建项目
-pnpm -C apps/api tsc
+pnpm -C apps/api-service tsc
 
 # 启动生产服务
-pnpm -C apps/api start
+pnpm -C apps/api-service start
 ```
 
 ### 访问文档
-- **API文档**: http://localhost:7001/api/v1/docs/openapi.json
+- **API文档**: http://localhost:4000/api/v1/docs/openapi_json
 - **开发文档**: 查看本目录下的文档文件
 - **示例代码**: 查看 `examples/` 目录
 
@@ -147,10 +186,29 @@ pnpm -C apps/api start
 ## 🤝 贡献指南
 
 ### 文档贡献
-1. 新增文档请放在对应的分类目录下
-2. 文档命名使用小写字母和连字符
-3. 重要的技术决策记录在 `development/` 目录
+
+⚠️ **重要规则**：
+- **所有项目文档必须创建在对应项目的 `docs/` 目录下**
+- **文档命名必须使用中文**
+- **文档需要按照分类组织到相应目录**
+
+#### 文档分类规范
+- **开发文档** (`开发文档/`) - 开发流程、规范、设计方案
+- **API文档** (`API文档/`) - API接口说明、参数文档
+- **构建文档** (`构建文档/`) - 构建流程、部署指南
+- **任务文档** (`任务文档/`) - 开发任务、需求文档
+
+#### 文档命名规范
+- 使用中文命名，清晰表达文档内容
+- 按重要性添加序号前缀（01-, 02-, 03-）
+- 示例：`01-认证系统设计.md`、`02-API接口说明.md`
+
+#### 文档贡献步骤
+1. 确定文档类型，选择对应的分类目录
+2. 使用中文命名文档
+3. 参考已有文档的格式和风格
 4. 保持文档的时效性和准确性
+5. 更新本 README.md 中的导航链接
 
 ### 代码贡献
 1. 遵循 [开发工作流程](development-workflow.md)

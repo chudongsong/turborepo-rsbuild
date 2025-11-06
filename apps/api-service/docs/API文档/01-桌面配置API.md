@@ -305,7 +305,7 @@ curl -X POST "http://localhost:4000/api/v1/desktop/add_plugin" \
 2. **参数验证**: 必需参数缺失时会返回 400 错误
 3. **插件 ID 唯一性**: 添加新插件时，ID 必须唯一
 4. **位置坐标**: 插件位置基于网格系统，使用 `x, y` 坐标
-5. **文件权限**: 确保 API 服务有读写 `data/desktop-config.json` 文件的权限
+5. **文件权限**: 确保 API 服务有读写 `data/desktop.json` 文件的权限
 
 ## 扩展建议
 

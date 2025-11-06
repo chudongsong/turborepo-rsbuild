@@ -884,4 +884,500 @@ export default class StorageService extends Service {
 	getDatabase(): DatabaseManager {
 		return this.dbManager
 	}
+
+	// ==================== 插件实例管理相关方法 ====================
+
+	/**
+	 * 创建插件实例
+	 *
+	 * @param {object} instanceData 实例数据
+	 * @returns {number} 实例ID
+	 */
+	createPluginInstance(instanceData: {
+		plugin_id: number
+		version_id: number
+		instance_name: string
+		config?: any
+		status?: string
+		host_process_id?: string
+		sandbox_url?: string
+		mf_remote_name?: string
+		port?: number
+		metadata?: any
+	}): number {
+		const stmt = (this.dbManager as any).prepare(`
+			INSERT INTO plugin_instances (
+				plugin_id, version_id, instance_name, config, status,
+				host_process_id, sandbox_url, mf_remote_name, port, metadata
+			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		`)
+		const result = stmt.run(
+			instanceData.plugin_id,
+			instanceData.version_id,
+			instanceData.instance_name,
+			instanceData.config ? JSON.stringify(instanceData.config) : null,
+			instanceData.status || 'stopped',
+			instanceData.host_process_id || null,
+			instanceData.sandbox_url || null,
+			instanceData.mf_remote_name || null,
+			instanceData.port || null,
+			instanceData.metadata ? JSON.stringify(instanceData.metadata) : null,
+		)
+		return result.lastInsertRowid as number
+	}
+
+	/**
+	 * 获取插件实例列表
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @returns {array} 实例列表
+	 */
+	getPluginInstances(pluginId: number): any[] {
+		return this.dbManager.all(`
+			SELECT
+				pi.*,
+				p.name as plugin_name,
+				pv.version as plugin_version
+			FROM plugin_instances pi
+			LEFT JOIN plugins p ON pi.plugin_id = p.id
+			LEFT JOIN plugin_versions pv ON pi.version_id = pv.id
+			WHERE pi.plugin_id = ?
+			ORDER BY pi.created_at DESC
+		`, pluginId)
+	}
+
+	/**
+	 * 根据ID获取插件实例
+	 *
+	 * @param {number} id 实例ID
+	 * @returns {object|null} 实例信息
+	 */
+	getPluginInstanceById(id: number): any {
+		return this.dbManager.get(`
+			SELECT
+				pi.*,
+				p.name as plugin_name,
+				pv.version as plugin_version
+			FROM plugin_instances pi
+			LEFT JOIN plugins p ON pi.plugin_id = p.id
+			LEFT JOIN plugin_versions pv ON pi.version_id = pv.id
+			WHERE pi.id = ?
+		`, id)
+	}
+
+	/**
+	 * 更新插件实例
+	 *
+	 * @param {number} id 实例ID
+	 * @param {object} updates 更新数据
+	 * @returns {any} 执行结果
+	 */
+	updatePluginInstance(id: number, updates: {
+		config?: any
+		status?: string
+		host_process_id?: string
+		sandbox_url?: string
+		mf_remote_name?: string
+		port?: number
+		metadata?: any
+	}): any {
+		const fields: string[] = []
+		const values: any[] = []
+
+		if (updates.config !== undefined) {
+			fields.push('config = ?')
+			values.push(JSON.stringify(updates.config))
+		}
+		if (updates.status !== undefined) {
+			fields.push('status = ?')
+			values.push(updates.status)
+		}
+		if (updates.host_process_id !== undefined) {
+			fields.push('host_process_id = ?')
+			values.push(updates.host_process_id)
+		}
+		if (updates.sandbox_url !== undefined) {
+			fields.push('sandbox_url = ?')
+			values.push(updates.sandbox_url)
+		}
+		if (updates.mf_remote_name !== undefined) {
+			fields.push('mf_remote_name = ?')
+			values.push(updates.mf_remote_name)
+		}
+		if (updates.port !== undefined) {
+			fields.push('port = ?')
+			values.push(updates.port)
+		}
+		if (updates.metadata !== undefined) {
+			fields.push('metadata = ?')
+			values.push(JSON.stringify(updates.metadata))
+		}
+
+		if (fields.length === 0) {
+			throw new Error('No fields to update')
+		}
+
+		values.push(id)
+		const sql = `UPDATE plugin_instances SET ${fields.join(', ')} WHERE id = ?`
+		return this.dbManager.run(sql, ...values)
+	}
+
+	/**
+	 * 删除插件实例
+	 *
+	 * @param {number} id 实例ID
+	 * @returns {any} 执行结果
+	 */
+	deletePluginInstance(id: number): any {
+		return this.dbManager.run('DELETE FROM plugin_instances WHERE id = ?', id)
+	}
+
+	// ==================== 插件事件管理相关方法 ====================
+
+	/**
+	 * 记录插件事件
+	 *
+	 * @param {object} eventData 事件数据
+	 * @returns {number} 事件ID
+	 */
+	logPluginEvent(eventData: {
+		plugin_id: number
+		instance_id?: number
+		event_type: string
+		event_data?: any
+		user_id?: string
+		source_ip?: string
+		error_message?: string
+		stack_trace?: string
+	}): number {
+		const stmt = (this.dbManager as any).prepare(`
+			INSERT INTO plugin_events (
+				plugin_id, instance_id, event_type, event_data,
+				user_id, source_ip, error_message, stack_trace
+			) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+		`)
+		const result = stmt.run(
+			eventData.plugin_id,
+			eventData.instance_id || null,
+			eventData.event_type,
+			eventData.event_data ? JSON.stringify(eventData.event_data) : null,
+			eventData.user_id || null,
+			eventData.source_ip || null,
+			eventData.error_message || null,
+			eventData.stack_trace || null,
+		)
+		return result.lastInsertRowid as number
+	}
+
+	/**
+	 * 获取插件事件列表
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @param {object} options 查询选项
+	 * @returns {array} 事件列表
+	 */
+	getPluginEvents(pluginId: number, options?: {
+		limit?: number
+		offset?: number
+		event_type?: string
+		instance_id?: number
+	}): any[] {
+		let sql = `
+			SELECT
+				pe.*,
+				p.name as plugin_name,
+				pi.instance_name
+			FROM plugin_events pe
+			LEFT JOIN plugins p ON pe.plugin_id = p.id
+			LEFT JOIN plugin_instances pi ON pe.instance_id = pi.id
+			WHERE pe.plugin_id = ?
+		`
+		const params: any[] = [pluginId]
+
+		if (options?.event_type) {
+			sql += ' AND pe.event_type = ?'
+			params.push(options.event_type)
+		}
+		if (options?.instance_id) {
+			sql += ' AND pe.instance_id = ?'
+			params.push(options.instance_id)
+		}
+
+		sql += ' ORDER BY pe.created_at DESC'
+
+		if (options?.limit) {
+			sql += ' LIMIT ?'
+			params.push(options.limit)
+		}
+		if (options?.offset) {
+			sql += ' OFFSET ?'
+			params.push(options.offset)
+		}
+
+		return this.dbManager.all(sql, ...params)
+	}
+
+	/**
+	 * 获取插件事件统计
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @returns {object} 统计信息
+	 */
+	getPluginEventStats(pluginId: number): any {
+		return this.dbManager.get(`
+			SELECT
+				event_type,
+				COUNT(*) as count,
+				MIN(created_at) as first_event,
+				MAX(created_at) as last_event
+			FROM plugin_events
+			WHERE plugin_id = ?
+			GROUP BY event_type
+		`, pluginId)
+	}
+
+	// ==================== 插件权限管理相关方法 ====================
+
+	/**
+	 * 设置插件权限
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @param {object} permission 权限数据
+	 * @returns {number} 权限ID
+	 */
+	setPluginPermission(pluginId: number, permission: {
+		permission_name: string
+		permission_type?: 'allow' | 'deny'
+		resource_pattern?: string
+		conditions?: any
+	}): number {
+		const stmt = (this.dbManager as any).prepare(`
+			INSERT INTO plugin_permissions (
+				plugin_id, permission_name, permission_type,
+				resource_pattern, conditions
+			) VALUES (?, ?, ?, ?, ?)
+			ON CONFLICT(plugin_id, permission_name)
+			DO UPDATE SET
+				permission_type = excluded.permission_type,
+				resource_pattern = excluded.resource_pattern,
+				conditions = excluded.conditions,
+				updated_at = strftime('%s', 'now') * 1000
+		`)
+		const result = stmt.run(
+			pluginId,
+			permission.permission_name,
+			permission.permission_type || 'allow',
+			permission.resource_pattern || null,
+			permission.conditions ? JSON.stringify(permission.conditions) : null,
+		)
+		return result.lastInsertRowid as number
+	}
+
+	/**
+	 * 获取插件权限列表
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @returns {array} 权限列表
+	 */
+	getPluginPermissions(pluginId: number): any[] {
+		return this.dbManager.all(`
+			SELECT * FROM plugin_permissions
+			WHERE plugin_id = ?
+			ORDER BY permission_name
+		`, pluginId)
+	}
+
+	/**
+	 * 检查插件权限
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @param {string} permission 权限名称
+	 * @param {string} resource 资源
+	 * @returns {boolean} 是否有权限
+	 */
+	checkPluginPermission(pluginId: number, permission: string, _resource?: string): boolean {
+		const perm = this.dbManager.get(`
+			SELECT * FROM plugin_permissions
+			WHERE plugin_id = ? AND permission_name = ?
+		`, pluginId, permission)
+
+		if (!perm) {
+			return false
+		}
+
+		if (perm.permission_type === 'allow') {
+			return true
+		}
+
+		return false
+	}
+
+	/**
+	 * 删除插件权限
+	 *
+	 * @param {number} pluginId 插件ID
+	 * @param {string} permissionName 权限名称
+	 * @returns {any} 执行结果
+	 */
+	removePluginPermission(pluginId: number, permissionName: string): any {
+		return this.dbManager.run(
+			'DELETE FROM plugin_permissions WHERE plugin_id = ? AND permission_name = ?',
+			pluginId,
+			permissionName
+		)
+	}
+
+	// ==================== 插件主机管理相关方法 ====================
+
+	/**
+	 * 创建或更新插件主机
+	 *
+	 * @param {object} hostData 主机数据
+	 * @returns {number} 主机ID
+	 */
+	upsertPluginHost(hostData: {
+		host_name: string
+		process_id?: string
+		status?: string
+		config?: any
+		loaded_plugins?: any[]
+	}): number {
+		const stmt = (this.dbManager as any).prepare(`
+			INSERT INTO plugin_hosts (
+				host_name, process_id, status, config, loaded_plugins
+			) VALUES (?, ?, ?, ?, ?)
+			ON CONFLICT(host_name) DO UPDATE SET
+				process_id = excluded.process_id,
+				status = excluded.status,
+				config = excluded.config,
+				loaded_plugins = excluded.loaded_plugins,
+				updated_at = strftime('%s', 'now') * 1000
+		`)
+		const result = stmt.run(
+			hostData.host_name,
+			hostData.process_id || null,
+			hostData.status || 'stopped',
+			hostData.config ? JSON.stringify(hostData.config) : null,
+			hostData.loaded_plugins ? JSON.stringify(hostData.loaded_plugins) : null,
+		)
+		return result.lastInsertRowid as number
+	}
+
+	/**
+	 * 获取插件主机列表
+	 *
+	 * @returns {array} 主机列表
+	 */
+	getPluginHosts(): any[] {
+		return this.dbManager.all(`
+			SELECT * FROM plugin_hosts
+			ORDER BY host_name
+		`)
+	}
+
+	/**
+	 * 根据名称获取插件主机
+	 *
+	 * @param {string} hostName 主机名称
+	 * @returns {object|null} 主机信息
+	 */
+	getPluginHostByName(hostName: string): any {
+		return this.dbManager.get(`
+			SELECT * FROM plugin_hosts
+			WHERE host_name = ?
+		`, hostName)
+	}
+
+	/**
+	 * 更新插件主机状态
+	 *
+	 * @param {string} hostName 主机名称
+	 * @param {object} updates 更新数据
+	 * @returns {any} 执行结果
+	 */
+	updatePluginHost(hostName: string, updates: {
+		process_id?: string
+		status?: string
+		config?: any
+		loaded_plugins?: any[]
+		last_heartbeat?: number
+	}): any {
+		const fields: string[] = []
+		const values: any[] = []
+
+		if (updates.process_id !== undefined) {
+			fields.push('process_id = ?')
+			values.push(updates.process_id)
+		}
+		if (updates.status !== undefined) {
+			fields.push('status = ?')
+			values.push(updates.status)
+			if (updates.status === 'running') {
+				fields.push('start_time = ?')
+				values.push(Date.now())
+			} else if (updates.status === 'stopped') {
+				fields.push('stop_time = ?')
+				values.push(Date.now())
+			}
+		}
+		if (updates.config !== undefined) {
+			fields.push('config = ?')
+			values.push(JSON.stringify(updates.config))
+		}
+		if (updates.loaded_plugins !== undefined) {
+			fields.push('loaded_plugins = ?')
+			values.push(JSON.stringify(updates.loaded_plugins))
+		}
+		if (updates.last_heartbeat !== undefined) {
+			fields.push('last_heartbeat = ?')
+			values.push(updates.last_heartbeat)
+		}
+
+		if (fields.length === 0) {
+			throw new Error('No fields to update')
+		}
+
+		values.push(hostName)
+		const sql = `UPDATE plugin_hosts SET ${fields.join(', ')} WHERE host_name = ?`
+		return this.dbManager.run(sql, ...values)
+	}
+
+	/**
+	 * 删除插件主机
+	 *
+	 * @param {string} hostName 主机名称
+	 * @returns {any} 执行结果
+	 */
+	deletePluginHost(hostName: string): any {
+		return this.dbManager.run('DELETE FROM plugin_hosts WHERE host_name = ?', hostName)
+	}
+
+	/**
+	 * 获取插件主机状态
+	 *
+	 * @returns {object} 状态信息
+	 */
+	getPluginHostStatus(): any {
+		const hosts = this.dbManager.all(`
+			SELECT
+				host_name,
+				status,
+				last_heartbeat,
+				CASE
+					WHEN last_heartbeat IS NULL THEN 'no-heartbeat'
+					WHEN (strftime('%s', 'now') * 1000) - last_heartbeat > 30000 THEN 'timeout'
+					ELSE 'healthy'
+				END as health_status
+			FROM plugin_hosts
+			ORDER BY host_name
+		`)
+
+		return {
+			hosts,
+			total: hosts.length,
+			healthy: hosts.filter(h => h.health_status === 'healthy').length,
+			timeout: hosts.filter(h => h.health_status === 'timeout').length,
+			no_heartbeat: hosts.filter(h => h.health_status === 'no-heartbeat').length,
+		}
+	}
 }

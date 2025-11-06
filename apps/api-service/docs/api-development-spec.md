@@ -367,8 +367,8 @@ export default class PanelController extends Controller {
 
 ### 文档访问
 
-  - **Swagger UI**：`http://localhost:7001/swagger-ui.html`
-  - **JSON 文档**：`http://localhost:7001/swagger-doc`
+  - **Swagger UI**：`http://localhost:4000/swagger-ui.html`
+  - **JSON 文档**：`http://localhost:4000/swagger-doc`
 
 ### 自动化测试
 

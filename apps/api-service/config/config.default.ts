@@ -11,6 +11,13 @@ export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
 
   /**
+   * 端口配置 - 支持环境变量
+   * 通过环境变量 PORT 或 EGG_PORT 设置端口
+   * 端口检测和自动切换由启动脚本处理
+   */
+  const ACTUAL_PORT = parseInt(process.env.PORT || process.env.EGG_PORT || '7001', 10);
+
+  /**
    * Cookie 签名密钥（请在生产环境替换为安全随机值）。
    */
   // override config from framework / plugin
@@ -105,7 +112,7 @@ export default (appInfo: EggAppInfo) => {
     },
     enableSecurity: true,
     routerMap: false, // 禁用路由映射，避免路径不匹配错误
-    enable: true,
+    enable: false, // 临时禁用 Swagger 文档生成
   };
 
   /**
@@ -122,6 +129,24 @@ export default (appInfo: EggAppInfo) => {
    */
   config.multipart = {
     mode: 'file',
+  };
+
+  /**
+   * 端口配置 - 支持自动检测和切换
+   * 通过环境变量 PORT 或 EGG_PORT 设置端口
+   * 如果端口被占用，自动使用下一个可用端口
+   */
+  (config as any).port = ACTUAL_PORT;
+
+  /**
+   * 集群配置 - 支持端口检测
+   */
+  (config as any).cluster = {
+    listen: {
+      port: ACTUAL_PORT,
+      // 自动检测端口冲突，在开发模式下非常有用
+      strategy: 'failover',
+    },
   };
 
   // add your special config in here

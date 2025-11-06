@@ -18,13 +18,19 @@ export default function authMiddleware() {
   // 不需要认证的路径白名单
   const whitelist = [
     "/api/v1/init/status", // 初始化状态检查
+    "/api/v1/init/check_status", // 初始化状态检查（新路由）
     "/api/v1/auth/google-auth-bind", // 2FA 绑定（生成二维码）
     "/api/v1/auth/google-auth-confirm", // 2FA 确认绑定
     "/api/v1/auth/google-auth-verify", // 2FA 验证（首次绑定或登录）
+    "/api/v1/auth/password-verify", // 密码验证
+    "/api/v1/auth/auto-verify", // 自动验证
     "/api/v1/auth/set-auth-method", // 设置验证方式
+    "/api/v1/sessions/create_session", // 创建会话
+    "/api/v1/sessions/verify_session", // 验证会话
     "/docs", // Swagger UI 文档页面（带尾斜杠）
     "/docs/", // Swagger UI 文档页面（带尾斜杠）
     "/api/v1/docs/openapi.json", // OpenAPI JSON 文档
+    "/api/v1/docs/openapi_json", // OpenAPI JSON 文档（新路由）
     "/swagger-doc", // Swagger JSON 文档（旧路径）
     "/swagger-ui.html", // Swagger UI 页面
     "/swagger-ui-bundle.js", // Swagger UI 资源文件

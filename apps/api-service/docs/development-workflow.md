@@ -260,11 +260,11 @@ COPY . .
 RUN pnpm run build
 
 # 暴露端口
-EXPOSE 7001
+EXPOSE 4000
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:7001/health || exit 1
+  CMD curl -f http://localhost:4000/health || exit 1
 
 # 启动应用
 CMD ["npm", "start"]
@@ -277,7 +277,7 @@ services:
   api:
     build: .
     ports:
-      - "7001:7001"
+      - "4000:4000"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=sqlite:/app/data/prod.db
@@ -392,7 +392,7 @@ pnpm run dev
 **VS Code 设置**:
 ```json
 {
-  "eslint.workingDirectories": ["apps/api"],
+  "eslint.workingDirectories": ["apps/api-service"],
   "typescript.preferences.importModuleSpecifier": "relative",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
@@ -409,9 +409,9 @@ pnpm run dev
       "name": "Debug API",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/apps/api/node_modules/.bin/egg-bin",
+      "program": "${workspaceFolder}/apps/api-service/node_modules/.bin/egg-bin",
       "args": ["dev"],
-      "cwd": "${workspaceFolder}/apps/api",
+      "cwd": "${workspaceFolder}/apps/api-service",
       "console": "integratedTerminal"
     }
   ]
@@ -536,7 +536,7 @@ sqlite3 data/dev.db ".tables"
 #### 2. 端口冲突
 ```bash
 # 查找占用端口的进程
-lsof -i :7001
+lsof -i :4000
 kill -9 <PID>
 ```
 
@@ -612,5 +612,5 @@ EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = 'test@example.com';
 ```bash
 # 使用Artillery进行负载测试
 npm install -g artillery
-artillery quick --count 100 --num 10 http://localhost:7001/api/health
+artillery quick --count 100 --num 10 http://localhost:4000/api/health
 ```

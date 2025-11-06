@@ -257,7 +257,7 @@ export default class DesktopController extends Controller {
 
       await ctx.service.desktop.addPlugin(plugin)
 
-      ctx.success({ message: '插件添加成功' }, 201)
+      ctx.success({ message: '插件添加成功' }, 201 as any)
     } catch (error) {
       ctx.logger.error('添加插件失败:', error)
       const errorMessage = error instanceof Error ? error.message : String(error)

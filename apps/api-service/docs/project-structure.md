@@ -430,7 +430,7 @@ JWT_SECRET=your-jwt-secret-key
 JWT_EXPIRES_IN=24h
 
 # 服务器配置
-PORT=7001
+PORT=4000
 NODE_ENV=development
 ```
 

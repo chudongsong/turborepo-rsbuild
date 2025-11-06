@@ -116,6 +116,36 @@ export default (app: Application) => {
   ); // 获取插件分类列表
   router.post("/api/v1/increment_download_count", controller.plugins.download); // 递增下载计数
 
+  // ==================== 插件系统新路由 ====================
+
+  // 插件生命周期管理
+  router.post("/api/v1/plugins/:id/install", controller.pluginLifecycle.install); // 安装插件
+  router.post("/api/v1/plugins/:id/enable", controller.pluginLifecycle.enable); // 启用插件
+  router.post("/api/v1/plugins/:id/disable", controller.pluginLifecycle.disable); // 禁用插件
+  router.post("/api/v1/plugins/:id/uninstall", controller.pluginLifecycle.uninstall); // 卸载插件
+
+  // 插件实例管理
+  router.post("/api/v1/plugins/:id/instances", controller.pluginInstances.create); // 创建插件实例
+  router.get("/api/v1/plugins/:id/instances", controller.pluginInstances.index); // 获取插件实例列表
+  router.get("/api/v1/instances/:id", controller.pluginInstances.show); // 获取插件实例详情
+  router.put("/api/v1/instances/:id", controller.pluginInstances.update); // 更新插件实例
+  router.delete("/api/v1/instances/:id", controller.pluginInstances.destroy); // 删除插件实例
+  router.post("/api/v1/instances/:id/start", controller.pluginLifecycle.startInstance); // 启动插件实例
+  router.post("/api/v1/instances/:id/stop", controller.pluginLifecycle.stopInstance); // 停止插件实例
+  router.post("/api/v1/instances/:id/restart", controller.pluginLifecycle.restartInstance); // 重启插件实例
+
+  // 插件权限管理
+  router.get("/api/v1/plugins/:id/permissions", controller.pluginPermissions.get); // 获取插件权限列表
+  router.post("/api/v1/plugins/:id/permissions", controller.pluginPermissions.set); // 设置插件权限
+  router.delete("/api/v1/plugins/:id/permissions/:permName", controller.pluginPermissions.revoke); // 撤销插件权限
+
+  // 插件主机管理
+  router.get("/api/v1/plugin-hosts/status", controller.pluginHosts.status); // 获取插件主机状态
+  router.get("/api/v1/plugin-hosts", controller.pluginHosts.index); // 获取插件主机列表
+  router.post("/api/v1/plugin-hosts/:hostName/start", controller.pluginHosts.start); // 启动插件主机
+  router.post("/api/v1/plugin-hosts/:hostName/stop", controller.pluginHosts.stop); // 停止插件主机
+  router.post("/api/v1/plugin-hosts/:hostName/restart", controller.pluginHosts.restart); // 重启插件主机
+
   // 桌面 (Desktop Controller) - 遵循动词+宾语规范
   // 基础配置获取
   router.get("/api/v1/desktop/get_config", controller.desktop.getConfig); // 获取完整桌面配置
