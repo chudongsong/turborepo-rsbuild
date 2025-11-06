@@ -116,6 +116,27 @@ export default (app: Application) => {
   ); // 获取插件分类列表
   router.post("/api/v1/increment_download_count", controller.plugins.download); // 递增下载计数
 
+  // 桌面 (Desktop Controller) - 遵循动词+宾语规范
+  // 基础配置获取
+  router.get("/api/v1/desktop/get_config", controller.desktop.getConfig); // 获取完整桌面配置
+  router.get("/api/v1/desktop/get_registered_plugins", controller.desktop.getRegisteredPlugins); // 获取已注册插件列表
+  router.get("/api/v1/desktop/get_desktop_plugins", controller.desktop.getDesktopPlugins); // 获取桌面插件列表
+  router.get("/api/v1/desktop/get_plugin", controller.desktop.getPlugin); // 获取插件详情（通过query参数传递id）
+
+  // 任务栏和菜单配置
+  router.get("/api/v1/desktop/get_taskbar_config", controller.desktop.getTaskbarConfig); // 获取任务栏配置
+  router.get("/api/v1/desktop/get_context_menus", controller.desktop.getContextMenus); // 获取右键菜单配置
+
+  // 插件类型和商店
+  router.get("/api/v1/desktop/get_plugin_types", controller.desktop.getPluginTypes); // 获取插件类型定义
+  router.get("/api/v1/desktop/get_plugin_stores", controller.desktop.getPluginStores); // 获取插件商店列表
+
+  // 插件管理操作
+  router.post("/api/v1/desktop/update_plugin_position", controller.desktop.updatePluginPosition); // 更新插件位置
+  router.post("/api/v1/desktop/add_plugin", controller.desktop.addPlugin); // 添加插件到桌面
+  router.post("/api/v1/desktop/remove_plugin", controller.desktop.removePlugin); // 从桌面移除插件
+  router.post("/api/v1/desktop/update_plugin_config", controller.desktop.updatePluginConfig); // 更新插件配置
+
   // 其他路由
   router.get("/", controller.home.index); // 根路径首页，根据初始化状态重定向
   router.get("/ui", controller.ui.index);

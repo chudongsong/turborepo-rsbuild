@@ -1,0 +1,390 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "name": "Plugin-Based Web Desktop",
+    "created": "2025-11-05",
+    "pluginApiVersion": "1.0.0"
+  },
+  "desktop": {
+    "grid": {
+      "columns": 12,
+      "rows": 8,
+      "cellWidth": 80,
+      "cellHeight": 80,
+      "padding": 16
+    },
+    "registeredPlugins": [
+      {
+        "id": "core.desktop-icon",
+        "name": "桌面图标系统",
+        "type": "infrastructure",
+        "version": "1.0.0",
+        "enabled": true,
+        "zIndex": 1
+      },
+      {
+        "id": "core.taskbar",
+        "name": "任务栏",
+        "type": "infrastructure",
+        "version": "1.0.0",
+        "enabled": true,
+        "zIndex": 100
+      },
+      {
+        "id": "core.context-menu",
+        "name": "右键菜单",
+        "type": "infrastructure",
+        "version": "1.0.0",
+        "enabled": true,
+        "zIndex": 99
+      }
+    ],
+    "plugins": [
+      {
+        "id": "icon.trash",
+        "type": "icon",
+        "name": "回收站",
+        "icon": "🗑️",
+        "position": {
+          "x": 1,
+          "y": 1,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "draggable": true,
+          "doubleClickAction": "open"
+        }
+      },
+      {
+        "id": "icon.home",
+        "type": "icon",
+        "name": "我的电脑",
+        "icon": "💾",
+        "position": {
+          "x": 1,
+          "y": 3,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "draggable": true,
+          "doubleClickAction": "open"
+        }
+      },
+      {
+        "id": "icon.user-folder",
+        "type": "icon",
+        "name": "用户文件夹",
+        "icon": "👤",
+        "position": {
+          "x": 1,
+          "y": 5,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "draggable": true,
+          "doubleClickAction": "open",
+          "path": "/home/user"
+        }
+      },
+      {
+        "id": "widget.clock",
+        "type": "widget",
+        "name": "时钟",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "width": 2,
+          "height": 1
+        },
+        "config": {
+          "format": "HH:mm:ss",
+          "theme": "digital"
+        }
+      },
+      {
+        "id": "widget.weather",
+        "type": "widget",
+        "name": "天气",
+        "position": {
+          "x": 9,
+          "y": 2,
+          "width": 2,
+          "height": 2
+        },
+        "config": {
+          "city": "Beijing",
+          "showForecast": true
+        }
+      },
+      {
+        "id": "widget.notes",
+        "type": "widget",
+        "name": "便签",
+        "position": {
+          "x": 9,
+          "y": 4,
+          "width": 2,
+          "height": 2
+        },
+        "config": {
+          "defaultColor": "yellow"
+        }
+      },
+      {
+        "id": "shortcut.chrome",
+        "type": "shortcut",
+        "name": "Chrome",
+        "icon": "🌐",
+        "position": {
+          "x": 3,
+          "y": 1,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "chrome://newtab/",
+          "windowMode": "browser"
+        }
+      },
+      {
+        "id": "shortcut.terminal",
+        "type": "shortcut",
+        "name": "终端",
+        "icon": "⌨️",
+        "position": {
+          "x": 3,
+          "y": 3,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "/terminal",
+          "windowMode": "terminal"
+        }
+      },
+      {
+        "id": "shortcut.files",
+        "type": "shortcut",
+        "name": "文件管理器",
+        "icon": "📁",
+        "position": {
+          "x": 3,
+          "y": 5,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "/files"
+        }
+      },
+      {
+        "id": "shortcut.code",
+        "type": "shortcut",
+        "name": "代码编辑器",
+        "icon": "💻",
+        "position": {
+          "x": 5,
+          "y": 1,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "/code",
+          "windowMode": "editor"
+        }
+      },
+      {
+        "id": "shortcut.notes",
+        "type": "shortcut",
+        "name": "笔记",
+        "icon": "📝",
+        "position": {
+          "x": 5,
+          "y": 3,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "/notes"
+        }
+      },
+      {
+        "id": "shortcut.store",
+        "type": "shortcut",
+        "name": "应用商店",
+        "icon": "🛍️",
+        "position": {
+          "x": 5,
+          "y": 5,
+          "width": 1,
+          "height": 1
+        },
+        "config": {
+          "url": "/store"
+        }
+      }
+    ]
+  },
+  "taskbar": {
+    "position": "bottom",
+    "height": 60,
+    "autoHide": false,
+    "plugins": [
+      {
+        "id": "taskbar.launcher",
+        "type": "launcher",
+        "name": "应用启动器",
+        "config": {
+          "position": "left"
+        }
+      },
+      {
+        "id": "taskbar.window-list",
+        "type": "window-list",
+        "name": "窗口列表",
+        "config": {
+          "showThumbnails": true
+        }
+      },
+      {
+        "id": "taskbar.system-tray",
+        "type": "system-tray",
+        "name": "系统托盘",
+        "config": {
+          "position": "right"
+        }
+      }
+    ],
+    "quickLaunch": [
+      {
+        "name": "文件",
+        "icon": "📁",
+        "url": "/files"
+      },
+      {
+        "name": "浏览器",
+        "icon": "🌐",
+        "url": "/browser"
+      },
+      {
+        "name": "终端",
+        "icon": "⌨️",
+        "url": "/terminal"
+      },
+      {
+        "name": "设置",
+        "icon": "⚙️",
+        "url": "/settings"
+      }
+    ]
+  },
+  "contextMenus": [
+    {
+      "pluginId": "desktop",
+      "items": [
+        {
+          "id": "refresh",
+          "type": "action",
+          "name": "刷新桌面",
+          "icon": "🔄"
+        },
+        {
+          "id": "separator-1",
+          "type": "separator"
+        },
+        {
+          "id": "new-folder",
+          "type": "action",
+          "name": "新建文件夹",
+          "icon": "📁"
+        },
+        {
+          "id": "paste",
+          "type": "action",
+          "name": "粘贴",
+          "icon": "📋"
+        },
+        {
+          "id": "separator-2",
+          "type": "separator"
+        },
+        {
+          "id": "plugins",
+          "type": "submenu",
+          "name": "插件",
+          "icon": "🔌",
+          "items": [
+            {
+              "id": "plugin-manager",
+              "type": "action",
+              "name": "插件管理",
+              "icon": "⚙️"
+            },
+            {
+              "id": "add-widget",
+              "type": "action",
+              "name": "添加小组件",
+              "icon": "➕"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pluginTypes": {
+    "icon": {
+      "description": "桌面图标插件",
+      "configSchema": {
+        "draggable": "boolean",
+        "doubleClickAction": "string"
+      }
+    },
+    "widget": {
+      "description": "桌面小组件插件",
+      "configSchema": {
+        "resizable": "boolean",
+        "updateInterval": "number"
+      }
+    },
+    "shortcut": {
+      "description": "应用快捷方式插件",
+      "configSchema": {
+        "url": "string",
+        "windowMode": "string"
+      }
+    },
+    "infrastructure": {
+      "description": "基础设施插件",
+      "configSchema": {}
+    },
+    "launcher": {
+      "description": "启动器插件",
+      "configSchema": {}
+    },
+    "system-tray": {
+      "description": "系统托盘插件",
+      "configSchema": {}
+    }
+  },
+  "registeredPluginStores": [
+    {
+      "id": "builtin",
+      "name": "内置插件",
+      "url": "/plugins/builtin"
+    },
+    {
+      "id": "community",
+      "name": "社区插件",
+      "url": "/plugins/community"
+    }
+  ],
+  "system": {
+    "animations": true,
+    "snapToGrid": true,
+    "showDesktopLabels": true,
+    "doubleClickToOpen": true
+  }
+}

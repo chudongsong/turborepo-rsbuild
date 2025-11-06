@@ -104,18 +104,29 @@ LinglongOS API Service 是基于 **Egg.js** 与 **Tegg** 架构构建的统一�
 
 ### 1. 认证模块 (Auth)
 
-**功能**: 基于 TOTP 的双因素认证
+**功能**: 支持多种认证方式（2FA + 密码认证）
 
 **主要接口**:
+
+#### 2FA 认证（TOTP）
 - `GET /api/v1/auth/google-auth-bind` - 生成 2FA 绑定信息
 - `POST /api/v1/auth/google-auth-confirm` - 确认绑定并创建会话
 - `POST /api/v1/auth/google-auth-verify` - 验证令牌
 
-**流程**:
-1. 生成二维码和密钥（不保存）
-2. 用户使用 Authenticator 验证
-3. 确认绑定，保存密钥到数据库
-4. 创建签名 Cookie 会话
+#### 密码认证
+- `POST /api/v1/auth/password-verify` - 验证密码并创建会话
+- `POST /api/v1/auth/auto-verify` - 自动验证（密码或2FA）
+
+#### 统一认证管理
+- `POST /api/v1/auth/set-auth-method` - 设置验证方式和用户名
+- `GET /api/v1/init/check_status` - 获取用户名（包含在状态信息中）
+
+**特性**:
+- ✅ **双重认证方式**: 支持密码或2FA，灵活选择
+- ✅ **用户名支持**: 可自定义用户名（默认: admin）
+- ✅ **安全存储**: 用户名和认证信息分别存储在SQLite中
+- ✅ **TOTP算法**: 基于时间的一次性密码（30秒窗口）
+- ✅ **会话管理**: 4小时有效期，httpOnly + 签名 Cookie
 
 ### 2. 会话管理 (Sessions)
 
@@ -135,20 +146,32 @@ LinglongOS API Service 是基于 **Egg.js** 与 **Tegg** 架构构建的统一�
 
 ### 3. 面板代理 (Proxy)
 
-**功能**: 统一代理多个面板系统
+**功能**: 统一代理多个面板系统，支持文件管理和配置管理
 
 **支持面板**:
 - **BT 面板**: 自动处理签名认证（request_time + request_token）
 - **1Panel 面板**: 通用 HTTP 代理
 
 **主要接口**:
-- `POST /api/v1/proxy/bind-panel-key` - 绑定面板配置
-- `ALL /api/v1/proxy/request` - 代理请求
+- `POST /api/v1/proxy/request` - 通用代理请求
+- `GET /api/v1/proxy/file/get_file_list` - 获取文件列表
+- `POST /api/v1/proxy/panel/set_panel_config` - 设置面板配置（新路由）
+- `POST /api/v1/panels/set_proxy_panel` - 设置面板配置（兼容路由）
+
+**路由结构**:
+```
+/api/v1/proxy/
+├── request                    # 通用代理请求
+├── file/
+│   └── get_file_list         # 文件管理 - 获取文件列表
+└── panel/
+    └── set_panel_config      # 面板配置 - 设置面板配置
+```
 
 **代理流程**:
 1. 配置面板类型、URL、密钥
 2. 接收代理请求
-3. 根据面板类型添加认证参数
+3. 根据面板类型添加认证参数（BT面板自动添加request_time和request_token）
 4. 转发到目标面板
 5. 透传响应状态码
 
@@ -158,15 +181,40 @@ LinglongOS API Service 是基于 **Egg.js** 与 **Tegg** 架构构建的统一�
 
 **数据表**:
 - `sessions`: 会话存储
-- `auth`: 2FA 密钥存储
+- `auth`: 用户认证信息存储（用户名、认证方式、密码/2FA密钥）
 - `panels`: 面板配置存储
 
 **核心方法**:
 - `createSession()` - 创建会话
 - `isValidSession()` - 验证会话
 - `setTwoFASecret()` - 设置 2FA 密钥
+- `setAuthMethod()` - 设置认证方式和用户名
+- `getUsername()` - 获取用户名
 - `getPanel()` - 获取面板配置
 - `upsert()` - 插入或更新
+
+### 5. 插件注册中心 (Plugins)
+
+**功能**: 完整的插件管理系统，支持插件的创建、版本管理、分类和下载统计
+
+**主要接口**:
+- `GET /api/v1/get_plugins` - 获取插件列表
+- `GET /api/v1/get_plugin_detail` - 获取插件详情
+- `GET /api/v1/get_plugin_by_name` - 根据名称获取插件
+- `POST /api/v1/create_plugin` - 创建插件
+- `POST /api/v1/update_plugin` - 更新插件
+- `POST /api/v1/delete_plugin` - 删除插件
+- `GET /api/v1/get_plugin_versions` - 获取插件版本列表
+- `POST /api/v1/create_plugin_version` - 创建插件版本
+- `POST /api/v1/mark_plugin_latest` - 标记版本为最新
+- `GET /api/v1/get_plugin_categories` - 获取插件分类列表
+- `POST /api/v1/increment_download_count` - 递增下载计数
+
+**特性**:
+- ✅ 插件的完整生命周期管理
+- ✅ 版本控制和最新版本标记
+- ✅ 分类管理和下载统计
+- ✅ RESTful API 设计
 
 ## 🔌 中间件体系
 
@@ -179,6 +227,52 @@ LinglongOS API Service 是基于 **Egg.js** 与 **Tegg** 架构构建的统一�
 5. **staticFiles** - 静态资源服务
 6. **auth** - 认证中间件（白名单机制）
 7. **bt** - BT 面板特殊处理
+
+## 🛤️ 路由规范
+
+### 命名约定
+
+项目采用**下划线命名规范**（snake_case）和**子路由结构**，遵循"动词+宾语"（Verb+Object）的API设计模式：
+
+**基础结构**：
+```
+/api/v1/{controller}/{sub_controller}/{action}
+```
+
+**命名规则**：
+- ✅ 使用下划线分隔单词：`get_file_list`、`set_panel_config`
+- ✅ 控制器使用复数形式：`proxy`, `auth`, `plugins`
+- ✅ 子控制器按功能分组：`file`、`panel`
+- ✅ 动作命名统一：`get_xxx`、`create_xxx`、`set_xxx`、`update_xxx`、`delete_xxx`
+
+**路由分组示例**：
+```
+/api/v1/proxy/
+├── request                    # 通用代理请求
+├── file/
+│   └── get_file_list         # 获取文件列表
+└── panel/
+    └── set_panel_config      # 设置面板配置
+
+/api/v1/auth/
+├── google_auth_bind          # 2FA绑定
+├── google_auth_confirm       # 2FA确认
+└── google_auth_verify        # 2FA验证
+
+/api/v1/get_plugins           # 获取插件列表（GET请求）
+/api/v1/create_plugin         # 创建插件（POST请求）
+```
+
+### 向后兼容性
+
+项目保留旧路由以确保向后兼容，同时推荐使用新的命名规范：
+
+| 功能 | 旧路由 | 新路由（推荐） | 状态 |
+|------|--------|----------------|------|
+| 设置面板配置 | `POST /api/v1/panels/set_proxy_panel` | `POST /api/v1/proxy/panel/set_panel_config` | 双路由可用 |
+| 获取文件列表 | - | `GET /api/v1/proxy/file/get_file_list` | 新增 |
+
+详细的路由规范请参考 [API_ROUTING_CONVENTIONS.md](./API_ROUTING_CONVENTIONS.md)
 
 ## 🚀 快速开始
 
@@ -399,6 +493,26 @@ export default class ExampleController extends Controller {
 
 #### 典型调用流程
 
+**密码认证方式**：
+
+```bash
+# 1. 设置认证方式和用户名（初始化时）
+curl -X POST http://localhost:4000/api/v1/auth/set-auth-method \
+  -H 'Content-Type: application/json' \
+  -d '{"method": "password", "username": "admin", "password": "your_password"}'
+
+# 2. 验证密码并创建会话
+curl -X POST http://localhost:4000/api/v1/auth/password-verify \
+  -H 'Content-Type: application/json' \
+  -d '{"password": "your_password"}' \
+  -c cookies.txt
+
+# 3. 使用会话访问受保护接口
+curl http://localhost:4000/api/v1/proxy/file/get_file_list?panelType=bt&path=/www -b cookies.txt
+```
+
+**2FA认证方式**：
+
 ```bash
 # 1. 获取 2FA 绑定信息
 curl http://localhost:4000/api/v1/auth/google-auth-bind
@@ -406,37 +520,66 @@ curl http://localhost:4000/api/v1/auth/google-auth-bind
 # 2. 确认绑定（用户输入 6 位 TOTP）
 curl -X POST http://localhost:4000/api/v1/auth/google-auth-confirm \
   -H 'Content-Type: application/json' \
-  -d '{"secret": "SECRET_FROM_STEP_1", "token": "123456"}'
+  -d '{"secret": "SECRET_FROM_STEP_1", "token": "123456"}' \
+  -c cookies.txt
 
-# 3. 绑定面板
-curl -X POST http://localhost:4000/api/v1/proxy/bind-panel-key \
+# 3. 设置面板配置（使用新路由）
+curl -X POST http://localhost:4000/api/v1/proxy/panel/set_panel_config \
   -H 'Content-Type: application/json' \
-  -d '{"type": "bt", "url": "https://bt.example.com", "key": "YOUR_KEY"}'
+  -d '{"type": "bt", "url": "https://bt.example.com", "key": "YOUR_KEY"}' \
+  -b cookies.txt
 
 # 4. 发起代理请求
 curl -X POST http://localhost:4000/api/v1/proxy/request \
   -H 'Content-Type: application/json' \
-  -d '{"panelType": "bt", "url": "/api/panel", "method": "GET"}'
+  -d '{"panelType": "bt", "url": "/api/panel", "method": "GET"}' \
+  -b cookies.txt
 ```
 
 ## 🔒 安全机制
 
-1. **2FA 认证**: TOTP 算法，30 秒时间窗口
-2. **会话管理**: httpOnly + signed Cookie
+1. **双重认证方式**
+   - **2FA 认证**: TOTP 算法，30 秒时间窗口
+   - **密码认证**: SHA256 哈希存储
+   - **用户名支持**: 可自定义用户名（默认: admin）
+
+2. **会话管理**
+   - httpOnly + signed Cookie
+   - 4 小时有效期
+   - 自动过期检查
+
 3. **认证中间件**: 白名单机制
-4. **CSRF 防护**: 已禁用（API 场景）
-5. **CORS 配置**: 允许跨域（可配置域名白名单）
+   - 文档相关路径无需认证
+   - 初始化接口允许访问
+   - 已初始化后所有 API 需要认证
+
+4. **数据库安全**
+   - SQLite with WAL mode
+   - 参数化查询防注入
+   - 敏感信息加密存储
+
+5. **CSRF 防护**: 已禁用（API 场景）
+6. **CORS 配置**: 允许跨域（可配置域名白名单）
 
 ## 🧪 测试覆盖
 
 - ✅ 2FA 认证与会话创建
+- ✅ 密码认证与会话管理
 - ✅ 面板绑定与代理请求
+- ✅ 文件列表获取
 - ✅ 状态码透传
 - ✅ 静态文件服务
-- ✅ 认证中间件
+- ✅ 认证中间件与权限控制
 - ✅ 错误处理
+- ✅ 插件注册中心 API
 
 **测试状态**: 19/19 通过
+
+详细的测试报告请参考：
+- `test/auth.test.ts` - 认证测试
+- `test/proxy.test.ts` - 代理测试
+- `test/middleware.test.ts` - 中间件测试
+- `test/storage.test.ts` - 存储测试
 
 ## 📊 性能优化
 
@@ -620,11 +763,32 @@ CI 已配置于 `.github/workflows/api-tests.yml`，在推送或 PR 时自动运
 
 LinglongOS API Service 是一个功能完善的企业级 Node.js 应用，具有以下特点：
 
+### 核心特性
+
 - ✅ **模块化架构**: 基于 Tegg 的微内核设计
-- ✅ **安全认证**: 2FA + 会话管理
-- ✅ **高效代理**: 支持多种面板类型
-- ✅ **完整文档**: Swagger UI + JSDoc
-- ✅ **测试覆盖**: 19/19 测试用例通过
-- ✅ **代码规范**: 统一使用 Biome 检查
+- ✅ **双重认证**: 支持密码和2FA两种认证方式
+- ✅ **用户名系统**: 支持自定义用户名（默认: admin）
+- ✅ **高效代理**: 支持 BT 面板和 1Panel，自动处理认证
+- ✅ **文件管理**: 统一的文件列表获取功能
+- ✅ **插件中心**: 完整的插件注册和管理系统
+- ✅ **统一路由**: 遵循下划线命名规范的 RESTful API
+- ✅ **向后兼容**: 保留兼容路由，支持平滑迁移
+
+### 技术亮点
+
+- ✅ **完整文档**: Swagger UI + JSDoc，自动生成 API 文档
+- ✅ **测试覆盖**: 19/19 测试用例通过，全面覆盖核心功能
+- ✅ **代码规范**: 统一使用 Biome 检查，保证代码质量
+- ✅ **安全机制**: httpOnly Cookie、SHA256 密码哈希、TOTP 算法
+- ✅ **性能优化**: SQLite WAL 模式、连接池管理、缓存策略
+
+### 文档支持
+
+- ✅ **README.md** - 项目概述和快速开始
+- ✅ **API_FIXES.md** - 详细的修复说明和开发指南
+- ✅ **FINAL_FIX_REPORT.md** - 最终修复报告
+- ✅ **USER_AUTH_OPTIMIZATION_SUMMARY.md** - 用户认证系统优化报告
+- ✅ **ROUTING_RESTRUCTURING_SUMMARY.md** - 路由重构报告
+- ✅ **API_ROUTING_CONVENTIONS.md** - 路由规范文档
 
 项目严格遵循 Egg.js 企业级开发规范，具有良好的可维护性和扩展性，是 LinglongOS 桌面环境的可靠后端服务支撑。
