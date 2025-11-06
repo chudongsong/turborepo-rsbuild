@@ -26,7 +26,9 @@
     "export:openapi": "node ./scripts/export-openapi.js",
     "migrate:to-sqlite": "node ./scripts/run-migration.js",
     "test:storage": "npm run tsc && node ./scripts/test-storage.js",
-    "prepublishOnly": "npm run clean && npm run tsc"
+    "prepublishOnly": "npm run clean && npm run tsc",
+    "logs:cleanup": "bash scripts/cleanup-logs.sh",
+    "logs:check": "du -h logs/@linglongos/api-service/*.log"
   },
   "dependencies": {
     "@eggjs/scripts": "^4.0.0",

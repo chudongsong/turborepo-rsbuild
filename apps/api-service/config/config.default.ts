@@ -122,6 +122,31 @@ export default (appInfo: EggAppInfo) => {
     path: `${appInfo.baseDir}/data/api.db`,
   };
 
+  /**
+   * 日志配置 - 启用日志轮转，限制文件大小50MB
+   */
+  (config as any).logger = {
+    // 输出文件路径，支持环境变量
+    dir: process.env.LOG_DIR || path.join(appInfo.baseDir, 'logs'),
+    // 文件大小限制：50MB
+    fileSize: 50 * 1024 * 1024, // 50MB
+    // 历史文件数量：保留5个备份文件
+    numBackups: 5,
+    // 启用控制台输出
+    console: true,
+    // 日志级别
+    level: process.env.LOG_LEVEL || 'INFO',
+    // 启用日志轮转
+    rotate: {
+      // 每小时检查一次文件大小
+      interval: '1h',
+      // 压缩历史文件
+      compress: true,
+    },
+    // 自定义日志格式
+    format: '[{method}] {url} {status} {response-time}ms - {size}',
+  };
+
   // change multipart mode to file
   // @see https://github.com/eggjs/multipart/blob/master/src/config/config.default.ts#L104
   /**
