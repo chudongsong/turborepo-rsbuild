@@ -1,5 +1,6 @@
-import { Controller } from 'egg';
-import type { Context } from 'egg';
+import { Controller } from "egg";
+import type { Context } from "egg";
+import { setSecureSessionCookie } from "../utils/cookie";
 
 /**
  * AuthController
@@ -43,11 +44,7 @@ export default class AuthController extends Controller {
         return;
       }
       const maxAge = 4 * 60 * 60 * 1000;
-      ctx.cookies.set('ll_session', result.sessionId!, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId!, maxAge);
       ctx.success(null, '2FA binding confirmed successfully.');
     } catch (error) {
       ctx.logger.error('确认绑定失败:', error);
@@ -71,11 +68,7 @@ export default class AuthController extends Controller {
         return;
       }
       const maxAge = 4 * 60 * 60 * 1000;
-      ctx.cookies.set('ll_session', result.sessionId!, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId!, maxAge);
       ctx.success(null, 'Authentication successful, session created.');
     } catch (error) {
       ctx.logger.error('验证令牌失败:', error);
@@ -99,11 +92,7 @@ export default class AuthController extends Controller {
         return;
       }
       const maxAge = 4 * 60 * 60 * 1000;
-      ctx.cookies.set('ll_session', result.sessionId!, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId!, maxAge);
       ctx.success(null, 'Authentication successful, session created.');
     } catch (error) {
       ctx.logger.error('验证密码失败:', error);
@@ -127,11 +116,7 @@ export default class AuthController extends Controller {
         return;
       }
       const maxAge = 4 * 60 * 60 * 1000;
-      ctx.cookies.set('ll_session', result.sessionId!, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId!, maxAge);
       ctx.success(null, 'Authentication successful, session created.');
     } catch (error) {
       ctx.logger.error('自动验证失败:', error);
@@ -191,11 +176,7 @@ export default class AuthController extends Controller {
       }
 
       const maxAge = 4 * 60 * 60 * 1000;
-      ctx.cookies.set('ll_session', result.sessionId!, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId!, maxAge);
       ctx.success(null, 'Auth method set successfully.');
     } catch (error) {
       ctx.logger.error('设置验证方式失败:', error);

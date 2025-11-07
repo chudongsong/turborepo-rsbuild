@@ -1,4 +1,5 @@
 import type { Context } from "egg";
+import { COOKIE_SECURITY_OPTIONS } from "../utils/cookie";
 
 /**
  * 认证中间件：校验签名会话 Cookie `ll_session` 是否有效。
@@ -65,7 +66,7 @@ export default function authMiddleware() {
     // 系统已初始化：检查认证状态
     // 只对 API 路径进行认证检查
     if (ctx.path.startsWith("/api/")) {
-      const sid = ctx.cookies.get("ll_session", { signed: true });
+      const sid = ctx.cookies.get("ll_session", COOKIE_SECURITY_OPTIONS);
       const ok = sid ? ctx.service.storage.isValidSession(sid) : false;
       if (!ok) {
         ctx.unauthorized("AUTH_REQUIRED");

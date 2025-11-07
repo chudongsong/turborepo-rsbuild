@@ -3,6 +3,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'crypto'
 import { DatabaseManager } from '../lib/database'
+import { PathValidator } from '../utils/validation'
+import { initEncryption, encryptObject, decryptObject } from '../utils/encryption'
 
 /** 面板类型定义 */
 type PanelType = 'bt' | '1panel'
@@ -90,6 +92,11 @@ export default class StorageService extends Service {
 		this.jsonPath = path.join(this.app.baseDir, StorageService.JSON_FILE_PATH)
 		
 		this.dbManager = new DatabaseManager(dbPath)
+		
+		// 初始化加密，使用应用密钥或默认密钥
+		const encryptionSecret = this.app.config.encryptionSecret || 'default-encryption-secret'
+		initEncryption(encryptionSecret)
+		
 		this.ensureJsonFile()
 		this.migrateFromOldStorage()
 	}
@@ -232,11 +239,14 @@ export default class StorageService extends Service {
 	 * @param {string} secret 2FA密钥
 	 */
 	setTwoFASecret(secret: string): void {
+		// 加密2FA密钥
+		const encryptedSecret = encryptText(secret)
+		
 		this.dbManager.upsert(
 			'auth',
 			{
 				key: StorageService.TWOFA_SECRET_KEY,
-				value: secret,
+				value: encryptedSecret,
 			},
 			['key']
 		)
@@ -252,7 +262,19 @@ export default class StorageService extends Service {
 			'SELECT value FROM auth WHERE key = ?',
 			StorageService.TWOFA_SECRET_KEY
 		)
-		return record?.value || null
+		
+		if (!record) {
+			return null
+		}
+		
+		// 解密2FA密钥
+		try {
+			return decryptText(record.value)
+		} catch (error) {
+			// 如果解密失败，可能是旧版本存储的未加密密钥
+			this.app.logger.warn('Failed to decrypt 2FA secret, using as plaintext')
+			return record.value
+		}
 	}
 
 	/**
@@ -460,12 +482,15 @@ export default class StorageService extends Service {
 	 * @param {string} key 面板密钥
 	 */
 	bindPanelKey(type: PanelType, url: string, key: string): void {
+		// 加密面板密钥
+		const encryptedKey = encryptText(key)
+		
 		this.dbManager.upsert(
 			'panels',
 			{
 				type,
 				url,
-				key,
+				key: encryptedKey,
 			},
 			['type']
 		)
@@ -482,7 +507,21 @@ export default class StorageService extends Service {
 			'SELECT url, key FROM panels WHERE type = ?',
 			type
 		)
-		return record ? { url: record.url, key: record.key } : null
+		if (!record) {
+			return null
+		}
+		
+		// 解密面板密钥
+		let decryptedKey: string
+		try {
+			decryptedKey = decryptText(record.key)
+		} catch (error) {
+			// 如果解密失败，可能是旧版本存储的未加密密钥
+			this.app.logger.warn(`Failed to decrypt panel key for ${type}, using as plaintext`)
+			decryptedKey = record.key
+		}
+		
+		return { url: record.url, key: decryptedKey }
 	}
 
 	/**

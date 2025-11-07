@@ -1,5 +1,6 @@
 import { Controller } from 'egg';
 import type { Context } from 'egg';
+import { setSecureSessionCookie, clearSessionCookie } from "../utils/cookie";
 
 /**
  * SessionsController - RESTful 认证会话管理
@@ -64,11 +65,7 @@ export default class SessionsController extends Controller {
 
       // 设置会话 Cookie
       const maxAge = 4 * 60 * 60 * 1000; // 4小时
-      ctx.cookies.set('ll_session', result.sessionId, {
-        maxAge,
-        httpOnly: true,
-        signed: true,
-      });
+      setSecureSessionCookie(ctx, result.sessionId, maxAge);
 
       ctx.success({ session_id: result.sessionId }, 'Session created successfully', 201);
     } catch (error: any) {
@@ -124,7 +121,7 @@ export default class SessionsController extends Controller {
           ctx.service.storage.deleteSession(sessionId);
         }
         // 清除客户端 Cookie
-        ctx.cookies.set('ll_session', null);
+        clearSessionCookie(ctx);
       }
 
       ctx.success(null, 'Session deleted successfully', 204);

@@ -1,67 +1,246 @@
 /**
- * 标准化错误码定义
- *
- * 错误码分类：
- * - 1xxx: 系统错误
- * - 2xxx: 认证错误
- * - 3xxx: 权限错误
- * - 4xxx: 参数错误
- * - 5xxx: 业务错误
+ * 统一错误码定义
+ * 
+ * 错误码格式：模块(2位) + 业务(2位) + 具体错误(3位)
+ * 模块划分：
+ * - 01: 认证模块
+ * - 02: 代理模块
+ * - 03: 存储模块
+ * - 04: 系统模块
+ * - 99: 通用模块
  */
 
-export const ERROR_CODES = {
-  // 系统错误 (1xxx)
-  SYSTEM_ERROR: 1000,
-  DATABASE_ERROR: 1001,
-  CONFIG_ERROR: 1002,
-
-  // 认证错误 (2xxx)
-  UNAUTHORIZED: 2001,
-  INVALID_TOKEN: 2002,
-  TOKEN_EXPIRED: 2003,
-  INVALID_CREDENTIALS: 2004,
-  TOTP_REQUIRED: 2005,
-  TOTP_INVALID: 2006,
-
-  // 权限错误 (3xxx)
-  FORBIDDEN: 3001,
-  ROLE_REQUIRED: 3002,
-
-  // 参数错误 (4xxx)
-  VALIDATION_ERROR: 4001,
-  MISSING_PARAMETER: 4002,
-  INVALID_FORMAT: 4003,
-
-  // 业务错误 (5xxx)
-  PANEL_NOT_FOUND: 5001,
-  PANEL_EXISTS: 5002,
-  PROXY_ERROR: 5003,
-  CONFIG_NOT_FOUND: 5004,
+/**
+ * 通用错误码 (99xxxx)
+ */
+export const COMMON = {
+  SUCCESS: 0,
+  INVALID_PARAMS: 990001,
+  UNAUTHORIZED: 990002,
+  FORBIDDEN: 990003,
+  NOT_FOUND: 990004,
+  INTERNAL_ERROR: 990005,
+  RATE_LIMIT_EXCEEDED: 990006,
+  VALIDATION_FAILED: 990007,
+  MAINTENANCE_MODE: 990008,
 } as const;
 
+/**
+ * 认证模块错误码 (01xxxx)
+ */
+export const AUTH = {
+  INVALID_CREDENTIALS: 010001,
+  TOKEN_EXPIRED: 010002,
+  TOKEN_INVALID: 010003,
+  USER_NOT_FOUND: 010004,
+  USER_ALREADY_EXISTS: 010005,
+  PASSWORD_TOO_WEAK: 010006,
+  TWOFA_REQUIRED: 010007,
+  TWOFA_INVALID: 010008,
+  TWOFA_SETUP_FAILED: 010009,
+  SESSION_NOT_FOUND: 010010,
+  SESSION_EXPIRED: 010011,
+  UNAUTHORIZED_ACCESS: 010012,
+  LOGIN_REQUIRED: 010013,
+} as const;
+
+/**
+ * 代理模块错误码 (02xxxx)
+ */
+export const PROXY = {
+  INVALID_URL: 020001,
+  UNSUPPORTED_METHOD: 020002,
+  REQUEST_TIMEOUT: 020003,
+  CONNECTION_FAILED: 020004,
+  RESPONSE_TOO_LARGE: 020005,
+  INVALID_RESPONSE: 020006,
+  SSL_VERIFICATION_FAILED: 020007,
+  HOST_NOT_ALLOWED: 020008,
+  PATH_NOT_ALLOWED: 020009,
+  HEADER_NOT_ALLOWED: 020010,
+  BODY_TOO_LARGE: 020011,
+  UNSUPPORTED_MEDIA_TYPE: 020012,
+} as const;
+
+/**
+ * 存储模块错误码 (03xxxx)
+ */
+export const STORAGE = {
+  DATABASE_ERROR: 030001,
+  DATA_NOT_FOUND: 030002,
+  DATA_ALREADY_EXISTS: 030003,
+  INVALID_DATA_FORMAT: 030004,
+  ENCRYPTION_FAILED: 030005,
+  DECRYPTION_FAILED: 030006,
+  STORAGE_FULL: 030007,
+  BACKUP_FAILED: 030008,
+  RESTORE_FAILED: 030009,
+  MIGRATION_FAILED: 030010,
+} as const;
+
+/**
+ * 系统模块错误码 (04xxxx)
+ */
+export const SYSTEM = {
+  CONFIGURATION_ERROR: 040001,
+  SERVICE_UNAVAILABLE: 040002,
+  RESOURCE_EXHAUSTED: 040003,
+  DEPENDENCY_ERROR: 040004,
+  INITIALIZATION_FAILED: 040005,
+  SHUTDOWN_FAILED: 040006,
+  HEALTH_CHECK_FAILED: 040007,
+  BACKUP_SERVICE_ERROR: 040008,
+  LOG_SERVICE_ERROR: 040009,
+} as const;
+
+/**
+ * 兼容旧版本的错误码定义
+ */
+export const ERROR_CODES = {
+  // 系统错误 (1xxx)
+  SYSTEM_ERROR: SYSTEM.CONFIGURATION_ERROR,
+  DATABASE_ERROR: STORAGE.DATABASE_ERROR,
+  CONFIG_ERROR: SYSTEM.CONFIGURATION_ERROR,
+
+  // 认证错误 (2xxx)
+  UNAUTHORIZED: AUTH.UNAUTHORIZED_ACCESS,
+  INVALID_TOKEN: AUTH.TOKEN_INVALID,
+  TOKEN_EXPIRED: AUTH.TOKEN_EXPIRED,
+  INVALID_CREDENTIALS: AUTH.INVALID_CREDENTIALS,
+  TOTP_REQUIRED: AUTH.TWOFA_REQUIRED,
+  TOTP_INVALID: AUTH.TWOFA_INVALID,
+
+  // 权限错误 (3xxx)
+  FORBIDDEN: COMMON.FORBIDDEN,
+  ROLE_REQUIRED: COMMON.FORBIDDEN,
+
+  // 参数错误 (4xxx)
+  VALIDATION_ERROR: COMMON.VALIDATION_FAILED,
+  MISSING_PARAMETER: COMMON.INVALID_PARAMS,
+  INVALID_FORMAT: COMMON.VALIDATION_FAILED,
+
+  // 业务错误 (5xxx)
+  PANEL_NOT_FOUND: PROXY.HOST_NOT_ALLOWED,
+  PANEL_EXISTS: STORAGE.DATA_ALREADY_EXISTS,
+  PROXY_ERROR: PROXY.CONNECTION_FAILED,
+  CONFIG_NOT_FOUND: STORAGE.DATA_NOT_FOUND,
+} as const;
+
+/**
+ * 错误码消息映射
+ */
 export const ERROR_MESSAGES = {
+  [COMMON.SUCCESS]: '成功',
+  [COMMON.INVALID_PARAMS]: '参数无效',
+  [COMMON.UNAUTHORIZED]: '未授权',
+  [COMMON.FORBIDDEN]: '禁止访问',
+  [COMMON.NOT_FOUND]: '资源不存在',
+  [COMMON.INTERNAL_ERROR]: '内部服务器错误',
+  [COMMON.RATE_LIMIT_EXCEEDED]: '请求频率超过限制',
+  [COMMON.VALIDATION_FAILED]: '数据验证失败',
+  [COMMON.MAINTENANCE_MODE]: '系统维护中',
+
+  [AUTH.INVALID_CREDENTIALS]: '用户名或密码错误',
+  [AUTH.TOKEN_EXPIRED]: '登录已过期，请重新登录',
+  [AUTH.TOKEN_INVALID]: '无效的登录凭证',
+  [AUTH.USER_NOT_FOUND]: '用户不存在',
+  [AUTH.USER_ALREADY_EXISTS]: '用户已存在',
+  [AUTH.PASSWORD_TOO_WEAK]: '密码强度不足',
+  [AUTH.TWOFA_REQUIRED]: '需要两步验证',
+  [AUTH.TWOFA_INVALID]: '两步验证码错误',
+  [AUTH.TWOFA_SETUP_FAILED]: '设置两步验证失败',
+  [AUTH.SESSION_NOT_FOUND]: '会话不存在',
+  [AUTH.SESSION_EXPIRED]: '会话已过期',
+  [AUTH.UNAUTHORIZED_ACCESS]: '无权限访问',
+  [AUTH.LOGIN_REQUIRED]: '请先登录',
+
+  [PROXY.INVALID_URL]: '无效的URL',
+  [PROXY.UNSUPPORTED_METHOD]: '不支持的请求方法',
+  [PROXY.REQUEST_TIMEOUT]: '请求超时',
+  [PROXY.CONNECTION_FAILED]: '连接失败',
+  [PROXY.RESPONSE_TOO_LARGE]: '响应数据过大',
+  [PROXY.INVALID_RESPONSE]: '无效的响应',
+  [PROXY.SSL_VERIFICATION_FAILED]: 'SSL证书验证失败',
+  [PROXY.HOST_NOT_ALLOWED]: '不允许的主机',
+  [PROXY.PATH_NOT_ALLOWED]: '不允许的路径',
+  [PROXY.HEADER_NOT_ALLOWED]: '不允许的请求头',
+  [PROXY.BODY_TOO_LARGE]: '请求体过大',
+  [PROXY.UNSUPPORTED_MEDIA_TYPE]: '不支持的媒体类型',
+
+  [STORAGE.DATABASE_ERROR]: '数据库错误',
+  [STORAGE.DATA_NOT_FOUND]: '数据不存在',
+  [STORAGE.DATA_ALREADY_EXISTS]: '数据已存在',
+  [STORAGE.INVALID_DATA_FORMAT]: '无效的数据格式',
+  [STORAGE.ENCRYPTION_FAILED]: '数据加密失败',
+  [STORAGE.DECRYPTION_FAILED]: '数据解密失败',
+  [STORAGE.STORAGE_FULL]: '存储空间不足',
+  [STORAGE.BACKUP_FAILED]: '备份失败',
+  [STORAGE.RESTORE_FAILED]: '恢复失败',
+  [STORAGE.MIGRATION_FAILED]: '数据迁移失败',
+
+  [SYSTEM.CONFIGURATION_ERROR]: '配置错误',
+  [SYSTEM.SERVICE_UNAVAILABLE]: '服务不可用',
+  [SYSTEM.RESOURCE_EXHAUSTED]: '资源耗尽',
+  [SYSTEM.DEPENDENCY_ERROR]: '依赖服务错误',
+  [SYSTEM.INITIALIZATION_FAILED]: '初始化失败',
+  [SYSTEM.SHUTDOWN_FAILED]: '关闭失败',
+  [SYSTEM.HEALTH_CHECK_FAILED]: '健康检查失败',
+  [SYSTEM.BACKUP_SERVICE_ERROR]: '备份服务错误',
+  [SYSTEM.LOG_SERVICE_ERROR]: '日志服务错误',
+
+  // 兼容旧版本的错误消息
   [ERROR_CODES.SYSTEM_ERROR]: '服务器内部错误',
   [ERROR_CODES.DATABASE_ERROR]: '数据库错误',
   [ERROR_CODES.CONFIG_ERROR]: '配置错误',
-
   [ERROR_CODES.UNAUTHORIZED]: '未授权访问',
   [ERROR_CODES.INVALID_TOKEN]: '无效的令牌',
   [ERROR_CODES.TOKEN_EXPIRED]: '令牌已过期',
   [ERROR_CODES.INVALID_CREDENTIALS]: '无效的凭据',
   [ERROR_CODES.TOTP_REQUIRED]: '需要双因素认证',
   [ERROR_CODES.TOTP_INVALID]: '双因素认证码无效',
-
   [ERROR_CODES.FORBIDDEN]: '权限不足',
   [ERROR_CODES.ROLE_REQUIRED]: '需要特定角色权限',
-
   [ERROR_CODES.VALIDATION_ERROR]: '参数验证错误',
   [ERROR_CODES.MISSING_PARAMETER]: '缺少必需参数',
   [ERROR_CODES.INVALID_FORMAT]: '参数格式错误',
-
   [ERROR_CODES.PANEL_NOT_FOUND]: '面板不存在',
   [ERROR_CODES.PANEL_EXISTS]: '面板已存在',
   [ERROR_CODES.PROXY_ERROR]: '代理请求错误',
   [ERROR_CODES.CONFIG_NOT_FOUND]: '配置不存在',
 } as const;
 
-export type ErrorCode = typeof ERROR_CODES[keyof typeof ERROR_CODES];
+/**
+ * 获取错误消息
+ * @param code 错误码
+ * @returns 错误消息
+ */
+export function getErrorMessage(code: number): string {
+  return ERROR_MESSAGES[code] || ERROR_MESSAGES[COMMON.INTERNAL_ERROR];
+}
+
+/**
+ * 判断是否为成功码
+ * @param code 错误码
+ * @returns 是否成功
+ */
+export function isSuccess(code: number): boolean {
+  return code === COMMON.SUCCESS;
+}
+
+/**
+ * 判断是否为客户端错误 (4xx)
+ * @param code 错误码
+ * @returns 是否为客户端错误
+ */
+export function isClientError(code: number): boolean {
+  return code >= 990001 && code < 995000;
+}
+
+/**
+ * 判断是否为服务器错误 (5xx)
+ * @param code 错误码
+ * @returns 是否为服务器错误
+ */
+export function isServerError(code: number): boolean {
+  return code >= 995000;
+}

@@ -26,17 +26,20 @@ export default (appInfo: EggAppInfo) => {
 
   // add your egg config in here
   /**
-   * 全局中间件顺序：`requestId` → `errorHandler` → `common` → `staticAuth` → `staticFiles` → `auth` → `bt`
+   * 全局中间件顺序：`requestId` → `errorHandler` → `inputValidation` → `rateLimit` → `authRateLimit` → `common` → `staticAuth` → `staticFiles` → `auth` → `bt`
    *
    * - `requestId`：请求ID生成中间件（用于日志追踪和响应标识）；
    * - `errorHandler`：全局错误处理中间件；
+   * - `inputValidation`：输入验证中间件（防止SSRF和路径遍历攻击）；
+   * - `rateLimit`：请求频率限制中间件（防止DDoS攻击）；
+   * - `authRateLimit`：认证频率限制中间件（防止暴力破解攻击）；
    * - `staticAuth`：静态页面会话验证中间件（在静态文件服务之前）；
    * - `staticFiles`：静态资源服务中间件；
    * - `auth.ignore`：忽略认证的路由（正则形式）；
    * - `bt.match`：限定 BT 中间件仅在代理请求路由生效；
    * - `common`：通用中间件（当前为空配置）。
    */
-  config.middleware = [ 'requestId', 'errorHandler', 'common', 'staticAuth', 'staticFiles', 'auth', 'bt' ];
+  config.middleware = [ 'requestId', 'errorHandler', 'inputValidation', 'rateLimit', 'authRateLimit', 'common', 'staticAuth', 'staticFiles', 'auth', 'bt' ];
   (config as any).staticAuth = {
     // 静态页面会话验证中间件配置
     // 该中间件会在静态文件服务之前运行，对HTML页面进行会话验证
@@ -60,16 +63,34 @@ export default (appInfo: EggAppInfo) => {
     // 2. 根据系统初始化状态动态决定是否需要认证
     // 3. 已初始化系统要求所有路径认证（包括根路径和UI路径）
   };
+
+  // 认证路由频率限制
+  (config as any).authRateLimit = {
+    enable: true,
+    match: /^\/api\/auth/,
+    options: {
+      windowMs: 60 * 1000, // 1分钟
+      maxRequests: 10, // 最多10次请求
+      message: '登录尝试过于频繁，请稍后再试',
+    },
+  };
   (config as any).bt = {
     match: [/^\/api\/v1\/proxy\/request/],
   };
   (config as any).common = {};
 
   /**
-   * 安全配置：关闭 CSRF（典型 API 场景）。
+   * 安全配置：关闭 CSRF（典型 API 场景）并配置 Cookie 安全属性。
    */
   (config as any).security = {
     csrf: { enable: false },
+    // Cookie 安全配置
+    sessionCookie: {
+      httpOnly: true,    // 防止 XSS 攻击窃取 Cookie
+      secure: process.env.NODE_ENV === 'production', // 生产环境仅 HTTPS 传输
+      sameSite: 'strict', // 严格同站策略，防止 CSRF 攻击
+      maxAge: 24 * 60 * 60 * 1000, // 会话有效期：24小时
+    },
   };
 
   /**
@@ -114,6 +135,11 @@ export default (appInfo: EggAppInfo) => {
     routerMap: false, // 禁用路由映射，避免路径不匹配错误
     enable: false, // 临时禁用 Swagger 文档生成
   };
+
+  /**
+   * 加密配置 - 用于敏感信息加密存储
+   */
+  (config as any).encryptionSecret = process.env.ENCRYPTION_SECRET || 'linglongos-default-encryption-secret-please-change-in-production';
 
   /**
    * SQLite 数据库路径。

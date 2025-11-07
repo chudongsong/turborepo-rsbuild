@@ -1,6 +1,7 @@
 import { Service } from "egg";
 import axios, { AxiosRequestConfig } from "axios";
 import md5 from "md5";
+import { UrlValidator, PathValidator } from "../utils/validation";
 
 /** 面板类型定义 */
 type PanelType = "bt" | "1panel";
@@ -98,6 +99,14 @@ export default class ProxyService extends Service {
 
     if (!panel || !panel.url) {
       throw new Error(ProxyService.ERROR_MESSAGES.PANEL_NOT_CONFIGURED);
+    }
+
+    // 验证路径参数，防止路径遍历攻击
+    if (params.path) {
+      const pathValidator = new PathValidator();
+      if (!pathValidator.validatePath(params.path)) {
+        throw new Error(`Invalid path: ${params.path}`);
+      }
     }
 
     try {
@@ -361,7 +370,15 @@ export default class ProxyService extends Service {
   private buildUrl(baseUrl: string, path: string): string {
     const cleanBaseUrl = baseUrl.replace(/\/$/, "");
     const cleanPath = path?.startsWith("/") ? path : `/${path || ""}`;
-    return cleanBaseUrl + cleanPath;
+    const fullUrl = cleanBaseUrl + cleanPath;
+    
+    // 验证URL是否安全
+    const urlValidator = new UrlValidator();
+    if (!urlValidator.validateUrl(fullUrl)) {
+      throw new Error(`Invalid URL: ${fullUrl}`);
+    }
+    
+    return fullUrl;
   }
 
   /**
